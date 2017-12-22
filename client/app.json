@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/dashboard/dashboard",
+    "pages/plan/plan",
+    "pages/uc/uc",
+    "pages/index/index",
+    "pages/addCgi/addCgi"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "Wafer Quick Start",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#ff9800",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "听口首页",
+        "iconPath": "assets/home4@3x.png",
+        "selectedIconPath": "assets/home3@3x.png"
+      },
+      {
+        "pagePath": "pages/plan/plan",
+        "text": "学习计划",
+        "iconPath": "assets/plan4@3x.png",
+        "selectedIconPath": "assets/plan3@3x.png"
+      },
+      {
+        "pagePath": "pages/uc/uc",
+        "text": "个人中心",
+        "iconPath": "assets/personal4@3x.png",
+        "selectedIconPath": "assets/personal3@3x.png"
+      }
+    ]
+  }
+}
