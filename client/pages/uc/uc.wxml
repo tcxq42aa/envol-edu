@@ -1,2 +1,40 @@
 <!--pages/uc/uc.wxml-->
-<text>pages/uc/uc.wxml</text>
+<view class="uc-page">
+  <view class="userinfo flex flex-bottom-v">
+    <view class="flex-1">
+      <image
+          class="userinfo-avatar"
+          src="{{logged ? userInfo.avatarUrl : '../../assets/user-unlogin.png'}}"
+          background-size="cover"
+      ></image>
+    </view>
+    <view>
+      <view>J'ai écouté</view>
+      <view><text class="f24">123</text> mots</view>
+    </view>
+    <view class="uc-bd">
+      <view>J'ai fini</view>
+      <view><text class="f24">12</text> fois</view>
+    </view>
+  </view>
+
+  <view class="uc-card-wrap">
+    <view class="uc-card">
+      <view class="uc-card--icon"></view>
+      Alarme
+    </view>
+    <view class="uc-card">
+      <view class="uc-card--icon"></view>
+      FAQ
+    </view>
+    <view class="uc-card">
+      <view class="uc-card--icon"></view>
+      <view>Je cherche</view>
+      <view>moniteur, trice</view>
+    </view>
+    <view class="uc-card">
+      <view class="uc-card--icon"></view>
+      Maison ENVOL
+    </view>
+  </view>
+</view>

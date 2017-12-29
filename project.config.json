@@ -4,13 +4,38 @@
 	"miniprogramRoot": "./client",
 	"qcloudRoot": "./server",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true
 	},
-	"appid": "wx072faf1c8da06d99",
-	"projectname": "envol",
-	"condition": {}
+	"appid": "wx46875b919da524bb",
+	"projectname": "ENVOL%E6%B3%95%E8%AF%AD%E7%A7%81%E5%A1%BE",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 1,
+			"list": [
+				{
+					"id": -1,
+					"name": "home",
+					"pathName": "pages/home/home",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "uc",
+					"pathName": "pages/uc/uc"
+				}
+			]
+		}
+	}
 }

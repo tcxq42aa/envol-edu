@@ -1,2 +1,34 @@
 <!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<view class="home-page">
+  <view class="userinfo flex flex-center-v">
+    <view class="flex-1">
+      <image
+          class="userinfo-avatar"
+          src="{{logged ? userInfo.avatarUrl : '../../assets/user-unlogin.png'}}"
+          background-size="cover"
+      ></image>
+    </view>
+    <view class="text-right">
+      <view class="mb-10">已坚持 <text class="f24">123</text> 天</view>
+      <view>Message(s)</view>
+    </view>
+  </view>
+
+  <view class="course-card">
+    <view class="course-card--cover"></view>
+    <view class="f15 fb mb-10 ellipsis">Le monstre du Poitou （1）</view>
+    <view class="ellipsis">Sunday Dec 17-Sunday Dec 17</view>
+  </view>
+
+  <view class="course-card">
+    <view class="course-card--cover"></view>
+    <view class="f15 fb mb-10 ellipsis">Le monstre du Poitou （1）</view>
+    <view class="ellipsis">Sunday Dec 17-Sunday Dec 17</view>
+  </view>
+
+  <view class="course-card">
+    <view class="course-card--cover"></view>
+    <view class="f15 fb mb-10 ellipsis">Le monstre du Poitou （1）</view>
+    <view class="ellipsis">Sunday Dec 17-Sunday Dec 17</view>
+  </view>
+</view>

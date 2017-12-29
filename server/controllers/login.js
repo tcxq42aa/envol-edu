@@ -7,4 +7,5 @@ module.exports = async (ctx, next) => {
         ctx.state.data = ctx.state.$wxInfo.userinfo
         ctx.state.data['time'] = Math.floor(Date.now() / 1000)
     }
+    console.log(123123);
 }

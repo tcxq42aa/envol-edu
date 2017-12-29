@@ -1,1 +1,33 @@
 /* pages/home/hone.wxss */
+.home-page {
+  margin: 54rpx;
+}
+.userinfo {
+  margin-bottom: 130rpx;
+}
+.userinfo-avatar {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 50%;
+}
+.course-card {
+  position: relative;
+  margin: 0 0 85rpx 96rpx;
+  height: 190rpx;
+  background: #EEE;
+  border-radius: 4px;
+  padding: 40rpx 60rpx 40rpx 80rpx;
+  box-sizing: border-box;
+}
+.course-card--cover {
+  position: absolute;
+  width: 146rpx;
+  height: 198rpx;
+  top: -48rpx;
+  left: -96rpx;
+  background: #ccc;
+  border-radius: 4px;
+}
+.course-card--cover > view {
+  white-space: nowrap;
+}
