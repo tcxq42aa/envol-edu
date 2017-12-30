@@ -8,6 +8,12 @@ const CONF = {
     // 微信小程序 App Secret
     appSecret: '70602293eb5483fec5470e2f47419741',
 
+    // 公众号 App ID
+    gzAppId: 'wx2e16f47e06ea5273',
+
+    // 公众号 App Secret
+    gzAppSecret: 'b8257dfd15b07d6a8481ba7ca3ae8c81',
+
     // 是否使用腾讯云代理登录小程序
     useQcloudLogin: false,
 

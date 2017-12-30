@@ -34,4 +34,6 @@ router.post('/message', controllers.message.post)
 
 router.get('/demo', controllers.demo)
 
+router.get('/accessToken', controllers.accessToken)
+
 module.exports = router
