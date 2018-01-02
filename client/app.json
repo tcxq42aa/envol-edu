@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/audition/audition",
     "pages/courseList/courseList",
     "pages/home/home",
     "pages/dashboard/dashboard",

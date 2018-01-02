@@ -1,0 +1,33 @@
+<!--pages/courseList/courseList.wxml-->
+<view class="courselist-header">
+  <view class="courselist-header--title">
+    <view class="f24 fb">Aujourd'hui</view>
+    <view class="f16">Dimanche 17 décembre 2017</view>
+  </view>
+  <view class="userinfo">
+    <image
+        class="userinfo-avatar"
+        src="{{logged ? userInfo.avatarUrl : '../../assets/user-unlogin.png'}}"
+        background-size="cover"
+    ></image>
+  </view>
+</view>
+
+<view class="courselist-body">
+  <view class="courselist-item">
+    <view class="courselist-item--time f12">17/12/2017</view>
+    <view class="courselist-item--cover"></view>
+    <view class="courselist-item--detail">
+      <view class="flex-1">
+        <view class="f12 mb-10">Compréhension orale</view>
+        <view>听力朗读课</view>
+      </view>
+      <view class="flex-1">
+        <view class="flex mb-10">
+          <text class="f12 flex-1">Déroulement</text><text>5/90</text>
+        </view>
+        <progress percent="40" stroke-width="8" backgroundColor="#fff"/>
+      </view>
+    </view>
+  </view>
+</view>
