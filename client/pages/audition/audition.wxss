@@ -1,0 +1,43 @@
+/* pages/audition/audition.wxss */
+@import "/vendor/wxParse/wxParse.wxss";
+.page-content {
+  padding-bottom: 180rpx;
+}
+.bannel {
+  position: relative;
+  padding: 82rpx 30rpx 48rpx;
+  color: #fff;
+}
+.bannel--bg {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.offset-l-1 {
+  margin-left: 50rpx;
+}
+.offset-l-2 {
+  margin-left: 150rpx;
+}
+.offset-r-1 {
+  margin-right: 86rpx;
+}
+.footer-btns {
+  display: flex;
+  position: fixed;
+  bottom: 60rpx;
+  left: 0;
+  right: 0;
+  margin-left: 60rpx;
+  margin-right: 60rpx;
+}
+.footer-btns .btn {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+.footer-btns .btn + .btn {
+  margin-left: 30rpx;
+}

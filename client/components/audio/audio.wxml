@@ -1,0 +1,24 @@
+<!--components/audio/audio.wxml-->
+<view class="audio">
+  <image class="audio--btn" style="width:68rpx;height:68rpx" 
+  src="{{'../../assets/common/' + (isPlaying ? 'pause' : 'play') + '@3x.png'}}" bindtap='audioPlay' data-status='{{isPlaying}}'></image>
+  <view class="flex-1" style="position: relative;top:-2px">
+    <view class="progress">      
+      <view class="flex-1 progress--bar" id="bar">
+        <view class="progress--bar-line" style="width: {{currentTime/duration * 100}}%"></view>
+      </view>
+      <image bindtouchmove="onTouchMove" class="progress--point" style="width:40rpx;height:40rpx;left:{{currentTime/duration * 100}}%" src='../../assets/common/point@3x.png'></image>
+    </view>
+    <view style='position:absolute;top:100%;left:0;font-size: 10px;color: rgba(0,0,0,.4);line-height: 1'>
+      {{currentTimeStr}} / {{durationStr}}
+    </view>
+  </view>
+  <view class="progress--ctrl" wx-if="{{draggable}}" bindtap='switchSpeed'>
+    <text class="{{isL ? '' : 'sm'}}">L</text>/<text class="{{isL ? 'sm' : ''}}">R</text>
+  </view>
+
+  <view class="toast" wx-if="{{showToast}}">
+    Interdit de scroller en lisant
+  </view>
+</view>
+

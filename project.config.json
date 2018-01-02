@@ -22,7 +22,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -35,6 +35,12 @@
 					"name": "uc",
 					"pathName": "pages/uc/uc",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "paper",
+					"pathName": "pages/audition/audition",
+					"query": "paperId=1"
 				}
 			]
 		}

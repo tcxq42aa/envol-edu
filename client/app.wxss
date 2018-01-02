@@ -76,6 +76,9 @@ page {
 .mb-15 {
   margin-bottom: 30rpx;
 }
+.mb-30 {
+  margin-bottom: 60rpx;
+}
 .ml-5 {
   margin-left: 10rpx;
 }
@@ -131,7 +134,7 @@ page {
   text-align: left;
 }
 .btn--next.disabled {
-  opacity: .5;
+   opacity: .5; 
   pointer-events: none;
 }
 .btn--next:after {

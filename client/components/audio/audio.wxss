@@ -1,0 +1,72 @@
+/* components/audio/audio.wxss */
+
+.flex-1 {
+  flex: 1;
+}
+view {
+  overflow: visible;
+}
+.audio {
+  position: relative;
+  display: flex;
+  padding: 0 32rpx;
+  height: 160rpx;
+  box-shadow: 0 5px 20px rgba(155,155,155,.3);
+  align-items: center;
+}
+.audio--btn {
+  margin-right: 32rpx;
+}
+
+.progress {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 40rpx;
+}
+.progress--bar {
+  position: relative;
+  height: 10rpx;
+  background: rgba(0,0,0,.1);
+  border-radius: 5rpx;
+}
+.progress--bar-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 10rpx;
+  background: rgba(0,0,0,.1);
+  background: linear-gradient(to right, rgb(51,51,150), rgb(201, 102, 201));
+  border-radius: 5rpx;
+}
+.progress--point {
+  position: absolute;
+  left: 0;
+  top: 2rpx;
+  margin-left: -20rpx;
+}
+.progress--ctrl {
+  margin-left: 30rpx;
+  line-height: 40rpx;
+  height: 40rpx;
+  width: 60rpx;
+  text-align: center;
+  color: #fff;
+  border-radius: 4rpx;
+  font-size: 12px;
+  background: linear-gradient(to right, rgb(255, 209, 2), rgb(255, 192, 38));
+}
+.progress--ctrl .sm {
+  font-size: 10px;
+}
+.toast {
+  position: absolute;
+  background: rgba(0,0,0,.6);
+  padding: 0 24rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 4rpx;
+  top: -100rpx;
+  left: 0;
+  color: #fff;
+}
