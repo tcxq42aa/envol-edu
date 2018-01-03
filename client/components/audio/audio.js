@@ -19,7 +19,7 @@ Component({
           // audioCtx.seek(0)
         // } else {
           // test
-          // audioCtx.seek(265)
+          // audioCtx.seek(305)
         // }
       })
       audioCtx.onPause(function (e) {
@@ -71,8 +71,7 @@ Component({
   properties: {
     lSrc: String,
     rSrc: String,
-    finished: Boolean,
-    draggable: Boolean
+    finished: Boolean
   },
 
   /**

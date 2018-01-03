@@ -23,7 +23,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     qcloud.request({
-      url: config.service.paperUrl + '/' + options.paperId,
+      url: config.service.paperUrl + '/' + (options.paperId || 1),
       login: true,
       success(result) {
         let content = JSON.parse(result.data.content);
@@ -37,8 +37,8 @@ Page({
           paper: result.data,
           content: content
         })
-        console.log(content)
-        WxParse.wxParse('article', 'html', result.data.handout, that, 5);
+        WxParse.wxParse('handout', 'html', content.handout, that, 5);
+        WxParse.wxParse('optHandout', 'html', content.optHandout, that, 5);
       },
 
       fail(error) {
@@ -56,7 +56,22 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    // console.log(123123)
+    // wx.canvasToTempFilePath({
+    //   x: 100,
+    //   y: 200,
+    //   width: 50,
+    //   height: 50,
+    //   destWidth: 100,
+    //   destHeight: 100,
+    //   canvasId: 'myCanvas',
+    //   success: function (res) {
+    //     console.log(res.tempFilePath)
+    //   },
+    //   fail: function (err) {
+    //     console.log(err)
+    //   }
+    // })
   },
 
   /**
@@ -109,9 +124,6 @@ Page({
       currentStep: this.data.currentStep + 1,
       fixed: true
     })
-    wx.pageScrollTo({
-      scrollTop: 99999
-    })
   },
 
   toggle: function(e) {
@@ -124,6 +136,9 @@ Page({
    * 音频播放结束
    */
   onAudioEnded: function(e) {
+    if(this.data.currentStep == 3) {
+      return
+    }
     var idx = e.target.dataset.idx
     var disabled = true;
     this.data.content.audios[idx].finished = true
@@ -132,17 +147,25 @@ Page({
     }
     this.setData({
       disabled: disabled,
+      currentStep: disabled ? 1 : 2,
       content: { ...this.data.content }
     })
+    if (!disabled && !this.data.isOptional) {
+      wx.pageScrollTo({
+        scrollTop: 99999
+      })
+    }
   },
 
   toOpt: function(){
-    this.data.content.cover = this.data.content.optCover
     this.data.content.audios = this.data.content.optAudios
     this.setData({
-      currentStep: 1,
+      currentStep: 2,
       isOptional: true,
       content: { ...this.data.content }
+    })
+    wx.pageScrollTo({
+      scrollTop: 0
     })
   }
 })

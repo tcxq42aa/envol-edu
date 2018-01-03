@@ -7,19 +7,23 @@
       <image style="width: 230rpx;height: 290rpx" src="{{content.cover || '../../assets/common/headphone@3x.png'}}"></image>
     </view>
     <view style="padding-top: 30rpx;margin-left: 30rpx">
-      <view wx:if="{{currentStep==1}}">
-        <view>Première étape</view>
-        <view class="f18">Ecouter sans texte</view>
+      <view wx:if="!isOptional">
+        <view wx:if="{{currentStep==1}}">
+          <view>Première étape</view>
+          <view class="f18">Ecouter sans texte</view>
+        </view>
+        <view wx:if="{{currentStep==2}}">
+          <view>Deuxième étape</view>
+          <view class="f18">Comprendre le texte</view>
+        </view>
+        <view wx:if="{{currentStep==3}}">
+          <view>Troisième étape</view>
+          <view class="f18">Lire en shadowing</view>
+        </view>
       </view>
-      <view wx:if="{{currentStep==2}}">
-        <view>Deuxième étape</view>
-        <view class="f18">Comprendre le texte</view>
+      <view wx:else>
+        <view class="f18">Histoire 1</view>
       </view>
-      <view wx:if="{{currentStep==3}}">
-        <view>Troisième étape</view>
-        <view class="f18">Lire en shadowing</view>
-      </view>
-      
       <view style='margin-top: 48rpx'>
         <image style="width: 30rpx;height:30rpx" src='../../assets/common/hp-sm@3x.png'></image>
         <image class="ml-5" style="width: 30rpx;height:30rpx" src='../../assets/common/book-sm@3x.png'></image>
@@ -31,6 +35,7 @@
 <view class="page-content">
 
   <!-- 第一步 -->
+  
   <view class="offset-l-2 animate-in delay-1 mb-30" wx:for="{{content.audios}}" wx:key="{{item.key}}">
     <view class="offset-r-1">
       <view class="f15">Astuce</view>
@@ -39,35 +44,44 @@
     <my-audio 
       data-idx='{{index}}'
       finished='{{item.finished}}'
-      bind:ended="onAudioEnded"  
-      draggable="{{currentStep === 3}}" l-src="{{item.src}}" r-src="{{item.src2}}"></my-audio>
+      bind:ended="onAudioEnded" l-src="{{item.src}}" r-src="{{item.src2}}"></my-audio>
   </view>
+  
 
   <!-- 第二步 -->
-  <view wx:if="{{currentStep >= 2}}" class="block animate-in offset-l-1 mt-20 pa-25">
+  <view wx:if="{{!isOptional && currentStep >= 2}}" class="block animate-in offset-l-1 mt-20 pa-25">
     <view class="btn--collapse {{!opened ? '' : 'up'}}" bindtap='toggle' data-target=''></view>
     <view class="{{!opened ? 'mask' : ''}}">
       <view class="f14 block--title">Écouter une fois avant de cliquer</view>
       <view class="text-gray mt-45">
         <import src="/vendor/wxParse/wxParse.wxml"/>  
-        <template is="wxParse" data="{{wxParseData:article.nodes}}"/> 
+        <template is="wxParse" data="{{wxParseData:handout.nodes}}"/>
       </view>
     </view>
   </view>
+  <view wx:if="{{isOptional}}" class="block animate-in offset-l-1 mt-20 pa-25">
+    <view>
+        <import src="/vendor/wxParse/wxParse.wxml"/>  
+        <template is="wxParse" data="{{wxParseData:optHandout.nodes}}"/> 
+    </view>
+  </view>
 
-  <view class="animate-in delay-2 {{fixed ? 'fixed-bottom' : 'mt-50'}}">
+  <view wx:if="{{!isOptional}}" class="animate-in delay-2 fixed-bottom">
     <view bindtap='next' wx:if="{{currentStep < 3}}" class="btn btn--next {{disabled ? 'disabled' : ''}}">
       Prochaine étape
     </view>
-  </view>
-  
-
-  <view class="footer-btns" wx:if="{{currentStep === 3}}">
-    <view class="btn btn--finish">
-      J'ai fini
+    <view wx:else class="footer-btns">
+      <view class="btn btn--finish">
+        J'ai fini
+      </view>
+      <view class="btn btn--finish" bindtap='toOpt'>
+        Je passe au défi
+      </view>
     </view>
-    <view class="btn btn--finish" wx:if="!isOptional" bindtap='toOpt'>
-      Passer au défi
+  </view>
+  <view wx:else class="animate-in delay-2 fixed-bottom">
+    <view bindtap='onFinish' class="btn btn--next">
+      Prochaine étape
     </view>
   </view>
 </view>

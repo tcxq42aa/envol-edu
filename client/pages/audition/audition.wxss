@@ -27,10 +27,6 @@
 }
 .footer-btns {
   display: flex;
-  position: fixed;
-  bottom: 60rpx;
-  left: 0;
-  right: 0;
   margin-left: 60rpx;
   margin-right: 60rpx;
 }
