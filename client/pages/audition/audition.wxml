@@ -1,7 +1,7 @@
 <!--pages/audition/audition.wxml-->
 <!-- 头部 -->
 <view class="bannel">
-  <image class="bannel--bg" style="width: 100%; height: 304rpx" mode="aspectFill" src='../../assets/common/bannel-yellow@3x.png'></image>
+  <image class="bannel--bg" style="width: 100%; height: 304rpx" mode="aspectFill" src='../../assets/common/bannel-yellow.png'></image>
   <view class="flex">
     <view>
       <image style="width: 230rpx;height: 290rpx" src="{{content.cover || '../../assets/common/headphone@3x.png'}}"></image>
