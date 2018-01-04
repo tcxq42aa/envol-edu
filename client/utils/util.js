@@ -39,4 +39,23 @@ var showModel = (title, content) => {
     })
 }
 
-module.exports = { formatTime, showBusy, showSuccess, showModel }
+var showToast = (title, sec) => {
+  let pages = getCurrentPages();
+  let curPage = pages[pages.length - 1];
+  let animation = wx.createAnimation();
+  animation.opacity(1).step();
+  curPage.setData({
+    toastData: {
+      reveal: true,
+      animationData: animation,
+      title: title
+    }
+  });
+  setTimeout(() => {
+    curPage.setData({
+      toastData: null
+    })
+  }, sec)
+}
+
+module.exports = { formatTime, showBusy, showSuccess, showModel, showToast }

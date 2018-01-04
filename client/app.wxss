@@ -16,20 +16,21 @@ page {
 }
 .block--title {
   position: absolute;
-  top: 50rpx;
+  font-weight: bold;
 }
 .block .mask {
   overflow: hidden;
-  max-height: 300rpx;
+  position: relative;
+  max-height: 200rpx;
 }
 .mask::after {
   position: absolute;
   content: ' ';
   left: 0;
-  top: 40%;
+  top: 50rpx;
   bottom: 0;
   width: 100%;
-  background: linear-gradient(to bottom, rgba(255,255,255, 0), rgba(255, 255, 255, 1));
+  background: linear-gradient(to bottom, rgba(255,255,255, 0.25), rgba(255, 255, 255, 1));
 }
 .flex {
   display: flex;
@@ -201,4 +202,22 @@ page {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+.wetoast__bd {
+  position: fixed;
+  width: 100%;
+  bottom: 200rpx;
+  opacity: 0;
+  text-align: center;
+}
+.wetoast__bd__title {
+  background: rgba(0,0,0,.65);
+  color: #fff;
+  text-align: left;
+  line-height: 1.5;
+  padding: 30rpx;
+  display: inline-block;
+  max-width: 70%;
+  border-radius: 5px;
 }

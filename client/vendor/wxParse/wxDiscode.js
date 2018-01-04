@@ -96,6 +96,63 @@ function strGreeceDiscode(str){
     str = str.replace(/&upsih;/g, 'ϒ');
     str = str.replace(/&piv;/g, 'ϖ');
     str = str.replace(/&middot;/g, '·');
+
+    str = str.replace(/&agrave;/g, 'à');
+    str = str.replace(/&aacute;/g, 'á');
+    str = str.replace(/&acirc;/g, 'â');
+    str = str.replace(/&atilde;/g, 'ã');
+    str = str.replace(/&auml;/g, 'ä');
+    str = str.replace(/&aring;/g, 'å');
+    str = str.replace(/&aelig;/g, 'æ');
+    str = str.replace(/&ccedil;/g, 'ç');
+    str = str.replace(/&egrave;/g, 'è');
+    str = str.replace(/&eacute;/g, 'é');
+    str = str.replace(/&ecirc;/g, 'ê');
+    str = str.replace(/&euml;/g, 'ë');
+    str = str.replace(/&igrave;/g, 'ì');
+    str = str.replace(/&iacute;/g, 'í');
+    str = str.replace(/&icirc;/g, 'î');
+    str = str.replace(/&iuml;/g, 'ï');
+    str = str.replace(/&ieth;/g, 'ð');
+    str = str.replace(/&ntilde;/g, 'ñ');
+    str = str.replace(/&ograve;/g, 'ò');
+    str = str.replace(/&oacute;/g, 'ó');
+    str = str.replace(/&ocirc;/g, 'ô');
+    str = str.replace(/&otilde;/g, 'õ');
+    str = str.replace(/&ouml;/g, 'ö');
+    str = str.replace(/&ugrave;/g, 'ù');
+    str = str.replace(/&uacute;/g, 'ú');
+    str = str.replace(/&ucirc;/g, 'û');
+    str = str.replace(/&uuml;/g, 'ü');
+
+    str = str.replace(/&Agrave;/g, 'À');
+    str = str.replace(/&Aacute;/g, 'Á');
+    str = str.replace(/&circ;/g, 'Â');
+    str = str.replace(/&Atilde;/g, 'Ã');
+    str = str.replace(/&Auml;/g, 'Ä');
+    str = str.replace(/&ring;/g, 'Å');
+    str = str.replace(/&AElig;/g, 'æ');
+    str = str.replace(/&Ccedil;/g, 'ç');
+    str = str.replace(/&Egrave;/g, 'È');
+    str = str.replace(/&Eacute;/g, 'É');
+    str = str.replace(/&Ecirc;/g, 'Ê');
+    str = str.replace(/&Euml;/g, 'Ë');
+    str = str.replace(/&Igrave;/g, 'Ì');
+    str = str.replace(/&Iacute;/g, 'Í');
+    str = str.replace(/&Icirc;/g, 'Î');
+    str = str.replace(/&Iuml;/g, 'Ï');
+    str = str.replace(/&ETH;/g, 'Ð');
+    str = str.replace(/&Ntilde;/g, 'Ñ');
+    str = str.replace(/&Ograve;/g, 'Ò');
+    str = str.replace(/&Oacute;/g, 'Ó');
+    str = str.replace(/&Ocirc;/g, 'Ô');
+    str = str.replace(/&Otilde;/g, 'Õ');
+    str = str.replace(/&Ouml;/g, 'Ö');
+    str = str.replace(/&Ugrave;/g, 'Ù');
+    str = str.replace(/&Uacute;/g, 'Ú');
+    str = str.replace(/&Ucirc;/g, 'Û');
+    str = str.replace(/&Uuml;/g, 'Ü');
+
     return str;
 }
 

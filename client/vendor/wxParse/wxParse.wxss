@@ -15,7 +15,10 @@
     font-family: Helvetica,sans-serif;
     font-size: 28rpx;
     color: #666;
-    line-height: 1.8;
+    line-height: 1.6;
+}
+.wxParse-p{
+  margin: 1em 0;
 }
 view{
     word-break:break-all; overflow:auto;

@@ -14,7 +14,7 @@ Component({
         that.setData({
           isPlaying: true
         })
-        
+        that.triggerEvent('play', {}, {})
         // audioCtx.seek(230)
       })
       audioCtx.onPause(function (e) {
@@ -62,6 +62,7 @@ Component({
           durationStr: dMin + ':' + dSec,
         })
       })
+      that.triggerEvent('ready', { context: audioCtx}, {})
     } else {
       // 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示
       wx.showModal({
@@ -151,7 +152,7 @@ Component({
       var that = this
       var query = wx.createSelectorQuery().in(this)
       query.select('#bar').boundingClientRect(function (res) {
-        console.log(res) // 这个组件内 #the-id 节点的上边界坐标
+        //console.log(res) // 这个组件内 #the-id 节点的上边界坐标
         that.barRef = res
       }).exec()
     }

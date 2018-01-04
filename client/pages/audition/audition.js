@@ -1,6 +1,7 @@
 // pages/audition/audition.js
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config.js')
+var util = require('../../utils/util.js')
 var WxParse = require('../../vendor/wxParse/wxParse.js');
 Page({
 
@@ -42,13 +43,8 @@ Page({
         })
         WxParse.wxParse('handout', 'html', content.handout, that, 5);
         WxParse.wxParse('optHandout', 'html', content.optHandout, that, 5);
-        if(content.preAudio) {
-          wx.showModal({
-            title: '',
-            content: "Tout écouter pour passer à l'étape suivante",
-            showCancel: false,
-            confirmText: '我知道了'
-          })
+        if (that.data.currentStep == 1 && content.preAudio) {
+          util.showToast("Tout écouter pour passer à l'étape suivante", 2500)
         }
       },
 
@@ -58,7 +54,6 @@ Page({
       },
 
       complete() {
-        wx.hideToast()
         wx.hideLoading()
       }
     })
@@ -87,48 +82,6 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
-
-  /**
    * 下一步
    */ 
   next: function() {
@@ -148,10 +101,15 @@ Page({
    * 音频播放结束
    */
   onPreAudioEnded: function() {
+    var firstFinished = !!this.data.content.audios[0].finished
     this.setData({
       preAudioFinshed: true,
-      firstFinished: this.data.content.audios[0].finished
+      firstFinished: firstFinished
     })
+    
+    if (!firstFinished) {
+      util.showToast("Tout écouter pour passer à l'étape suivante", 3000)
+    }
   },
   onAudioEnded: function(e) {
     switch (this.data.currentStep) {
@@ -163,6 +121,9 @@ Page({
           this.setData({
             firstFinished: true
           })
+        }
+        if(hasPreAudio && !preAudioFinshed) {
+          util.showToast("Tout écouter pour passer à l'étape suivante", 3000)
         }
         break
       case 2:
@@ -179,28 +140,25 @@ Page({
     if(this.data.currentStep == 3) {
       return
     }
-    // var idx = e.target.dataset.idx
-    // var disabled = true;
-    // this.data.content.audios[idx].finished = true
-    // if (this.data.content.audios.filter((audio) => audio.finished).length == this.data.content.audios.length) {
-    //   disabled = false
-    // }
-    // this.setData({
-    //   disabled: disabled,
-    //   currentStep: disabled ? 1 : 2,
-    //   content: { ...this.data.content }
-    // })
-    // if (!disabled && !this.data.isOptional) {
-    //   wx.pageScrollTo({
-    //     scrollTop: 99999
-    //   })
-    // }
   },
 
   onAudioCycleEnded: function(e) {
     this.setData({
       audioCycleEnded: true
     })
+  },
+
+  onPreAudioReady: function (e) {
+    this.preAudioCtx = e.detail.context
+  },
+  onAudioReady: function(e){
+    this.audioCtx = e.detail.context
+  },
+  onPreAudioPlay: function (e) {
+    this.audioCtx && this.audioCtx.pause()
+  },
+  onAudioPlay: function (e) {
+    this.preAudioCtx && this.preAudioCtx.pause()
   },
 
   toOpt: function(){

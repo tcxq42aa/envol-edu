@@ -20,6 +20,9 @@
           <view>Troisième étape</view>
           <view class="f18">Lire en shadowing</view>
         </view>
+        <view wx:if="{{currentStep==4}}">
+          <view class="f18 mt-20">Histoire 1</view>
+        </view>
       </view>
       <view wx:else>
         <view class="f18">Histoire 1</view>
@@ -41,14 +44,14 @@
         <view class="f15">Astuce</view>
         <view class="text-gray mb-15">{{content.preAudioDesc}}</view>
       </view>
-      <my-audio bind:ended="onPreAudioEnded" l-src="{{content.preAudio}}"></my-audio>
+      <my-audio bind:ready="onPreAudioReady" bind:play="onPreAudioPlay" bind:ended="onPreAudioEnded" l-src="{{content.preAudio}}"></my-audio>
     </view>
     <view class="offset-l-2 animate-in delay-1 mb-30">
       <view class="offset-r-1">
         <view class="f15">Astuce</view>
         <view class="text-gray mb-15">{{content.audios[0].desc}}</view>
       </view>
-      <my-audio bind:ended="onAudioEnded" data-idx='0' max="{{1}}" l-src="{{content.audios[0].src1}}" r-src="{{content.audios[0].src2}}"></my-audio>
+      <my-audio bind:ready="onAudioReady" bind:play="onAudioPlay" bind:ended="onAudioEnded" data-idx='0' max="{{1}}" l-src="{{content.audios[0].src1}}" r-src="{{content.audios[0].src2}}"></my-audio>
     </view>
   </view>
 
@@ -62,9 +65,9 @@
   </view>
   <view wx:if="{{currentStep == 2}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25">
     <view class="btn--collapse {{!opened ? '' : 'up'}}" bindtap='toggle' data-target=''></view>
+    <view class="f14 block--title">Écouter une fois avant de cliquer</view>
     <view class="{{!opened ? 'mask' : ''}}">
-      <view class="f14 block--title">Écouter une fois avant de cliquer</view>
-      <view class="text-gray mt-45">
+      <view class="mt-45">
         <import src="/vendor/wxParse/wxParse.wxml"/>  
         <template is="wxParse" data="{{wxParseData:handout.nodes}}"/>
       </view>
@@ -126,3 +129,5 @@
     </view>
   </view>
 </view>
+<import src="../../components/toast/toast.wxml"/>
+<template is="wetoast" data="{{toastData: toastData}}"/>
