@@ -9,7 +9,6 @@ Component({
 
     if (wx.createInnerAudioContext) {
       const audioCtx = this.audioCtx = wx.createInnerAudioContext()
-      
       audioCtx.src = this.data.lSrc
       audioCtx.onPlay(function(e){
         that.setData({
@@ -19,25 +18,35 @@ Component({
           // audioCtx.seek(0)
         // } else {
           // test
-          // audioCtx.seek(305)
+          // audioCtx.seek(230)
         // }
       })
       audioCtx.onPause(function (e) {
-        if (audioCtx.duration != 0 && audioCtx.currentTime.toFixed(0) == audioCtx.duration.toFixed(0)) {
-          audioCtx.seek(0)
-          that.setData({
-            currentTime: 0
-          })
-        }
-        
         that.setData({
           isPlaying: false
         })
       })
       audioCtx.onEnded(function() {
+        audioCtx.seek(0)
+        that.setData({
+          currentTime: 0,
+          currentTimeStr: '00:00',
+          isPlaying: false
+        })
         var myEventDetail = {} // detail对象，提供给事件监听函数
         var myEventOption = {} // 触发事件的选项
         that.triggerEvent('ended', myEventDetail, myEventOption)
+        
+        that.data.cycleTimes = that.data.cycleTimes + 1
+        if (that.data.autocycle > 0) {
+          if (that.data.cycleTimes < that.data.autocycle) {
+            setTimeout(() => {
+              audioCtx.play()
+            }, 100)
+          } else {
+            that.triggerEvent('cycleended', {}, {})
+          }
+        }
       })
       audioCtx.onTimeUpdate(function(e){
         let sec = Math.round(audioCtx.currentTime % 60)
@@ -69,9 +78,17 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    lSrc: String,
+    lSrc: {
+      type: String,
+      observer: function (newVal, oldVal) { 
+        this.audioCtx && (this.audioCtx.src = newVal)
+      } 
+    },
     rSrc: String,
-    finished: Boolean
+    finished: Boolean,
+    switchable: Boolean,
+    autocycle: Number,
+    max: Number
   },
 
   /**
@@ -82,7 +99,8 @@ Component({
     isPlaying: false,
     showToast: false,
     currentTimeStr: '00:00',
-    durationStr: '00:00'
+    durationStr: '00:00',
+    cycleTimes: 0
   },
 
   /**
@@ -90,6 +108,9 @@ Component({
    */
   methods: {
     audioPlay: function (e) {
+      if (this.data.max > 0 && this.data.cycleTimes >= this.data.max) {
+        return
+      }
       if (e.target.dataset.status) {
         this.audioCtx.pause()
       } else {
@@ -102,9 +123,10 @@ Component({
       })
       if (this.data.isL) {
         this.audioCtx.src = this.data.lSrc
-        this.audioCtx.play()
       } else {
         this.audioCtx.src = this.data.rSrc
+      }
+      if (this.data.isPlaying) {
         this.audioCtx.play()
       }
     },

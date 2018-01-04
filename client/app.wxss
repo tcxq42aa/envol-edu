@@ -127,15 +127,15 @@ page {
   box-shadow: 0 5px 10px rgba(252, 147, 61, 0.3);
   text-align: center;
 }
+.btn.disabled {
+  opacity: .5; 
+  pointer-events: none;
+}
 .btn--next {
   position: relative;
   margin-left: 75rpx;
   margin-right: 75rpx;
   text-align: left;
-}
-.btn--next.disabled {
-   opacity: .5; 
-  pointer-events: none;
 }
 .btn--next:after {
   display: block;

@@ -22,8 +22,11 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     qcloud.request({
-      url: config.service.paperUrl + '/' + (options.paperId || 1),
+      url: config.service.paperUrl + '/' + (options.paperId || 4),
       login: true,
       success(result) {
         let content = JSON.parse(result.data.content);
@@ -39,6 +42,14 @@ Page({
         })
         WxParse.wxParse('handout', 'html', content.handout, that, 5);
         WxParse.wxParse('optHandout', 'html', content.optHandout, that, 5);
+        if(content.preAudio) {
+          wx.showModal({
+            title: '',
+            content: "Tout écouter pour passer à l'étape suivante",
+            showCancel: false,
+            confirmText: '我知道了'
+          })
+        }
       },
 
       fail(error) {
@@ -48,6 +59,7 @@ Page({
 
       complete() {
         wx.hideToast()
+        wx.hideLoading()
       }
     })
   },
@@ -135,34 +147,68 @@ Page({
   /**
    * 音频播放结束
    */
+  onPreAudioEnded: function() {
+    this.setData({
+      preAudioFinshed: true,
+      firstFinished: this.data.content.audios[0].finished
+    })
+  },
   onAudioEnded: function(e) {
+    switch (this.data.currentStep) {
+      case 1:
+        var hasPreAudio = this.data.content.preAudio
+        this.data.content.audios[0].finished = true;
+        var preAudioFinshed = this.data.preAudioFinshed
+        if ((!hasPreAudio || preAudioFinshed)) {
+          this.setData({
+            firstFinished: true
+          })
+        }
+        break
+      case 2:
+        this.setData({
+          secondFinished: true
+        })
+        break
+      case 4:
+        this.setData({
+          optFinished: true
+        })
+        break
+    }
     if(this.data.currentStep == 3) {
       return
     }
-    var idx = e.target.dataset.idx
-    var disabled = true;
-    this.data.content.audios[idx].finished = true
-    if (this.data.content.audios.filter((audio) => audio.finished).length == this.data.content.audios.length) {
-      disabled = false
-    }
+    // var idx = e.target.dataset.idx
+    // var disabled = true;
+    // this.data.content.audios[idx].finished = true
+    // if (this.data.content.audios.filter((audio) => audio.finished).length == this.data.content.audios.length) {
+    //   disabled = false
+    // }
+    // this.setData({
+    //   disabled: disabled,
+    //   currentStep: disabled ? 1 : 2,
+    //   content: { ...this.data.content }
+    // })
+    // if (!disabled && !this.data.isOptional) {
+    //   wx.pageScrollTo({
+    //     scrollTop: 99999
+    //   })
+    // }
+  },
+
+  onAudioCycleEnded: function(e) {
     this.setData({
-      disabled: disabled,
-      currentStep: disabled ? 1 : 2,
-      content: { ...this.data.content }
+      audioCycleEnded: true
     })
-    if (!disabled && !this.data.isOptional) {
-      wx.pageScrollTo({
-        scrollTop: 99999
-      })
-    }
   },
 
   toOpt: function(){
-    this.data.content.audios = this.data.content.optAudios
+    // this.data.content.audios = this.data.content.optAudios
     this.setData({
-      currentStep: 2,
-      isOptional: true,
-      content: { ...this.data.content }
+      currentStep: 4,
+      // isOptional: true,
+      // content: { ...this.data.content }
     })
     wx.pageScrollTo({
       scrollTop: 0

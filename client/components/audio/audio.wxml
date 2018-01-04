@@ -13,7 +13,7 @@
       {{currentTimeStr}} / {{durationStr}}
     </view>
   </view>
-  <view class="progress--ctrl" wx-if="{{draggable}}" bindtap='switchSpeed'>
+  <view class="progress--ctrl" wx-if="{{switchable}}" bindtap='switchSpeed'>
     <text class="{{isL ? '' : 'sm'}}">L</text>/<text class="{{isL ? 'sm' : ''}}">R</text>
   </view>
 
