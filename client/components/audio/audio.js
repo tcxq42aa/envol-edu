@@ -14,12 +14,8 @@ Component({
         that.setData({
           isPlaying: true
         })
-        // if (audioCtx.duration !=0 && audioCtx.currentTime.toFixed(0) == audioCtx.duration.toFixed(0)) {
-          // audioCtx.seek(0)
-        // } else {
-          // test
-          // audioCtx.seek(230)
-        // }
+        
+        // audioCtx.seek(230)
       })
       audioCtx.onPause(function (e) {
         that.setData({
