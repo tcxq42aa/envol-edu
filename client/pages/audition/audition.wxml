@@ -1,6 +1,6 @@
 <!--pages/audition/audition.wxml-->
 <!-- 头部 -->
-<view class="bannel">
+<view class="bannel" bindtap="toMiniPro">
   <image class="bannel--bg" style="width: 100%; height: 304rpx" mode="aspectFill" src='../../assets/common/bannel-yellow.png'></image>
   <view class="flex">
     <view>
@@ -61,14 +61,13 @@
       <view class="f15">Astuce</view>
       <view class="text-gray mb-15">{{content.audios[1].desc}}</view>
     </view>
-    <my-audio bind:ended="onAudioEnded" data-idx='1' finished='{{true}}' min-play="{{1}}" l-src="{{content.audios[1].src1}}" r-src="{{content.audios[1].src2}}"></my-audio>
+    <my-audio bind:ended="onAudioEnded" data-idx='1' finished='{{true}}' min-play="{{1}}" l-src="{{content.audios[1].src1}}" r-src="{{content.audios[1].src2}}" toast-text="Interdit de scroller avant d’avoir fini la première écoute."></my-audio>
   </view>
   <view wx:if="{{currentStep == 2}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25 pr-82">
     <view class="btn--collapse {{!opened ? '' : 'up'}}" bindtap='toggle' data-target='opened'></view>
     <view class="f14 block--title">Écouter une fois avant de cliquer</view>
     <view class="{{!opened ? 'mask' : ''}}">
       <view class="mt-45">
-        <view class="f18">Texte d’aujourdhui</view>
         <import src="/vendor/wxParse/wxParse.wxml"/>  
         <template is="wxParse" data="{{wxParseData:handout.nodes}}"/>
       </view>
@@ -87,14 +86,13 @@
       <view class="f15">Astuce</view>
       <view class="text-gray mb-15">{{content.audios[2].desc}}</view>
     </view>
-    <my-audio autocycle="{{5}}" bind:cycleended="onAudioCycleEnded" bind:ended="onAudioEnded" data-idx='2' switchable="{{true}}" l-src="{{content.audios[2].src1}}" r-src="{{content.audios[2].src2}}"></my-audio>
+    <my-audio autocycle="{{5}}" bind:cycleended="onAudioCycleEnded" bind:ended="onAudioEnded" data-idx='2' switchable="{{true}}" l-src="{{content.audios[2].src1}}" r-src="{{content.audios[2].src2}}" toast-text="Écouter au moins cinq fois pour passer à l’étape suivante."></my-audio>
   </view>
   <view wx:if="{{currentStep == 3}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25 pr-82">
     <view class="btn--collapse {{!opened2 ? '' : 'up'}}" bindtap='toggle' data-target='opened2'></view>
     <view class="f14 block--title">Écouter une fois avant de cliquer</view>
     <view class="{{!opened2 ? 'mask' : ''}}">
       <view class="mt-45">
-        <view class="f18">Texte d’aujourdhui</view>
         <import src="/vendor/wxParse/wxParse.wxml"/>  
         <template is="wxParse" data="{{wxParseData:thirdHandout.nodes}}"/>
       </view>
@@ -128,7 +126,7 @@
     </view>
   </view>
   <view wx:elif="{{currentStep == 3}}" class="footer-btns animate-in delay-2">
-    <view class="btn btn--finish {{audioCycleEnded ? '' : 'disabled'}}">
+    <view bindtap='handleFinish' data-type="1" class="btn btn--finish {{audioCycleEnded ? '' : 'disabled'}}">
       J'ai fini
     </view>
     <view class="btn btn--finish {{audioCycleEnded ? '' : 'disabled'}}" bindtap='toOpt'>
@@ -136,7 +134,7 @@
       </view>
   </view>
   <view wx:elif="{{currentStep == 4}}" class="footer-btns animate-in delay-2">
-    <view class="btn btn--finish {{optFinished ? '' : 'disabled'}}">
+    <view bindtap='handleFinish' data-type="2" class="btn btn--finish {{optFinished ? '' : 'disabled'}}">
       J'ai fini
     </view>
   </view>

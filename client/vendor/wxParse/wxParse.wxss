@@ -12,13 +12,17 @@
 
 .wxParse{
     margin: 0 5px;
-    font-family: Helvetica,sans-serif;
+    font-family: DIN,Helvetica,sans-serif;
     font-size: 28rpx;
-    color: #666;
+    color: rgb(51,51,51);
     line-height: 1.6;
 }
 .wxParse-p{
   margin: 1em 0;
+}
+.wxParse-hr{
+  height: 1rpx;
+  background: rgb(216,216,216);
 }
 view{
     word-break:break-all; overflow:auto;

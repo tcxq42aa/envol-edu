@@ -18,7 +18,7 @@
   </view>
 
   <view class="toast" wx-if="{{showToast}}">
-    Interdit de scroller en lisant
+    {{toastText || 'Interdit de scroller en lisant'}}
   </view>
 </view>
 

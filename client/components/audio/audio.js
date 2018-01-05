@@ -17,7 +17,7 @@ Component({
           isPlaying: true
         })
         that.triggerEvent('play', {}, {})
-        // audioCtx.seek(230)
+        // audioCtx.seek(420)
       })
       audioCtx.onPause(function (e) {
         that.setData({
@@ -88,7 +88,8 @@ Component({
     switchable: Boolean,
     autocycle: Number,
     max: Number,
-    minPlay: Number
+    minPlay: Number,
+    toastText: String
   },
 
   /**

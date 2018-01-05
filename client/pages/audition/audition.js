@@ -173,5 +173,26 @@ Page({
     wx.pageScrollTo({
       scrollTop: 0
     })
+  },
+
+  toMiniPro: function() {
+    // wx.navigateToMiniProgram({
+    //   appId: 'wxde736ea090d9d526',
+    //   path: 'pages/user/home/home?courseId=1970&start_at=2017-12-12&end_time=2017-12-14',
+    //   extraData: {
+    //     foo: 'bar'
+    //   },
+    //   envVersion: 'release',
+    //   success(res) {
+    //     // 打开成功
+    //   }
+    // })
+  },
+
+  handleFinish: function(e){
+    var t = e.target.dataset.type
+    wx.navigateTo({
+      url: '/pages/audition/result?type=' + (t || 1)
+    })
   }
 })

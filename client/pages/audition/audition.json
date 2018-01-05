@@ -1,5 +1,4 @@
 {
-  "navigationBarTitleText": "ENVOL听力朗读课",
   "usingComponents": {
     "my-audio": "/components/audio/audio"
   }

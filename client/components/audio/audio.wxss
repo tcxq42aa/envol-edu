@@ -62,9 +62,8 @@ view {
 .toast {
   position: absolute;
   background: rgba(0,0,0,.6);
-  padding: 0 24rpx;
-  height: 80rpx;
-  line-height: 80rpx;
+  padding: 18rpx 24rpx;
+  max-width: 80%;
   border-radius: 4rpx;
   top: -100rpx;
   left: 0;
