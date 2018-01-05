@@ -68,6 +68,7 @@
     <view class="f14 block--title">Écouter une fois avant de cliquer</view>
     <view class="{{!opened ? 'mask' : ''}}">
       <view class="mt-45">
+        <view class="f18">Texte d’aujourdhui</view>
         <import src="/vendor/wxParse/wxParse.wxml"/>  
         <template is="wxParse" data="{{wxParseData:handout.nodes}}"/>
       </view>
@@ -93,6 +94,7 @@
     <view class="f14 block--title">Écouter une fois avant de cliquer</view>
     <view class="{{!opened2 ? 'mask' : ''}}">
       <view class="mt-45">
+        <view class="f18">Texte d’aujourdhui</view>
         <import src="/vendor/wxParse/wxParse.wxml"/>  
         <template is="wxParse" data="{{wxParseData:thirdHandout.nodes}}"/>
       </view>

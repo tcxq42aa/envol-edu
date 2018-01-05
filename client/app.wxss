@@ -24,13 +24,13 @@ page {
 .block .mask {
   overflow: hidden;
   position: relative;
-  max-height: 200rpx;
+  max-height: 185rpx;
 }
 .mask::after {
   position: absolute;
   content: ' ';
   left: 0;
-  top: 50rpx;
+  top: 0;
   bottom: 0;
   width: 100%;
   background: linear-gradient(to bottom, rgba(255,255,255, 0.25), rgba(255, 255, 255, 1));
