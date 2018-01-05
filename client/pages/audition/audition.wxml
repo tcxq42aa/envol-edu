@@ -61,10 +61,10 @@
       <view class="f15">Astuce</view>
       <view class="text-gray mb-15">{{content.audios[1].desc}}</view>
     </view>
-    <my-audio bind:ended="onAudioEnded" data-idx='1' finished='{{true}}' l-src="{{content.audios[1].src1}}" r-src="{{content.audios[1].src2}}"></my-audio>
+    <my-audio bind:ended="onAudioEnded" data-idx='1' finished='{{true}}' min-play="{{1}}" l-src="{{content.audios[1].src1}}" r-src="{{content.audios[1].src2}}"></my-audio>
   </view>
   <view wx:if="{{currentStep == 2}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25">
-    <view class="btn--collapse {{!opened ? '' : 'up'}}" bindtap='toggle' data-target=''></view>
+    <view class="btn--collapse {{!opened ? '' : 'up'}}" bindtap='toggle' data-target='opened'></view>
     <view class="f14 block--title">Écouter une fois avant de cliquer</view>
     <view class="{{!opened ? 'mask' : ''}}">
       <view class="mt-45">
@@ -84,9 +84,19 @@
   <view wx:if="{{currentStep == 3}}" class="offset-l-2 animate-in delay-1 mb-30">
     <view class="offset-r-1">
       <view class="f15">Astuce</view>
-      <view class="text-gray mb-15">{{content.audios[0].desc}}</view>
+      <view class="text-gray mb-15">{{content.audios[2].desc}}</view>
     </view>
-    <my-audio autocycle="{{5}}" bind:cycleended="onAudioCycleEnded" bind:ended="onAudioEnded" data-idx='0' switchable="{{true}}" l-src="{{content.audios[0].src1}}" r-src="{{content.audios[0].src2}}"></my-audio>
+    <my-audio autocycle="{{5}}" bind:cycleended="onAudioCycleEnded" bind:ended="onAudioEnded" data-idx='2' switchable="{{true}}" l-src="{{content.audios[2].src1}}" r-src="{{content.audios[2].src2}}"></my-audio>
+  </view>
+  <view wx:if="{{currentStep == 3}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25">
+    <view class="btn--collapse {{!opened2 ? '' : 'up'}}" bindtap='toggle' data-target='opened2'></view>
+    <view class="f14 block--title">Écouter une fois avant de cliquer</view>
+    <view class="{{!opened2 ? 'mask' : ''}}">
+      <view class="mt-45">
+        <import src="/vendor/wxParse/wxParse.wxml"/>  
+        <template is="wxParse" data="{{wxParseData:thirdHandout.nodes}}"/>
+      </view>
+    </view>
   </view>
 
   <!-- 选修 -->
@@ -95,7 +105,7 @@
       <view class="f15">Astuce</view>
       <view class="text-gray mb-15">{{content.optAudios[0].desc}}</view>
     </view>
-    <my-audio bind:ended="onAudioEnded" data-idx='0' l-src="{{content.optAudios[0].src1}}" r-src="{{content.optAudios[0].src2}}" finished='{{true}}'></my-audio>
+    <my-audio bind:ended="onAudioEnded" data-idx='0' l-src="{{content.optAudios[0].src1}}" r-src="{{content.optAudios[0].src2}}" finished='{{true}}' min-play="{{1}}"></my-audio>
   </view>
   <view wx:if="{{currentStep == 4}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25">
     <view>

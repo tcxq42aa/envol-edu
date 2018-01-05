@@ -42,6 +42,7 @@ Page({
           content: content
         })
         WxParse.wxParse('handout', 'html', content.handout, that, 5);
+        WxParse.wxParse('thirdHandout', 'html', content.thirdHandout, that, 5);
         WxParse.wxParse('optHandout', 'html', content.optHandout, that, 5);
         if (that.data.currentStep == 1 && content.preAudio) {
           util.showToast("Tout écouter pour passer à l'étape suivante", 2500)
@@ -92,8 +93,9 @@ Page({
   },
 
   toggle: function(e) {
+    var key = e.target.dataset.target
     this.setData({
-      opened: !this.data.opened
+      [key]: !this.data[key]
     })
   },
 

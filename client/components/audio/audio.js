@@ -9,7 +9,9 @@ Component({
 
     if (wx.createInnerAudioContext) {
       const audioCtx = this.audioCtx = wx.createInnerAudioContext()
-      audioCtx.src = this.data.lSrc
+      if (this.data.lSrc) {
+        audioCtx.src = this.data.lSrc
+      }
       audioCtx.onPlay(function(e){
         that.setData({
           isPlaying: true
@@ -85,7 +87,8 @@ Component({
     finished: Boolean,
     switchable: Boolean,
     autocycle: Number,
-    max: Number
+    max: Number,
+    minPlay: Number
   },
 
   /**
@@ -128,7 +131,7 @@ Component({
       }
     },
     onTouchMove: function(e) {
-      if (!this.data.finished) {
+      if (!this.data.finished || (this.data.minPlay > 0 && this.data.minPlay > this.data.cycleTimes)) {
         this.setData({
           showToast: true
         })
