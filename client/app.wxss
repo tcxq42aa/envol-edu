@@ -102,6 +102,9 @@ page {
 .pa-25 {
   padding: 50rpx;
 }
+.pr-82 {
+  padding-right: 164rpx;
+}
 
 .text-gray {
   color: rgb(153,153,153);

@@ -63,7 +63,7 @@
     </view>
     <my-audio bind:ended="onAudioEnded" data-idx='1' finished='{{true}}' min-play="{{1}}" l-src="{{content.audios[1].src1}}" r-src="{{content.audios[1].src2}}"></my-audio>
   </view>
-  <view wx:if="{{currentStep == 2}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25">
+  <view wx:if="{{currentStep == 2}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25 pr-82">
     <view class="btn--collapse {{!opened ? '' : 'up'}}" bindtap='toggle' data-target='opened'></view>
     <view class="f14 block--title">Écouter une fois avant de cliquer</view>
     <view class="{{!opened ? 'mask' : ''}}">
@@ -89,7 +89,7 @@
     </view>
     <my-audio autocycle="{{5}}" bind:cycleended="onAudioCycleEnded" bind:ended="onAudioEnded" data-idx='2' switchable="{{true}}" l-src="{{content.audios[2].src1}}" r-src="{{content.audios[2].src2}}"></my-audio>
   </view>
-  <view wx:if="{{currentStep == 3}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25">
+  <view wx:if="{{currentStep == 3}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25 pr-82">
     <view class="btn--collapse {{!opened2 ? '' : 'up'}}" bindtap='toggle' data-target='opened2'></view>
     <view class="f14 block--title">Écouter une fois avant de cliquer</view>
     <view class="{{!opened2 ? 'mask' : ''}}">
