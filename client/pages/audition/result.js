@@ -14,8 +14,8 @@ Page({
       '2': '../../assets/common/book2@2x.png'
     },
     shareImgSrc: {
-      '1':'http://oss.edu.envol.vip/miniprogram/share-bg1.png',
-      '2': 'http://oss.edu.envol.vip/miniprogram/share-bg2.png'
+      '1':'https://oss.edu.envol.vip/miniprogram/share-bg1.png',
+      '2': 'https://oss.edu.envol.vip/miniprogram/share-bg2.png'
     }
   },
 

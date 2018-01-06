@@ -110,7 +110,7 @@ Component({
   methods: {
     audioPlay: function (e) {
       if (this.data.max > 0 && this.data.cycleTimes >= this.data.max) {
-        this.showToast('Vous ne pouvez écouter qu’une fois pour cette étape.')
+        this.showToast('À la première étape, n’écouter qu’une fois.')
         return
       }
       if (e.target.dataset.status) {
