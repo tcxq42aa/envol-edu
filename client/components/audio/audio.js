@@ -17,7 +17,7 @@ Component({
           isPlaying: true
         })
         that.triggerEvent('play', {}, {})
-        // audioCtx.seek(420)
+        // audioCtx.seek(620)
       })
       audioCtx.onPause(function (e) {
         that.setData({
@@ -96,7 +96,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    isL: true,
+    isN: true,
     isPlaying: false,
     showToast: false,
     currentTimeStr: '00:00',
@@ -121,9 +121,9 @@ Component({
     },
     switchSpeed: function(){
       this.setData({
-        isL: !this.data.isL
+        isN: !this.data.isN
       })
-      if (this.data.isL) {
+      if (this.data.isN) {
         this.audioCtx.src = this.data.lSrc
       } else {
         this.audioCtx.src = this.data.rSrc

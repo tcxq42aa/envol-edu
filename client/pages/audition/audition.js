@@ -96,7 +96,7 @@ Page({
     })
     if (this.data.currentStep == 3) {
       setTimeout(() => {
-        util.showToast("Lire au moins cinq fois pour passer la étape suivante.", 2500)
+        util.showToast("Lire au moins cinq fois pour passer à l’étape suivante.", 2500)
       } ,1000)
     }
   },

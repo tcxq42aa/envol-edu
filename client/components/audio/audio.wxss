@@ -51,9 +51,17 @@ view {
   height: 40rpx;
   width: 60rpx;
   text-align: center;
-  color: #fff;
+  color: rgb(255, 192, 38);
   border-radius: 4rpx;
   font-size: 12px;
+  border-style: solid;
+  border-width: 1rpx;
+  border-color: rgb(255, 192, 38);
+  background: #fff;
+}
+.progress--ctrl.isN {
+  color: #fff;
+  border-color: transparent;
   background: linear-gradient(to right, rgb(255, 209, 2), rgb(255, 192, 38));
 }
 .progress--ctrl .sm {
