@@ -22,12 +22,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    this.setData({ options })
+    this.initPageData()
+    wx.getSetting({
+      success: function (res) {
+        if (!res.authSetting['scope.userInfo']) {
+          wx.openSetting({
+            success: function (res) {
+              if (res.authSetting['scope.userInfo']) {
+                that.initPageData()
+              }
+            }
+          })
+        }
+      }
+    })
+  },
+
+  initPageData: function (){
     var that = this;
     wx.showLoading({
       title: '加载中',
     })
     qcloud.request({
-      url: config.service.paperUrl + '/' + (options.paperId || 4),
+      url: config.service.paperUrl + '/' + (that.data.options.paperId || 4),
       login: true,
       success(result) {
         let content = JSON.parse(result.data.content);
@@ -64,22 +83,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    // console.log(123123)
-    // wx.canvasToTempFilePath({
-    //   x: 100,
-    //   y: 200,
-    //   width: 50,
-    //   height: 50,
-    //   destWidth: 100,
-    //   destHeight: 100,
-    //   canvasId: 'myCanvas',
-    //   success: function (res) {
-    //     console.log(res.tempFilePath)
-    //   },
-    //   fail: function (err) {
-    //     console.log(err)
-    //   }
-    // })
+    
   },
 
   /**
@@ -90,6 +94,11 @@ Page({
       currentStep: this.data.currentStep + 1,
       fixed: true
     })
+    if (this.data.currentStep == 3) {
+      setTimeout(() => {
+        util.showToast("Lire au moins cinq fois pour passer la étape suivante.", 2500)
+      } ,1000)
+    }
   },
 
   toggle: function(e) {

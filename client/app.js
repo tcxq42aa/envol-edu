@@ -2,6 +2,8 @@
 var qcloud = require('./vendor/wafer2-client-sdk/index')
 var config = require('./config')
 var util = require('./utils/util.js')
+var fundebug = require('./vendor/fundebug.0.0.3.min.js')
+fundebug.apikey = "649b7b34dcb8d3f7ab304a70f2a65ce997c57f56a967563f1dcc21f49200a1b1";
 
 App({
     onLaunch: function () {

@@ -110,6 +110,7 @@ Component({
   methods: {
     audioPlay: function (e) {
       if (this.data.max > 0 && this.data.cycleTimes >= this.data.max) {
+        this.showToast('Vous ne pouvez écouter qu’une fois pour cette étape.')
         return
       }
       if (e.target.dataset.status) {
@@ -133,14 +134,7 @@ Component({
     },
     onTouchMove: function(e) {
       if (!this.data.finished || (this.data.minPlay > 0 && this.data.minPlay > this.data.cycleTimes)) {
-        this.setData({
-          showToast: true
-        })
-        setTimeout(() => {
-          this.setData({
-            showToast: false
-          })
-        }, 2500)
+        this.showToast(this.data.toastText)
         return
       }
       
@@ -159,6 +153,17 @@ Component({
         //console.log(res) // 这个组件内 #the-id 节点的上边界坐标
         that.barRef = res
       }).exec()
+    },
+    showToast: function(content){
+      this.setData({
+        showToast: true,
+        msg: content || 'Interdit de scroller en lisant'
+      })
+      setTimeout(() => {
+        this.setData({
+          showToast: false
+        })
+      }, 2500)
     }
   }
 })

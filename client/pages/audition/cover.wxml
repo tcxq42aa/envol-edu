@@ -1,0 +1,24 @@
+<!--pages/audition/cover.wxml-->
+<view class="result-page">
+  <image class="bannel--bg" style="width: 100%; height: 400rpx" mode="aspectFill" src='{{bgImgSrc}}'></image>
+  <view class="result-box fsm">
+    <view class="f18">Bienvenue chez envol! </view>
+    <view class="line"></view>
+    <view class="f14">
+    Seb x Weina
+    </view>
+    <view class="f18 mt-30">Seb</view>
+    <view class="text-gray">envol创始人</view>
+    <view class="text-gray">几乎自学2年当上法语教练</view>
+    <view class="text-gray">深谙高效学习法语之道</view>
+    <view class="text-gray">擅长站在学员角度引导学员学习</view>
+    <view class="f18 mt-20">Weina</view>
+    <view class="text-gray">资深教师</view>
+    <view class="text-gray">留学生涯10年，口音纯正</view>
+    <view class="text-gray">教学经验7年之久</view>
+    <view class="result-btn-group">
+      <view class="btn btn--next" bindtap='onNav'>C’est parti!</view>
+    </view>
+  </view>
+</view>
+

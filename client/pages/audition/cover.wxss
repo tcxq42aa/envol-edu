@@ -1,0 +1,43 @@
+/* pages/audition/cover.wxss */
+.result-page {
+  color: white;
+  text-align: center;
+  padding-top: 40rpx;
+}
+.bannel--bg {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+.result-box {
+  min-height:910rpx;
+  margin-bottom: 50rpx;
+  background: #fff;
+  color: rgb(51,51,51);
+  border-radius: 4rpx;
+  margin-top: 170rpx;
+  margin-left: 70rpx;
+  padding: 80rpx 160rpx 130rpx 60rpx;
+  position: relative;
+  text-align: left;
+  box-sizing: border-box;
+  box-shadow: 0 10px 15px rgba(155,155,155, 0.2)
+}
+.result-btn-group {
+  position: absolute;
+  bottom: 35rpx;
+  left: 0;
+  width: 100%;
+}
+.line {
+  height: 1rpx;
+  background: rgb(216,216,216);
+  margin: 30rpx 0;
+}
+.btn--next {
+  font-size: 14px;
+  margin-right: 100rpx;
+  margin-left: -20rpx;
+}

@@ -86,7 +86,7 @@
       <view class="f15">Astuce</view>
       <view class="text-gray mb-15">{{content.audios[2].desc}}</view>
     </view>
-    <my-audio autocycle="{{5}}" bind:cycleended="onAudioCycleEnded" bind:ended="onAudioEnded" data-idx='2' switchable="{{true}}" l-src="{{content.audios[2].src1}}" r-src="{{content.audios[2].src2}}" toast-text="Écouter au moins cinq fois pour passer à l’étape suivante."></my-audio>
+    <my-audio autocycle="{{5}}" bind:cycleended="onAudioCycleEnded" bind:ended="onAudioEnded" data-idx='2' switchable="{{true}}" l-src="{{content.audios[2].src1}}" r-src="{{content.audios[2].src2}}" toast-text="Lire au moins cinq fois pour passer la étape suivante."></my-audio>
   </view>
   <view wx:if="{{currentStep == 3}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25 pr-82">
     <view class="btn--collapse {{!opened2 ? '' : 'up'}}" bindtap='toggle' data-target='opened2'></view>
@@ -105,7 +105,7 @@
       <view class="f15">Astuce</view>
       <view class="text-gray mb-15">{{content.optAudios[0].desc}}</view>
     </view>
-    <my-audio bind:ended="onAudioEnded" data-idx='0' l-src="{{content.optAudios[0].src1}}" r-src="{{content.optAudios[0].src2}}" finished='{{true}}' min-play="{{1}}"></my-audio>
+    <my-audio bind:ended="onAudioEnded" data-idx='0' l-src="{{content.optAudios[0].src1}}" r-src="{{content.optAudios[0].src2}}" finished='{{true}}' min-play="{{1}}" toast-text="Interdit de scroller avant d’avoir fini la première écoute."></my-audio>
   </view>
   <view wx:if="{{currentStep == 4}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25">
     <view>

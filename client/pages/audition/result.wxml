@@ -1,0 +1,26 @@
+<!--pages/audition/result.wxml-->
+<view class="result-page">
+  <image class="bannel--bg" style="width: 100%; height: 600rpx" mode="aspectFill" src='{{bgImgSrc[type]}}'></image>
+  <view style="visibility: {{type=='1' ? 'visible' : 'hidden'}}">
+    <view class="f18">ENVOL王牌听力朗读课</view>
+    <view class="f12 fsm">开启全新法语学习模式和体验</view>
+  </view>
+
+  <view class="result-box">
+    <image style="width: 260rpx; height: 220rpx" mode="aspectFill" src='{{bookImgSrc[type]}}'/>
+    <view class="fsm mt-30">
+      <view>恭喜你，</view>
+      <view>完成了ENVOL王牌听力朗读课程必修试听！</view>
+      <view>如果觉得不错，</view>
+      <view>别忘了分享给朋友哦！</view>
+    </view>
+    <view class="result-btn-group">
+      <button class="btn btn--share btn-theme-{{type}}" open-type='share'>转发到好友或群聊
+        <image src="../../assets/common/ic_arrow_forward_white_2x.png" style="width: 50rpx;height: 50rpx"/>
+      </button>
+      <view class="btn btn--next btn--pic btn-theme-{{type}}" bindtap='generateShareImg'>生成朋友圈分享图</view>
+    </view>
+  </view>
+</view>
+<canvas style="position: absolute;left: -99999rpx;width: 966px; height: 1350px;transform: scale({{scale}}, {{scale}});transform-origin:left top" canvas-id="firstCanvas"></canvas>
+

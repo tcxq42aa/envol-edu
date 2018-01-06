@@ -19,6 +19,7 @@
 }
 .wxParse-p{
   margin: 1em 0;
+  min-height: 1rpx;
 }
 .wxParse-hr{
   height: 1rpx;
