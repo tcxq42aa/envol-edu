@@ -4,18 +4,15 @@
   <view class="result-box fsm">
     <view class="f18">Bienvenue chez envol! </view>
     <view class="line"></view>
-    <view class="f14">
-    Seb x Weina
-    </view>
-    <view class="f18 mt-30">Seb</view>
-    <view class="text-gray">envol创始人</view>
-    <view class="text-gray">几乎自学2年当上法语教练</view>
-    <view class="text-gray">深谙高效学习法语之道</view>
-    <view class="text-gray">擅长站在学员角度引导学员学习</view>
+    <view class="f18 mt-30">Seb | envol创始人</view>
+    <view class="text-gray">几乎自学2年当上法语教练，深谙高效学法语之道</view>
+    <view class="text-gray">曾任老佛爷总裁、Clarins全球CEO、巴黎副市长随身口译</view>
+    <view class="text-gray">奥赛博物馆珍品展作品官方介绍、导览文字翻译 </view>
+    <view class="text-gray">擅长站在学员角度进行引导式教学</view>
     <view class="f18 mt-20">Weina</view>
-    <view class="text-gray">资深教师</view>
-    <view class="text-gray">留学生涯10年，口音纯正</view>
-    <view class="text-gray">教学经验7年之久</view>
+    <view class="text-gray">留法生涯10年有余，口音纯正</view>
+    <view class="text-gray">资深金牌导师，教学经验7年之久</view>
+    <view class="text-gray">擅长教授“法国人都会用的地道口语表达”</view>
     <view class="result-btn-group">
       <view class="btn btn--next" bindtap='onNav'>C’est parti!</view>
     </view>

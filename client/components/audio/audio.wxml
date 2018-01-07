@@ -1,7 +1,7 @@
 <!--components/audio/audio.wxml-->
 <view class="audio">
   <image class="audio--btn" style="width:68rpx;height:68rpx" 
-  src="{{'../../assets/common/' + (isPlaying ? 'pause' : 'play') + '@3x.png'}}" bindtap='audioPlay' data-status='{{isPlaying}}'></image>
+  src="{{'../../assets/common/' + (isPlaying ? 'pause' : 'play') + '@3x.png'}}" bindtap='toggle' data-status='{{isPlaying}}'></image>
   <view class="flex-1" style="position: relative;top:-2px">
     <view class="progress">      
       <view class="flex-1 progress--bar" id="bar">

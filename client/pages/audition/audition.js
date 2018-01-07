@@ -64,7 +64,7 @@ Page({
         WxParse.wxParse('thirdHandout', 'html', content.thirdHandout, that, 5);
         WxParse.wxParse('optHandout', 'html', content.optHandout, that, 5);
         if (that.data.currentStep == 1 && content.preAudio) {
-          util.showToast("Tout écouter pour passer à l'étape suivante", 2500)
+          util.showToast("播放完两个音频才可进入下一学习环节，中间不要退出小程序，否则要重新播放", 3000)
         }
       },
 
@@ -96,7 +96,7 @@ Page({
     })
     if (this.data.currentStep == 3) {
       setTimeout(() => {
-        util.showToast("Lire au moins cinq fois pour passer à l’étape suivante.", 2500)
+        util.showToast("跟读5遍才可完成今日学习或进入挑战模式", 2500)
       } ,1000)
     }
   },
@@ -119,7 +119,7 @@ Page({
     })
     
     if (!firstFinished) {
-      util.showToast("Tout écouter pour passer à l'étape suivante", 3000)
+      util.showToast("听完两个音频才可进入下一学习环节", 3000)
     }
   },
   onAudioEnded: function(e) {
@@ -134,7 +134,7 @@ Page({
           })
         }
         if(hasPreAudio && !preAudioFinshed) {
-          util.showToast("Tout écouter pour passer à l'étape suivante", 3000)
+          util.showToast("听完两个音频才可进入下一学习环节", 3000)
         }
         break
       case 2:

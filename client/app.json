@@ -20,25 +20,25 @@
   },
   "tabBar": {
     "color": "#999",
-    "selectedColor": "#ff9800",
+    "selectedColor": "#744EAC",
     "backgroundColor": "#fff",
     "borderStyle": "black",
     "list": [
       {
         "pagePath": "pages/home/home",
-        "text": "听口首页",
+        "text": "",
         "iconPath": "assets/home4@3x.png",
         "selectedIconPath": "assets/home3@3x.png"
       },
       {
         "pagePath": "pages/plan/plan",
-        "text": "学习计划",
+        "text": "",
         "iconPath": "assets/plan4@3x.png",
         "selectedIconPath": "assets/plan3@3x.png"
       },
       {
         "pagePath": "pages/uc/uc",
-        "text": "个人中心",
+        "text": "",
         "iconPath": "assets/personal4@3x.png",
         "selectedIconPath": "assets/personal3@3x.png"
       }

@@ -3,7 +3,7 @@ var qcloud = require('./vendor/wafer2-client-sdk/index')
 var config = require('./config')
 var util = require('./utils/util.js')
 var fundebug = require('./vendor/fundebug.0.0.3.min.js')
-fundebug.apikey = "649b7b34dcb8d3f7ab304a70f2a65ce997c57f56a967563f1dcc21f49200a1b1";
+fundebug.apikey = 'f24ac51aec6a37d209d9dc8d85e9ec1ab21ec9d8dc872ef292850b072b6e881e';
 
 App({
     onLaunch: function () {
@@ -11,8 +11,14 @@ App({
       var that = this
       this.login(function (result){
         that.globalData = {
-          userInfo: result,
+          userInfo: result.userInfo,
           logged: true
+        }
+        fundebug.userInfo = result.userInfo;
+      })
+      wx.getSystemInfo({
+        success: function (res) {
+          fundebug.systemInfo = res;
         }
       })
     },
