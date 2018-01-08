@@ -48,6 +48,9 @@ page {
 .flex-bottom-v {
   align-items: flex-end;
 }
+.f0 {
+  font-size: 0;
+}
 .f10 {
   font-size: 10px;
 }

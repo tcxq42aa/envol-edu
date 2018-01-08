@@ -1,12 +1,18 @@
-const formatTime = date => {
+const formatTime = (date, containHMS) => {
+  if (typeof date == 'number') {
+    date = new Date(date)
+  }
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
   const hour = date.getHours()
   const minute = date.getMinutes()
   const second = date.getSeconds()
-
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  let result = [day, month, year ].map(formatNumber).join('/')
+  if (containHMS) {
+    result = result + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  }
+  return result
 }
 
 const formatNumber = n => {
@@ -58,4 +64,10 @@ var showToast = (title, sec) => {
   }, sec)
 }
 
-module.exports = { formatTime, showBusy, showSuccess, showModel, showToast }
+var formatDate = (date = new Date()) => {
+  var weekDays = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+  var monthArr = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+  return `${weekDays[date.getDay()]} ${date.getDate()} ${monthArr[date.getMonth()]} ${date.getFullYear()}`;
+}
+
+module.exports = { formatTime, showBusy, showSuccess, showModel, showToast, formatDate }

@@ -16,7 +16,8 @@
   margin-bottom: 50rpx;
   background: #fff;
   color: rgb(51,51,51);
-  border-radius: 4rpx;
+  border-top-left-radius: 4rpx;
+  border-bottom-left-radius: 4rpx;
   margin-top: 170rpx;
   margin-left: 70rpx;
   padding: 80rpx 160rpx 130rpx 60rpx;

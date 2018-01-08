@@ -13,6 +13,7 @@ module.exports = async (ctx, next) => {
         ctx.state.$wxInfo.userinfo.nickname = ctx.state.$wxInfo.userinfo.nickName
         ctx.state.$wxInfo.userinfo.headimgurl = ctx.state.$wxInfo.userinfo.avatarUrl
         ctx.state.data = ctx.state.$wxInfo.userinfo
+        ctx.state.data.serverTime = Date.now()
     } else {
         ctx.state.code = -1
     }
