@@ -39,7 +39,7 @@
 
   <!-- 第一步 -->
   <view wx:if="{{currentStep == 1}}">
-    <view class="offset-l-2 animate-in delay-1 mb-30" wx:if="content.preAudio">
+    <view class="offset-l-2 animate-in delay-1 mb-30" wx:if="{{content.preAudio}}">
       <view class="offset-r-1">
         <view class="f15">Astuce</view>
         <view class="text-gray mb-15">{{content.preAudioDesc}}</view>

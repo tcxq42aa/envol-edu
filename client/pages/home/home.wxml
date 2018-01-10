@@ -14,21 +14,22 @@
     </view>
   </view>
 
-  <view class="course-card">
-    <view class="course-card--cover"></view>
-    <view class="f15 fb mb-10 ellipsis">Le monstre du Poitou （1）</view>
-    <view class="ellipsis">Sunday Dec 17-Sunday Dec 17</view>
+  <!-- <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">手机号 </button> -->
+</view>
+<view class="course-card" wx:for="{{paperList}}" wx:key="id" bindtap='onTapPaper' data-id="{{item.id}}">
+  <view class="course-card--cover">
+    <image
+        style="width:100%;height:100%"
+        src="{{item.content.cover}}"
+        background-size="cover"
+    ></image>
   </view>
-
-  <view class="course-card">
-    <view class="course-card--cover"></view>
-    <view class="f15 fb mb-10 ellipsis">Le monstre du Poitou （1）</view>
-    <view class="ellipsis">Sunday Dec 17-Sunday Dec 17</view>
+  <view class="course-card--bg">
+    <image
+        style="width:100%;height:100%"
+        src="../../assets/common/paper-bg.png" mode='aspectFill'
+    ></image>
   </view>
-
-  <view class="course-card">
-    <view class="course-card--cover"></view>
-    <view class="f15 fb mb-10 ellipsis">Le monstre du Poitou （1）</view>
-    <view class="ellipsis">Sunday Dec 17-Sunday Dec 17</view>
-  </view>
+  <view class="f15 fb mb-10 ellipsis">{{item.name}}</view>
+  <view class="f12 ellipsis ">{{item.dateStr}}</view>
 </view>

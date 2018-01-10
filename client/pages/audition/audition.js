@@ -2,6 +2,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config.js')
 var util = require('../../utils/util.js')
+var moment = require('../../vendor/moment.min')
 var WxParse = require('../../vendor/wxParse/wxParse.js');
 Page({
 
@@ -99,6 +100,7 @@ Page({
         util.showToast("跟读5遍才可完成今日学习或进入挑战模式", 2500)
       } ,1000)
     }
+    this.stopAudio()
   },
 
   toggle: function(e) {
@@ -182,6 +184,7 @@ Page({
     wx.pageScrollTo({
       scrollTop: 0
     })
+    this.stopAudio()
   },
 
   toMiniPro: function() {
@@ -196,6 +199,7 @@ Page({
     //     // 打开成功
     //   }
     // })
+    this.stopAudio()
   },
 
   handleFinish: function(e){
@@ -203,5 +207,31 @@ Page({
     wx.navigateTo({
       url: '/pages/audition/result?type=' + (t || 1)
     })
+    this.stopAudio()
+    
+    var that = this
+    const { serverTime, openId } = getApp().globalData.userInfo
+    const readToday = moment(this.data.paper.readToday).format('YYYY-MM-DD')
+    var options = {
+      url: config.service.finishUrl.replace('{paperId}', that.data.options.paperId),
+      method: 'POST',
+      data: { openId, readToday },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      login: true,
+      success(result) {
+        console.log('request success', result)
+      },
+      fail(error) {
+        console.log('request fail', error);
+      }
+    }
+    qcloud.request(options)
+  },
+  stopAudio: function() {
+    if (wx.getBackgroundAudioManager) {
+      wx.getBackgroundAudioManager().stop()
+    }
   }
 })

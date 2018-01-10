@@ -63,6 +63,12 @@
 					"name": "index",
 					"pathName": "pages/index/index",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "courseList",
+					"pathName": "pages/courseList/courseList",
+					"query": ""
 				}
 			]
 		}

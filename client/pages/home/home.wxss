@@ -12,21 +12,31 @@
 }
 .course-card {
   position: relative;
-  margin: 0 0 85rpx 96rpx;
-  height: 190rpx;
-  background: #EEE;
+  margin: 30rpx 45rpx;
+  height: 320rpx;
   border-radius: 4px;
-  padding: 40rpx 60rpx 40rpx 80rpx;
+  padding: 118rpx 20rpx 40rpx 242rpx;
   box-sizing: border-box;
+  color: #fff;
+}
+.course-card--bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
 }
 .course-card--cover {
   position: absolute;
-  width: 146rpx;
-  height: 198rpx;
-  top: -48rpx;
-  left: -96rpx;
+  width: 180rpx;
+  height: 224rpx;
+  bottom: 0;
+  left: 37rpx;
   background: #ccc;
   border-radius: 4px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .course-card--cover > view {
   white-space: nowrap;

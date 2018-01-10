@@ -50,8 +50,9 @@ Page({
   },
 
   goSemesterHome: function(e){
-    wx.navigateTo({
-      url: '/pages/audition/cover',
+    wx.setStorageSync('currentSemester', e.currentTarget.dataset.target)
+    wx.switchTab({
+      url: '/pages/home/home'
     })
   }
 })

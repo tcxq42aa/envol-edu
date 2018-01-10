@@ -3,9 +3,8 @@
  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
-// var host = 'https://419337163.envol.xyz';
-var host = 'https://edu.envol.vip';
-// var host = 'http://127.0.0.1:5757';
+// var host = 'https://edu.envol.vip';
+var host = 'http://127.0.0.1:5757';
 
 var config = {
 
@@ -30,7 +29,13 @@ var config = {
 
         payUrl: `${host}/api/userSemester/{semesterId}/enroll`,
 
-        semesterListUrl: `${host}/api/semester/list`
+        semesterListUrl: `${host}/api/semester/list`,
+
+        todayUrl: `${host}/api/user/today`,
+
+        finishUrl: `${host}/api/user/course/{paperId}/save`,
+
+        decodePhoneNumberUrl: `${host}/weapp/phoneNumber`
     }
 };
 
