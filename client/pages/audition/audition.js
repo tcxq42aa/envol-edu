@@ -16,13 +16,29 @@ Page({
     classNames: '',
     opened: false,
     isOptional: false,
-    paper: {}
+    paper: {},
+    mainEnded: false,
+    optEnded: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let mainEnded = wx.getStorageSync('paper_' + options.paperId)
+    let optEnded = wx.getStorageSync('optPaper_' + options.paperId)
+    
+    if (options.main == 'done' && mainEnded) {
+      this.setData({
+        currentStep: 3,
+        audioCycleEnded: true
+      })
+    }
+    if (optEnded) {
+      this.setData({
+        optFinished: true
+      })
+    }
     var that = this
     this.setData({ options })
     this.initPageData()
@@ -50,6 +66,10 @@ Page({
       url: config.service.paperUrl + '/' + (that.data.options.paperId || 4),
       login: true,
       success(result) {
+        if (result.statusCode != 200) {
+
+          return
+        }
         let content = JSON.parse(result.data.content);
         content.audios.forEach(audio => {
           audio.key = Math.random() * 100000
@@ -57,9 +77,13 @@ Page({
         content.optAudios.forEach(audio => {
           audio.key = Math.random() * 100000
         })
+        let mainEnded = wx.getStorageSync('paper_' + result.data.id)
+        let optEnded = wx.getStorageSync('optPaper_' + result.data.id)
         that.setData({
           paper: result.data,
-          content: content
+          content: content,
+          mainEnded: mainEnded, 
+          optEnded: optEnded
         })
         WxParse.wxParse('handout', 'html', content.handout, that, 5);
         WxParse.wxParse('thirdHandout', 'html', content.thirdHandout, that, 5);
@@ -204,18 +228,41 @@ Page({
 
   handleFinish: function(e){
     var t = e.target.dataset.type
+    if (this.data.content.preAudio) {
+      this.goResultPage(t)
+      return
+    }
+    
+    var key = ''
+    if(t == 1) {
+      key = 'paper_' + this.data.paper.id
+    }
+    if (t == 2) {
+      key = 'optPaper_' + this.data.paper.id
+    }
+    if(!wx.getStorageSync(key)) {
+      this.goJdk()
+    } else {
+      this.goResultPage(t)
+    }
+    wx.setStorage({
+      key: key,
+      data: 'finished',
+    })
+  },
+  goResultPage: function(t){
     wx.navigateTo({
       url: '/pages/audition/result?type=' + (t || 1)
     })
     this.stopAudio()
-    
+
     var that = this
     const { serverTime, openId } = getApp().globalData.userInfo
-    const readToday = moment(this.data.paper.readToday).format('YYYY-MM-DD')
+    const readToday = util.getCurrentDate(this.data.paper.readToday)
     var options = {
       url: config.service.finishUrl.replace('{paperId}', that.data.options.paperId),
       method: 'POST',
-      data: { openId, readToday },
+      data: { openId, readToday, wordsTotal: this.data.paper.wordsTotal },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -233,5 +280,21 @@ Page({
     if (wx.getBackgroundAudioManager) {
       wx.getBackgroundAudioManager().stop()
     }
+  },
+  // 去鲸打卡
+  goJdk() {
+    wx.navigateToMiniProgram({
+      appId: 'wxbff9a0fc838c56e7',
+      path: 'pages/user/home/home?courseId=3807&start_at=2018-01-12&end_time=2018-01-30',
+      envVersion: 'release',
+      success(res) {
+        // 打开成功
+        console.log(res)
+      },
+      fail(res) {
+        // 打开成功
+        console.log(res)
+      }
+    })
   }
 })

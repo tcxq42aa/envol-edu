@@ -1,27 +1,28 @@
 <!--pages/home/home.wxml-->
 <view class="home-page">
-  <view class="userinfo flex flex-center-v">
-    <view class="flex-1">
+  <view class="userinfo">
+    <view class="">
       <image
           class="userinfo-avatar"
           src="{{logged ? userInfo.avatarUrl : '../../assets/user-unlogin.png'}}"
           background-size="cover"
       ></image>
     </view>
-    <view class="text-right">
-      <view class="mb-10">已坚持 <text class="f24">123</text> 天</view>
-      <view>Message(s)</view>
+    <view class="text-center">
+      <view class="f13">Message(s)</view>
+      <view class="f50 mb-5" style="letter-spacing: 3.8rpx">{{statistical ? statistical.length : 0}}</view>
+      <view class="f13">jour(s) de persévérance</view>
     </view>
   </view>
-
   <!-- <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">手机号 </button> -->
 </view>
-<view class="course-card" wx:for="{{paperList}}" wx:key="id" bindtap='onTapPaper' data-id="{{item.id}}">
+<view class="course-card" wx:for="{{semesterPlans}}" wx:key="id" bindtap='onTapPaper' data-id="{{item.id}}">
   <view class="course-card--cover">
     <image
         style="width:100%;height:100%"
-        src="{{item.content.cover}}"
+        src="{{item.coverUrl}}"
         background-size="cover"
+        mode='aspectFill'
     ></image>
   </view>
   <view class="course-card--bg">
@@ -33,3 +34,5 @@
   <view class="f15 fb mb-10 ellipsis">{{item.name}}</view>
   <view class="f12 ellipsis ">{{item.dateStr}}</view>
 </view>
+
+<view wx:if="{{errCode==4041}}" class="mt-50 btn btn--next btn--pic btn-theme-2" bindtap='onEnroll'>立即报名</view>

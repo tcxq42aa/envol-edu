@@ -1,39 +1,45 @@
 <!--pages/uc/uc.wxml-->
 <view class="uc-page">
-  <view class="userinfo flex flex-bottom-v">
-    <view class="flex-1">
+  <view class="userinfo">
+    <view>
       <image
           class="userinfo-avatar"
           src="{{logged ? userInfo.avatarUrl : '../../assets/user-unlogin.png'}}"
           background-size="cover"
       ></image>
     </view>
-    <view>
-      <view>J'ai écouté</view>
-      <view><text class="f24">123</text> mots</view>
-    </view>
-    <view class="uc-bd">
-      <view>J'ai fini</view>
-      <view><text class="f24">12</text> fois</view>
+    <view class="flex">
+      <view class="flex-1 text-center">
+        <view>J'ai écouté</view>
+        <view><text class="f24">123</text> mots</view>
+      </view>
+      <view class="flex-1 text-center">
+        <view>J'ai fini</view>
+        <view><text class="f24">12</text> fois</view>
+      </view>
     </view>
   </view>
 
   <view class="uc-card-wrap">
-    <view class="uc-card">
-      <view class="uc-card--icon"></view>
-      Alarme
-    </view>
-    <view class="uc-card">
-      <view class="uc-card--icon"></view>
+    <picker mode="time" value="{{time}}" bindchange="bindTimeChange">
+      <view class="uc-card flex-1">
+        <image class="uc-card--icon" mode='aspectFit' src='../../assets/alarme@3x.png'/>
+        Alarme
+      </view>
+    </picker>
+    <view class="uc-card" bindtap='toWebPage' data-url="https://shimo.im/doc/d6a4P8lVlPUxXgIl?r=YRL1ML/">
+      <image class="uc-card--icon" mode='aspectFit' src='../../assets/faq@3x.png'/>
       FAQ
     </view>
-    <view class="uc-card">
-      <view class="uc-card--icon"></view>
-      <view>Je cherche</view>
-      <view>moniteur, trice</view>
+    <view class="uc-card" bindtap='toWebPage' data-url="https://mp.weixin.qq.com/s/RJJKy6rd35W9XfloXhTWfw">
+      <image class="uc-card--icon" mode='aspectFit' src='../../assets/trice@3x.png'/>
+      <view>
+        <view>Je cherche un,une</view>
+        <view>montieur, trice</view>
+      </view>
     </view>
     <view class="uc-card">
-      <view class="uc-card--icon"></view>
+      <image class="uc-card--icon" mode='aspectFit' src='../../assets/envol@3x.png'/>
       Maison ENVOL
     </view>
   </view>

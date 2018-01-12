@@ -1,7 +1,7 @@
 <!--pages/audition/cover.wxml-->
 <view class="result-page">
   <image class="bannel--bg" style="width: 100%; height: 400rpx" mode="aspectFill" src='{{bgImgSrc}}'></image>
-  <view class="result-box fsm" bindtap='onPay'>
+  <view class="result-box fsm">
     <view class="f18">Bienvenue chez envol! </view>
     <view class="line"></view>
     <view class="f18 mt-30">Seb | envol创始人</view>

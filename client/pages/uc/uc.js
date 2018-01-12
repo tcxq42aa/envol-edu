@@ -1,4 +1,9 @@
 // pages/uc/uc.js
+var qcloud = require('../../vendor/wafer2-client-sdk/index')
+var config = require('../../config')
+var util = require('../../utils/util.js')
+var moment = require('../../vendor/moment.min')
+
 Page({
 
   /**
@@ -7,6 +12,7 @@ Page({
   data: {
     logged: false,
     userInfo: {},
+    time: '08:00'
   },
 
   /**
@@ -14,10 +20,17 @@ Page({
    */
   onLoad: function (options) {
     getApp().ready((data) => {
+      console.log(data.userInfo)
       this.setData({
         logged: data.logged,
         userInfo: data.userInfo,
       })
+    })
+    wx.getStorage({
+      key: 'reminder',
+      success: (res) => {
+        this.setData({ time: res.data })
+      },
     })
   },
 
@@ -68,5 +81,44 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  bindTimeChange: function (e) {
+    const time = e.detail.value.split(':')
+    const reminderHour = parseInt(time[0])
+    const reminderMinute = parseInt(time[1])
+    const differenceMinute = new Date().getTimezoneOffset()
+    
+    wx.showLoading({
+      title: '加载中',
+    })
+    const { openId } = getApp().globalData.userInfo
+    var that = this
+    var options = {
+      method: 'PUT',
+      url: `${config.service.reminderUrl}?openId=${openId}&reminderHour=${reminderHour}&reminderMinute=${reminderMinute}&differenceMinute=${differenceMinute}`,
+      login: true,
+      success(result) {
+        console.log('request success', result)
+        wx.setStorage({
+          key: 'reminder',
+          data: e.detail.value,
+        })
+      },
+      fail(error) {
+        console.log('request fail', error);
+      },
+      complete: function () {
+        wx.hideLoading()
+      }
+    }
+    qcloud.request(options)
+  },
+
+  toWebPage: function(e) {
+    const url = e.currentTarget.dataset.url
+    wx.navigateTo({
+      url: '/pages/web/web?url=' + encodeURIComponent(url),
+    })
   }
 })

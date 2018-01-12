@@ -1,3 +1,4 @@
+var moment = require('../vendor/moment.min')
 const formatTime = (date, containHMS) => {
   if (typeof date == 'number') {
     date = new Date(date)
@@ -64,10 +65,29 @@ var showToast = (title, sec) => {
   }, sec)
 }
 
+var weekDays = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+var monthArr = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+var lowerMonthArr = ['jan.', 'fév.', 'mars', 'avr.', 'mai', 'juin', 'juillet', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
 var formatDate = (date = new Date()) => {
-  var weekDays = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
-  var monthArr = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
   return `${weekDays[date.getDay()]} ${date.getDate()} ${monthArr[date.getMonth()]} ${date.getFullYear()}`;
 }
 
-module.exports = { formatTime, showBusy, showSuccess, showModel, showToast, formatDate }
+var formatDate2 = (date) => {
+  return weekDays[date.day()] + ' ' + lowerMonthArr[date.month()].replace(/^./, function (a) {
+    return a.toUpperCase()
+  }) + ' ' + date.date();
+}
+
+var getCurrentTime = function() {
+  var serverTime = getApp().globalData.userInfo.serverTime;
+  return moment(serverTime).utc().utcOffset(8)
+ };
+var getCurrentDate = function (date) {
+  var serverTime = date || getApp().globalData.userInfo.serverTime;
+  return moment(serverTime).utc().utcOffset(8).format('YYYY-MM-DD')
+};
+
+module.exports = { 
+  formatTime, showBusy, showSuccess, showModel, 
+  showToast, formatDate, formatDate2, getCurrentTime, getCurrentDate
+}
