@@ -38,4 +38,20 @@ router.get('/demo', controllers.demo)
 
 router.get('/accessToken', controllers.accessToken)
 
+router.get('/webview', function(ctx, next) {
+    const site = decodeURIComponent(ctx.request.query.site);
+    ctx.body = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head></head>
+        <body style="margin:0;padding:0;overflow:hidden">
+            <div id="app"></div>
+            <iframe width="100%" style="height: 100vh" src="${site}"
+            frameborder="no" border="0" marginwidth="0" marginheight="0" allowtransparency="yes"
+            ></iframe>
+        </body>
+        </html>
+    `
+})
+
 module.exports = router
