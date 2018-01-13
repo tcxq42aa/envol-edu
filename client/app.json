@@ -23,7 +23,7 @@
     "color": "#999",
     "selectedColor": "#744EAC",
     "backgroundColor": "#fff",
-    "borderStyle": "white",
+    "borderStyle": "black",
     "list": [
       {
         "pagePath": "pages/home/home",

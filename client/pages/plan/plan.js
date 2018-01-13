@@ -44,9 +44,9 @@ Page({
       wx.getStorage({
         key: 'currentSemester',
         success: (res) => {
-          this.initData(res.data)
+          this.initData(res.data.id)
           this.setData({
-            semesterId: res.data
+            semesterId: res.data.id
           })
         },
       })
@@ -112,7 +112,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    this.initData(this.data.semesterId, true, (d) => {
+      wx.stopPullDownRefresh()
+    }, true)
   },
 
   /**

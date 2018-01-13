@@ -20,21 +20,6 @@
     <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
       <image src="{{item.coverUrl}}"></image>
     </view>
-    <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
-      <image src="{{item.coverUrl}}"></image>
-    </view>
-    <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
-      <image src="{{item.coverUrl}}"></image>
-    </view>
-    <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
-      <image src="{{item.coverUrl}}"></image>
-    </view>
-    <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
-      <image src="{{item.coverUrl}}"></image>
-    </view>
-    <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
-      <image src="{{item.coverUrl}}"></image>
-    </view>
   </view>
 </view>
 

@@ -28,9 +28,9 @@ Page({
       wx.getStorage({
         key: 'currentSemester',
         success: (res) => {
-          this.initData(res.data)
+          this.initData(res.data.id, false)
           this.setData({
-            semesterId: res.data
+            semesterId: res.data.id
           })
         },
       })
@@ -50,8 +50,9 @@ Page({
   
   },
 
-  initData: function (semesterId, slient){
-    service.getSemesterDetail.bind(this)(semesterId, slient)
+  initData: function (semesterId, slient, cb, forceOnline){
+    console.log('initData')
+    service.getSemesterDetail.bind(this)(semesterId, slient, cb, forceOnline)
   },
   onTapPaper: function(e) {
     if(!this.data.paper) {
@@ -135,5 +136,11 @@ Page({
       }
     }
     qcloud.request(options)
-  } 
+  } ,
+
+  onPullDownRefresh: function(e){
+    this.initData(this.data.semesterId, true, (d) => {
+      wx.stopPullDownRefresh()
+    }, true)
+  }
 })

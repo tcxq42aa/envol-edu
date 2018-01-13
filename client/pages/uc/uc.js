@@ -28,9 +28,9 @@ Page({
       wx.getStorage({
         key: 'currentSemester',
         success: (res) => {
-          this.initData(res.data)
+          this.initData(res.data.id)
           this.setData({
-            semesterId: res.data
+            semesterId: res.data.id
           })
         },
       })

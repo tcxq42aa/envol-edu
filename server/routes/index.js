@@ -37,6 +37,7 @@ router.post('/message', controllers.message.post)
 router.get('/demo', controllers.demo)
 
 router.get('/accessToken', controllers.accessToken)
+router.get('/accessToken4Mini', controllers.accessToken4Mini)
 
 router.get('/webview', function(ctx, next) {
     const site = decodeURIComponent(ctx.request.query.site);

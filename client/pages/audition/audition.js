@@ -27,22 +27,25 @@ Page({
   onLoad: function (options) {
     var that = this
     this.setData({ options })
-    this.initPageData((data)=>{
-      let mainEnded = wx.getStorageSync('paper_' + data.id)
-      let optEnded = wx.getStorageSync('optPaper_' + data.id)
+    getApp().ready(()=>{
+      this.initPageData((data) => {
+        let mainEnded = wx.getStorageSync('paper_' + data.id)
+        let optEnded = wx.getStorageSync('optPaper_' + data.id)
 
-      if (options.main == 'done' && mainEnded) {
-        this.setData({
-          currentStep: 3,
-          audioCycleEnded: true
-        })
-      }
-      if (optEnded) {
-        this.setData({
-          optFinished: true
-        })
-      }
+        if (options.main == 'done' && mainEnded) {
+          this.setData({
+            currentStep: 3,
+            audioCycleEnded: true
+          })
+        }
+        if (optEnded) {
+          this.setData({
+            optFinished: true
+          })
+        }
+      })
     })
+    
     wx.getSetting({
       success: function (res) {
         if (!res.authSetting['scope.userInfo']) {
@@ -66,13 +69,13 @@ Page({
     let url = '', method = 'GET', data, header;
     if(that.data.options.paperId) {
       url = config.service.paperUrl + '/' + (that.data.options.paperId || 4);
-    } else if (that.data.options.date && that.data.options.semesterId) {
+    } else if (that.data.options.semesterId) {
       url = config.service.todayPaperUrl;
       method = 'POST';
       data = {
         openId: getApp().globalData.userInfo.openId,
         semesterId: that.data.options.semesterId,
-        readToday: that.data.options.date
+        readToday: that.data.options.date || util.getCurrentDate()
       }
       header = {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -315,18 +318,24 @@ Page({
   },
   // 去鲸打卡
   goJdk() {
-    wx.navigateToMiniProgram({
-      appId: 'wxbff9a0fc838c56e7',
-      path: 'pages/user/home/home?courseId=3807&start_at=2018-01-12&end_time=2018-01-30',
-      envVersion: 'release',
-      success(res) {
-        // 打开成功
-        console.log(res)
+    wx.getStorage({
+      key: 'currentSemester',
+      success: (res) => {
+        wx.navigateToMiniProgram({
+          appId: res.data.appId,
+          path: res.data.appPath,
+          envVersion: 'release',
+          success(res) {
+            // 打开成功
+            console.log(res)
+          },
+          fail(res) {
+            // 打开成功
+            console.log(res)
+          }
+        })
       },
-      fail(res) {
-        // 打开成功
-        console.log(res)
-      }
     })
+    
   }
 })

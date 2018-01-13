@@ -15,7 +15,7 @@
     </view>
   </view>
   <block wx:for="{{semesterList}}" wx:key="id">
-    <view bindtap="goSemesterHome" data-target="{{item.id}}" class="index-card flex flex-center-v">
+    <view bindtap="goSemesterHome" data-target="{{item}}" class="index-card flex flex-center-v">
       <view class="f0">
         <image style="width: 115rpx; height: 115rpx;margin-right: 26rpx" mode="aspectFill" src='../../assets/common/headphone.png'></image>
       </view>

@@ -1,12 +1,10 @@
 /**app.wxss**/
-view {
-  font-family: DIN;
-  -webkit-font-smoothing: antialiased;
-  color: rgb(51,51,51);
-}
 page {
+  color: rgb(51,51,51);
   font-size: 14px;
   line-height:1.5;
+  font-family: DIN;
+  -webkit-font-smoothing: antialiased;
 }
 .container {
   display: flex; 
@@ -159,7 +157,7 @@ page {
 }
 .btn.disabled {
   opacity: .5; 
-  pointer-events: none;     
+  pointer-events: none;
 }
 .btn-theme-2 {
   background: linear-gradient(to right, rgb(51, 51, 150), rgb(201, 102, 201));
