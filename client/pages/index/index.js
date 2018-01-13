@@ -55,5 +55,18 @@ Page({
     wx.switchTab({
       url: '/pages/home/home'
     })
+  },
+
+  openSetting: function(){
+    let that = this;
+    wx.openSetting({
+      success: function(res) {
+        if (res.authSetting['scope.userInfo']) {
+          that.doRequest()
+        }
+      },
+      fail: function(res) {},
+      complete: function(res) {},
+    })
   }
 })

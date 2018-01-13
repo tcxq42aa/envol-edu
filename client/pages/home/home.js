@@ -55,7 +55,7 @@ Page({
     service.getSemesterDetail.bind(this)(semesterId, slient, cb, forceOnline)
   },
   onTapPaper: function(e) {
-    if(!this.data.paper) {
+    if (!this.data.paper || this.data.errCode == 4041) {
       return;
     }
     wx.navigateTo({
@@ -110,37 +110,52 @@ Page({
       }
     })
   },
-  getPhoneNumber: function (e) {
-    console.log(e.detail.errMsg)
-    console.log(e.detail.iv)
-    console.log(e.detail.encryptedData)
-    wx.showLoading({
-      title: '加载中',
-    })
-    var that = this
-    var options = {
-      url: config.service.decodePhoneNumberUrl,
-      header: {
-        'x-wx-encrypted-data': e.detail.encryptedData || '',
-        'x-wx-iv': e.detail.iv || ''
-      },
-      login: true,
-      success(result) {
-        console.log('request success', result)
-      },
-      fail(error) {
-        console.log('request fail', error);
-      },
-      complete: function () {
-        wx.hideLoading()
-      }
-    }
-    qcloud.request(options)
-  } ,
+  // getPhoneNumber: function (e) {
+  //   console.log(e.detail.errMsg)
+  //   console.log(e.detail.iv)
+  //   console.log(e.detail.encryptedData)
+  //   wx.showLoading({
+  //     title: '加载中',
+  //   })
+  //   var that = this
+  //   var options = {
+  //     url: config.service.decodePhoneNumberUrl,
+  //     header: {
+  //       'x-wx-encrypted-data': e.detail.encryptedData || '',
+  //       'x-wx-iv': e.detail.iv || ''
+  //     },
+  //     login: true,
+  //     success(result) {
+  //       console.log('request success', result)
+  //     },
+  //     fail(error) {
+  //       console.log('request fail', error);
+  //     },
+  //     complete: function () {
+  //       wx.hideLoading()
+  //     }
+  //   }
+  //   qcloud.request(options)
+  // } ,
 
   onPullDownRefresh: function(e){
     this.initData(this.data.semesterId, true, (d) => {
       wx.stopPullDownRefresh()
     }, true)
+  },
+
+  openSetting: function () {
+    let that = this;
+    wx.openSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          getApp().ready(()=>{
+            that.initData(that.data.semesterId, true)
+          })
+        }
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   }
 })

@@ -11,6 +11,7 @@
           class="userinfo-avatar"
           src="{{logged ? userInfo.avatarUrl : '../../assets/user-unlogin.png'}}"
           background-size="cover"
+          bindtap='openSetting'
       ></image>
     </view>
   </view>

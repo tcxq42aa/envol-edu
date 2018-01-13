@@ -140,5 +140,29 @@ Page({
     wx.navigateTo({
       url: '/pages/web/web?mId=' + mId,
     })
+  },
+
+  openSetting: function () {
+    let that = this;
+    wx.openSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          getApp().ready(() => {
+            wx.getStorage({
+              key: 'currentSemester',
+              success: (res) => {
+                that.initData(res.data.id)
+                that.setData({
+                  semesterId: res.data.id
+                })
+              },
+            })
+          })
+          
+        }
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   }
 })
