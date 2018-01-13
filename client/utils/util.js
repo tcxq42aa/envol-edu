@@ -66,14 +66,15 @@ var showToast = (title, sec) => {
 }
 
 var weekDays = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+var simpleWeekDays = ['dim', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.']
 var monthArr = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
-var lowerMonthArr = ['jan.', 'fév.', 'mars', 'avr.', 'mai', 'juin', 'juillet', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+var simlpleMonthArr = ['jan.', 'fév.', 'mars', 'avr.', 'mai', 'juin', 'juillet', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
 var formatDate = (date = new Date()) => {
   return `${weekDays[date.getDay()]} ${date.getDate()} ${monthArr[date.getMonth()]} ${date.getFullYear()}`;
 }
 
 var formatDate2 = (date) => {
-  return weekDays[date.day()] + ' ' + lowerMonthArr[date.month()].replace(/^./, function (a) {
+  return weekDays[date.day()] + ' ' + simlpleMonthArr[date.month()].replace(/^./, function (a) {
     return a.toUpperCase()
   }) + ' ' + date.date();
 }
@@ -88,6 +89,7 @@ var getCurrentDate = function (date) {
 };
 
 module.exports = { 
+  weekDays, simpleWeekDays, monthArr, simlpleMonthArr,
   formatTime, showBusy, showSuccess, showModel, 
   showToast, formatDate, formatDate2, getCurrentTime, getCurrentDate
 }

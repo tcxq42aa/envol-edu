@@ -3,6 +3,7 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 var moment = require('../../vendor/moment.min')
+import service from '../../utils/service'
 
 Page({
 
@@ -10,7 +11,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    logged: false,
     userInfo: {},
     semesterPlans: []
   },
@@ -19,6 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.firstLoad = true
     getApp().ready((data) => {
       this.setData({
         logged: data.logged,
@@ -36,6 +37,12 @@ Page({
     })
   },
 
+  onShow: function(){
+    if (!this.firstLoad) {
+      this.initData(this.data.semesterId, true)
+    }
+  },
+
   /**
    * 用户点击右上角分享
    */
@@ -43,48 +50,8 @@ Page({
   
   },
 
-  initData: function (semesterId){
-    wx.showLoading({
-      title: '加载中',
-    })
-    const { serverTime, openId } = getApp().globalData.userInfo
-    var that = this
-    var options = {
-      method: 'POST',
-      url: config.service.todayUrl,
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      data: {
-        openId,
-        semesterId,
-        readToday: util.getCurrentDate()
-      },
-      login: true,
-      success(result) {
-        console.log('request success', result)
-        if (result.data.code == 4041) {
-          that.setData({errCode: 4041})
-          return
-        }
-        let { semesterPlans, paper, statistical } = result.data.data;
-        semesterPlans.forEach( item => {
-          let begin = moment(item.beginDate).utc().utcOffset(8)
-          let end = moment(item.endDate).utc().utcOffset(8)
-          item.dateStr = util.formatDate2(begin) + ' - ' + util.formatDate2(end)
-        })
-        that.setData({
-          statistical, semesterPlans, paper
-        })
-      },
-      fail(error) {
-        console.log('request fail', error);
-      },
-      complete: function () {
-        wx.hideLoading()
-      }
-    }
-    qcloud.request(options)
+  initData: function (semesterId, slient){
+    service.getSemesterDetail.bind(this)(semesterId, slient)
   },
   onTapPaper: function(e) {
     if(!this.data.paper) {

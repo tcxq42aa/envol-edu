@@ -3,6 +3,7 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 var moment = require('../../vendor/moment.min')
+import service from '../../utils/service'
 
 Page({
 
@@ -10,7 +11,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    logged: false,
     userInfo: {},
     time: '08:00'
   },
@@ -19,18 +19,45 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.firstLoad = true
     getApp().ready((data) => {
-      console.log(data.userInfo)
       this.setData({
         logged: data.logged,
         userInfo: data.userInfo,
       })
+      wx.getStorage({
+        key: 'currentSemester',
+        success: (res) => {
+          this.initData(res.data)
+          this.setData({
+            semesterId: res.data
+          })
+        },
+      })
+      wx.getStorage({
+        key: 'reminder',
+        success: (res) => {
+          this.setData({ time: res.data })
+        },
+      })
     })
-    wx.getStorage({
-      key: 'reminder',
-      success: (res) => {
-        this.setData({ time: res.data })
-      },
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    if (!this.firstLoad) {
+      this.initData(this.data.semesterId, true)
+    }
+  },
+
+  initData: function (semesterId, slient) {
+    service.getSemesterDetail.bind(this)(semesterId, slient, ({ statistical }) => {
+      this.setData({
+        mots: statistical.map((o) => o.wordsTotal).reduceRight((a,b) => a + b, 0),
+        fois: statistical.length
+      })
     })
   },
 
@@ -38,13 +65,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
   
   },
 

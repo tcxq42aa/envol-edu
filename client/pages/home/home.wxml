@@ -4,7 +4,7 @@
     <view class="">
       <image
           class="userinfo-avatar"
-          src="{{logged ? userInfo.avatarUrl : '../../assets/user-unlogin.png'}}"
+          src="{{userInfo.avatarUrl || '../../assets/user-unlogin.png'}}"
           background-size="cover"
       ></image>
     </view>

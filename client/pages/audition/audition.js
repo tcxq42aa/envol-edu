@@ -25,23 +25,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let mainEnded = wx.getStorageSync('paper_' + options.paperId)
-    let optEnded = wx.getStorageSync('optPaper_' + options.paperId)
-    
-    if (options.main == 'done' && mainEnded) {
-      this.setData({
-        currentStep: 3,
-        audioCycleEnded: true
-      })
-    }
-    if (optEnded) {
-      this.setData({
-        optFinished: true
-      })
-    }
     var that = this
     this.setData({ options })
-    this.initPageData()
+    this.initPageData((data)=>{
+      let mainEnded = wx.getStorageSync('paper_' + data.id)
+      let optEnded = wx.getStorageSync('optPaper_' + data.id)
+
+      if (options.main == 'done' && mainEnded) {
+        this.setData({
+          currentStep: 3,
+          audioCycleEnded: true
+        })
+      }
+      if (optEnded) {
+        this.setData({
+          optFinished: true
+        })
+      }
+    })
     wx.getSetting({
       success: function (res) {
         if (!res.authSetting['scope.userInfo']) {
@@ -62,12 +63,43 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
+    let url = '', method = 'GET', data, header;
+    if(that.data.options.paperId) {
+      url = config.service.paperUrl + '/' + (that.data.options.paperId || 4);
+    } else if (that.data.options.date && that.data.options.semesterId) {
+      url = config.service.todayPaperUrl;
+      method = 'POST';
+      data = {
+        openId: getApp().globalData.userInfo.openId,
+        semesterId: that.data.options.semesterId,
+        readToday: that.data.options.date
+      }
+      header = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
     qcloud.request({
-      url: config.service.paperUrl + '/' + (that.data.options.paperId || 4),
+      url: url,
+      data: data,
+      header: header,
+      method: method,
       login: true,
       success(result) {
         if (result.statusCode != 200) {
-
+          if (result.data.code == 4042) {
+            wx.showModal({
+              title: '提示',
+              content: '该课程已删除',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }
+              }
+            })
+          }
           return
         }
         let content = JSON.parse(result.data.content);

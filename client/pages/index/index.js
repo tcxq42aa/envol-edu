@@ -6,6 +6,7 @@ var util = require('../../utils/util.js')
 
 Page({
   data: {
+    userInfo: {},
     bgImgSrc: '../../assets/common/index-bg.png',
     semesterList: [],
     todayStr: util.formatDate(),

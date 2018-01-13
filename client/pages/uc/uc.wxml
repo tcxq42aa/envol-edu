@@ -4,18 +4,18 @@
     <view>
       <image
           class="userinfo-avatar"
-          src="{{logged ? userInfo.avatarUrl : '../../assets/user-unlogin.png'}}"
+          src="{{userInfo.avatarUrl || '../../assets/user-unlogin.png'}}"
           background-size="cover"
       ></image>
     </view>
     <view class="flex">
       <view class="flex-1 text-center">
         <view>J'ai écouté</view>
-        <view><text class="f24">123</text> mots</view>
+        <view><text class="f24">{{mots}}</text> mots</view>
       </view>
       <view class="flex-1 text-center">
         <view>J'ai fini</view>
-        <view><text class="f24">12</text> fois</view>
+        <view><text class="f24">{{fois}}</text> fois</view>
       </view>
     </view>
   </view>

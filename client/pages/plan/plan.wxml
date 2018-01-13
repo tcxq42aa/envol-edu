@@ -1,2 +1,40 @@
 <!--pages/plan/plan.wxml-->
-<text>pages/plan/plan.wxml</text>
+<view class="plan-container">
+  <view class="plan-title">Aout</view>
+  <view class="week-wrap">
+    <view wx:for="{{weekIdxs}}" wx:key="index" class="week-day">{{weekDays[item]}}</view>
+  </view>
+  <view class="month-wrap">
+    <view wx:for="{{daysInMonth}}" wx:key="index"
+      bindtap="goCourseDetail" data-active="{{beginDate<=item.dateStr&&endDate>=item.dateStr}}" data-date="{{item.dateStr}}"
+      class="month-day {{beginDate<=item.dateStr&&endDate>=item.dateStr?'active':''}} {{!statisticalMap[item.dateStr] ? 'unfinished' : (statisticalMap[item.dateStr]!=item.dateStr?'finished2':'finished')}}">
+      <view class="point">{{index + 1}}</view>
+    </view>
+  </view>
+  <view class="statistic">
+    <view class="item">当日已读 <text class="icon-circle icon-finish"></text></view>
+    <view class="item">补读 <text class="icon-circle icon-finish2"></text></view>
+    <view class="item">未完成 <text class="icon-circle icon-unfinish"></text></view>
+  </view>
+  <view class="plans">
+    <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
+      <image src="{{item.coverUrl}}"></image>
+    </view>
+    <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
+      <image src="{{item.coverUrl}}"></image>
+    </view>
+    <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
+      <image src="{{item.coverUrl}}"></image>
+    </view>
+    <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
+      <image src="{{item.coverUrl}}"></image>
+    </view>
+    <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
+      <image src="{{item.coverUrl}}"></image>
+    </view>
+    <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
+      <image src="{{item.coverUrl}}"></image>
+    </view>
+  </view>
+</view>
+

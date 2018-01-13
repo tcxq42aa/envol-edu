@@ -33,6 +33,8 @@ var config = {
 
         todayUrl: `${host}/api/user/today`,
 
+        todayPaperUrl: `${host}/api/user/todayPaper`,
+
         finishUrl: `${host}/api/user/course/{paperId}/save`,
 
         reminderUrl: `${host}/api/user/setting`,
