@@ -1,2 +1,5 @@
 <!--pages/web/web.wxml-->
-<web-view v-if="url" src="{{url}}"></web-view>
+<view class="web-view">
+  <import src="/vendor/wxParse/wxParse.wxml"/>  
+  <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+</view>

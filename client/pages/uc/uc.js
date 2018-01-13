@@ -136,9 +136,9 @@ Page({
   },
 
   toWebPage: function(e) {
-    const url = e.currentTarget.dataset.url
+    const mId = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/web/web?url=' + encodeURIComponent(url),
+      url: '/pages/web/web?mId=' + mId,
     })
   }
 })

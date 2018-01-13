@@ -1,4 +1,8 @@
 // pages/web/web.js
+var qcloud = require('../../vendor/wafer2-client-sdk/index')
+var config = require('../../config')
+var util = require('../../utils/util.js')
+var WxParse = require('../../vendor/wxParse/wxParse.js');
 Page({
 
   /**
@@ -12,7 +16,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({ url: 'https://edu.envol.vip/weapp/webview?site=' + encodeURIComponent(options.url)})
+    const mId = options.mId;
+    wx.showLoading({
+      title: '加载中',
+    })
+    var that = this
+    var options = {
+      url: `${config.service.articleUrl}/${mId}`,
+      login: true,
+      success(result) {
+        console.log('request success', result)
+        WxParse.wxParse('content', 'html', result.data.content, that, 0);
+      },
+      fail(error) {
+        console.log('request fail', error);
+      },
+      complete: function () {
+        wx.hideLoading()
+      }
+    }
+    qcloud.request(options)
   },
 
   /**

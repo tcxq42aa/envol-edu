@@ -39,6 +39,8 @@ var config = {
 
         reminderUrl: `${host}/api/user/setting`,
 
+        articleUrl: `${host}/api/article`,
+
         decodePhoneNumberUrl: `${host}/weapp/phoneNumber`
     }
 };

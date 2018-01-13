@@ -1,1 +1,5 @@
 /* pages/web/web.wxss */
+@import "/vendor/wxParse/wxParse.wxss";
+.web-view {
+   padding: 40rpx; 
+}

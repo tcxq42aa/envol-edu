@@ -27,11 +27,11 @@
         Alarme
       </view>
     </picker>
-    <view class="uc-card" bindtap='toWebPage' data-url="https://shimo.im/doc/d6a4P8lVlPUxXgIl?r=YRL1ML/">
+    <view class="uc-card" bindtap='toWebPage' data-id="1">
       <image class="uc-card--icon" mode='aspectFit' src='../../assets/faq@3x.png'/>
       FAQ
     </view>
-    <view class="uc-card" bindtap='toWebPage' data-url="https://mp.weixin.qq.com/s/RJJKy6rd35W9XfloXhTWfw">
+    <view class="uc-card" bindtap='toWebPage' data-id="2">
       <image class="uc-card--icon" mode='aspectFit' src='../../assets/trice@3x.png'/>
       <view>
         <view>Je cherche un,une</view>
