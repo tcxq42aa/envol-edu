@@ -8,7 +8,8 @@ module.exports = async (ctx, next) => {
     var wxInfo = ctx.state.$wxInfo;
     if (ctx.state.$wxInfo.loginState === 1) {
         // loginState 为 1，登录态校验成功
-        ctx.state.$wxInfo.userinfo.openid = ctx.state.$wxInfo.userinfo.openId
+        ctx.state.$wxInfo.userinfo.openid = ctx.state.$wxInfo.userinfo.openId,
+        ctx.state.$wxInfo.userinfo.unionid = ctx.state.$wxInfo.userinfo.unionId,
         ctx.state.$wxInfo.userinfo.sex = ctx.state.$wxInfo.userinfo.gender
         ctx.state.$wxInfo.userinfo.nickname = ctx.state.$wxInfo.userinfo.nickName
         ctx.state.$wxInfo.userinfo.headimgurl = ctx.state.$wxInfo.userinfo.avatarUrl
