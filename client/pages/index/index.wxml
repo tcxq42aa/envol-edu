@@ -15,6 +15,7 @@
       ></image>
     </view>
   </view>
+   
   <block wx:for="{{semesterList}}" wx:key="id">
     <view bindtap="goSemesterHome" data-target="{{item}}" class="index-card flex flex-center-v">
       <view class="f0">
@@ -26,7 +27,7 @@
         <view class="f16 fb" style='letter-spacing: 2.9px;margin-bottom: 6rpx'>{{item.name}}</view>
         <view class="f10">{{item.beginDateStr}}</view>
       </view>
-      <image style="width: 186rpx; height: 36rpx" class="tag-new" mode="aspectFill" src='../../assets/common/tag-new.png'></image>
+      <view class="tag-new" wx:if="{{index==0}}">nouveau</view>
       <view class="progress">
         <view class="f10 flex flex-bottom-v">
           <text class="flex-1">Déroulement</text>

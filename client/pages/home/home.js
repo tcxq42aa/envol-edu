@@ -59,7 +59,7 @@ Page({
       return;
     }
     wx.navigateTo({
-      url: '/pages/audition/audition?paperId=' + this.data.paper.id,
+      url: '/pages/audition/audition?isNormal=true&paperId=' + this.data.paper.id,
     })
   },
   onEnroll: function () {

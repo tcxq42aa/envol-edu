@@ -36,6 +36,17 @@
 .uc-card-wrap > .uc-card:last-child {
   border-bottom-width: 0;
 }
+button.uc-card {
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  font-size: inherit;
+  line-height: inherit;
+  text-align: left;
+}
+button.uc-card::after {
+  display: none;
+}
 .uc-card--icon {
   width: 70rpx;
   height: 70rpx;

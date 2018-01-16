@@ -32,13 +32,13 @@
       <image class="uc-card--icon" mode='aspectFit' src='../../assets/faq@3x.png'/>
       FAQ
     </view>
-    <view class="uc-card">
+    <button class="uc-card" open-type='contact' session-from="uc">
       <image class="uc-card--icon" mode='aspectFit' src='../../assets/trice@3x.png'/>
       <view>
         <view>Je cherche un,une</view>
         <view>montieur, trice</view>
       </view>
-    </view>
+    </button>
     <view class="uc-card" bindtap='toWebPage' data-id="2">
       <image class="uc-card--icon" mode='aspectFit' src='../../assets/envol@3x.png'/>
       Maison ENVOL

@@ -1,4 +1,5 @@
 // pages/audition/result.js
+import service from '../../utils/service'
 Page({
 
   /**
@@ -10,8 +11,8 @@ Page({
       '2': '../../assets/common/bg2-2.png'
     },
     bookImgSrc: {
-      '1': '../../assets/common/book@2x.png',
-      '2': '../../assets/common/book2@2x.png'
+      '1': '../../assets/common/bixiu.png',
+      '2': '../../assets/common/xuanxiu.png'
     },
     shareImgSrc: {
       '1':'https://oss.edu.envol.vip/miniprogram/share-bg1.png',
@@ -24,8 +25,17 @@ Page({
    */
   onLoad: function (options) {
     // options.type 1:必修；2:选修
-    this.setData({type: options.type || '1'})
-    this.initCanvas()
+    this.setData({
+      type: options.type || '1',
+      isNormal: options.isNormal
+    })
+    if(options.isNormal) {
+      this.initData(() => {
+        this.initCanvas()
+      })
+    } else {
+      this.initCanvas()
+    }
   },
 
   /**
@@ -96,8 +106,14 @@ Page({
           ctx.setFontSize(40)
           ctx.setFillStyle('#999999')
           ctx.setTextAlign('center')
-          ctx.fillText(username + '邀请你参加', imgWidth / 2 + 16 / scale, imgHeight / 2 + 70 / scale)
-          ctx.fillText('ENVOL听力朗读课的试听', imgWidth / 2 + 16 / scale, imgHeight / 2 + 70 / scale + 24 / scale)
+          let line1 = username + '邀请你参加'
+          let line2 = 'ENVOL听力朗读课的试听'
+          if(that.data.isNormal) {
+            line1 = '我在ENVOL听力朗读课'
+            line2 = '坚持完成了挑战课程'
+          }
+          ctx.fillText(line1, imgWidth / 2 + 16 / scale, imgHeight / 2 + 70 / scale)
+          ctx.fillText(line2, imgWidth / 2 + 16 / scale, imgHeight / 2 + 70 / scale + 24 / scale)
           ctx.draw()
         },
         fail: function (err) {
@@ -141,6 +157,23 @@ Page({
       },
       complete: function () {
       }
+    })
+  },
+  initData: function (cb) {
+    getApp().ready(()=>{
+      wx.getStorage({
+        key: 'currentSemester',
+        success: (res) => {
+          console.log(res.data.id)
+          service.getSemesterDetail.bind(this)(res.data.id, false, ({ statistical }) => {
+            this.setData({
+              mots: statistical.map((o) => o.wordsTotal).reduceRight((a, b) => a + b, 0),
+              fois: statistical.length
+            })
+            cb()
+          })
+        },
+      })
     })
   }
 })

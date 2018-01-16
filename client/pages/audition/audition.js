@@ -28,19 +28,19 @@ Page({
     var that = this
     this.setData({ options })
     getApp().ready(()=>{
+      console.log('ready')
       this.initPageData((data) => {
-        let mainEnded = wx.getStorageSync('paper_' + data.id)
-        let optEnded = wx.getStorageSync('optPaper_' + data.id)
-
+        let { mainEnded, optEnded } = this.data
         if (options.main == 'done' && mainEnded) {
+          let step = 3, optFinished = false
+          if (optEnded) {
+            step = 4
+            optFinished = true
+          }
           this.setData({
-            currentStep: 3,
-            audioCycleEnded: true
-          })
-        }
-        if (optEnded) {
-          this.setData({
-            optFinished: true
+            currentStep: step,
+            audioCycleEnded: true,
+            optFinished: optFinished
           })
         }
       })
@@ -61,7 +61,7 @@ Page({
     })
   },
 
-  initPageData: function (){
+  initPageData: function (cb){
     var that = this;
     wx.showLoading({
       title: '加载中',
@@ -126,6 +126,7 @@ Page({
         if (that.data.currentStep == 1 && content.preAudio) {
           util.showToast("播放完两个音频才可进入下一学习环节，中间不要退出小程序，否则要重新播放", 3000)
         }
+        cb && cb()
       },
 
       fail(error) {
@@ -263,6 +264,7 @@ Page({
 
   handleFinish: function(e){
     var t = e.target.dataset.type
+    console.log(this.data.content)
     if (this.data.content.preAudio) {
       this.goResultPage(t)
       return
@@ -275,7 +277,7 @@ Page({
     if (t == 2) {
       key = 'optPaper_' + this.data.paper.id
     }
-    if(!wx.getStorageSync(key)) {
+    if(!wx.getStorageSync(key) && this.data.isNormal) {
       this.goJdk()
     } else {
       this.goResultPage(t)

@@ -51,14 +51,18 @@
 				{
 					"id": 3,
 					"name": "paper",
-					"pathName": "pages/audition/result",
-					"query": "type=1"
+					"pathName": "pages/audition/audition",
+					"query": "main=done&paperId=4",
+					"scene": "1020",
+					"referrerInfo": {}
 				},
 				{
-					"id": -1,
+					"id": 4,
 					"name": "cover",
 					"pathName": "pages/audition/cover",
-					"query": ""
+					"query": "paperId=4",
+					"scene": "1020",
+					"referrerInfo": {}
 				},
 				{
 					"id": -1,
@@ -83,6 +87,30 @@
 					"name": "web",
 					"pathName": "pages/web/web",
 					"query": "mId=1",
+					"scene": "1020",
+					"referrerInfo": {}
+				},
+				{
+					"id": -1,
+					"name": "audition",
+					"pathName": "pages/audition/result",
+					"query": "type=1&isNormal=true",
+					"scene": "1020",
+					"referrerInfo": {}
+				},
+				{
+					"id": -1,
+					"name": "audition",
+					"pathName": "pages/audition/audition",
+					"query": "type=1",
+					"scene": "1020",
+					"referrerInfo": {}
+				},
+				{
+					"id": 11,
+					"name": "result",
+					"pathName": "pages/audition/result",
+					"query": "type=1&isNormal=1",
 					"scene": "1020",
 					"referrerInfo": {}
 				}

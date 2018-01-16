@@ -12,7 +12,7 @@ Page({
 
   onNav: function(){
     wx.navigateTo({
-      url: '/pages/audition/audition'
+      url: '/pages/audition/audition?paperId=4'
     })
   },
 
