@@ -5,6 +5,7 @@
     <view wx:for="{{weekIdxs}}" wx:key="index" class="week-day">{{weekDays[item]}}</view>
   </view>
   <view class="month-wrap">
+    <view wx:for="{{emptyDays}}" wx:key="index" class="month-day"></view>
     <view wx:for="{{daysInMonth}}" wx:key="index"
       bindtap="goCourseDetail" data-active="{{beginDate<=item.dateStr&&endDate>=item.dateStr}}" data-date="{{item.dateStr}}"
       class="month-day {{beginDate<=item.dateStr&&endDate>=item.dateStr?'active':''}} {{!statisticalMap[item.dateStr] ? 'unfinished' : (statisticalMap[item.dateStr]!=item.dateStr?'finished2':'finished')}}">
