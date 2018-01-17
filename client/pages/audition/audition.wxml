@@ -1,31 +1,26 @@
 <!--pages/audition/audition.wxml-->
 <!-- 头部 -->
-<view class="bannel" bindtap="toMiniPro">
+<view class="bannel" wx:if="{{content}}">
   <image class="bannel--bg" style="width: 100%; height: 304rpx" mode="aspectFill" src='../../assets/common/bannel-yellow.png'></image>
   <view class="flex">
     <view>
       <image style="width: 230rpx;height: 290rpx" src="{{content.cover || '../../assets/common/headphone@3x.png'}}"></image>
     </view>
     <view style="padding-top: 30rpx;margin-left: 30rpx">
-      <view wx:if="!isOptional">
-        <view wx:if="{{currentStep==1}}">
-          <view>Première étape</view>
-          <view class="f18">Écouter sans texte</view>
-        </view>
-        <view wx:if="{{currentStep==2}}">
-          <view>Deuxième étape</view>
-          <view class="f18">Comprendre le texte</view>
-        </view>
-        <view wx:if="{{currentStep==3}}">
-          <view>Troisième étape</view>
-          <view class="f18">Lire en shadowing</view>
-        </view>
-        <view wx:if="{{currentStep==4}}">
-          <view class="f18 mt-20">Histoire 1</view>
-        </view>
+      <view wx:if="{{currentStep==1}}">
+        <view>Première étape</view>
+        <view class="f18">Écouter sans texte</view>
       </view>
-      <view wx:else>
-        <view class="f18">Histoire 1</view>
+      <view wx:if="{{currentStep==2}}">
+        <view>Deuxième étape</view>
+        <view class="f18">Comprendre le texte</view>
+      </view>
+      <view wx:if="{{currentStep==3}}">
+        <view>Troisième étape</view>
+        <view class="f18">Lire en shadowing</view>
+      </view>
+      <view wx:if="{{currentStep==4}}">
+        <view class="f18 mt-20">Histoire 1</view>
       </view>
       <view style='margin-top: 48rpx'>
         <image style="width: 30rpx;height:30rpx" src='../../assets/common/hp-sm@3x.png'></image>
@@ -35,7 +30,7 @@
   </view>
 </view>
 
-<view class="page-content">
+<view class="page-content" wx:if="{{content}}">
 
   <!-- 第一步 -->
   <view wx:if="{{currentStep == 1}}">
@@ -51,7 +46,9 @@
         <view class="f15">Astuce</view>
         <view class="text-gray mb-15">{{content.audios[0].desc}}</view>
       </view>
-      <my-audio bind:ready="onAudioReady" bind:play="onAudioPlay" bind:ended="onAudioEnded" data-idx='0' max="{{1}}" l-src="{{content.audios[0].src1}}" r-src="{{content.audios[0].src2}}"></my-audio>
+      <my-audio wx:if="{{!noLimited}}" bind:ready="onAudioReady" bind:play="onAudioPlay" bind:ended="onAudioEnded" data-idx='0' max="{{1}}" l-src="{{content.audios[0].src1}}" r-src="{{content.audios[0].src2}}"></my-audio>
+
+      <my-audio wx:if="{{noLimited}}" finished='{{true}}' bind:ready="onAudioReady" bind:play="onAudioPlay" bind:ended="onAudioEnded" data-idx='0' l-src="{{content.audios[0].src1}}" r-src="{{content.audios[0].src2}}"></my-audio>
     </view>
   </view>
 
@@ -61,7 +58,8 @@
       <view class="f15">Astuce</view>
       <view class="text-gray mb-15">{{content.audios[1].desc}}</view>
     </view>
-    <my-audio bind:ended="onAudioEnded" data-idx='1' finished='{{true}}' min-play="{{1}}" l-src="{{content.audios[1].src1}}" r-src="{{content.audios[1].src2}}" toast-text="听完一遍才可以拖动音频"></my-audio>
+    <my-audio wx:if="{{!noLimited}}" bind:ended="onAudioEnded" data-idx='1' finished='{{true}}' min-play="{{1}}" l-src="{{content.audios[1].src1}}" r-src="{{content.audios[1].src2}}" toast-text="Interdit de scroller avant d’avoir fini la première écoute."></my-audio>
+    <my-audio wx:if="{{noLimited}}" bind:ended="onAudioEnded" data-idx='1' finished='{{true}}' l-src="{{content.audios[1].src1}}" r-src="{{content.audios[1].src2}}"></my-audio>
   </view>
   <view wx:if="{{currentStep == 2}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25 pr-82">
     <view class="btn--collapse {{!opened ? '' : 'up'}}" bindtap='toggle' data-target='opened'></view>
@@ -86,7 +84,8 @@
       <view class="f15">Astuce</view>
       <view class="text-gray mb-15">{{content.audios[2].desc}}</view>
     </view>
-    <my-audio autocycle="{{5}}" bind:cycleended="onAudioCycleEnded" bind:ended="onAudioEnded" data-idx='2' switchable="{{true}}" l-src="{{content.audios[2].src1}}" r-src="{{content.audios[2].src2}}" toast-text="跟读5遍才可进入完成今日学习或进入挑战模式"></my-audio>
+    <my-audio wx:if="{{!noLimited}}" autocycle="{{5}}" bind:cycleended="onAudioCycleEnded" bind:ended="onAudioEnded" data-idx='2' switchable="{{true}}" l-src="{{content.audios[2].src1}}" r-src="{{content.audios[2].src2}}" toast-text="Lire au moins cinq fois pour passer à l’étape suivante."></my-audio>
+    <my-audio wx:if="{{noLimited}}" finished="{{true}}" bind:cycleended="onAudioCycleEnded" bind:ended="onAudioEnded" data-idx='2' switchable="{{true}}" l-src="{{content.audios[2].src1}}" r-src="{{content.audios[2].src2}}"></my-audio>
   </view>
   <view wx:if="{{currentStep == 3}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25 pr-82">
     <view class="btn--collapse {{!opened2 ? '' : 'up'}}" bindtap='toggle' data-target='opened2'></view>
@@ -105,7 +104,8 @@
       <view class="f15">Astuce</view>
       <view class="text-gray mb-15">{{content.optAudios[0].desc}}</view>
     </view>
-    <my-audio bind:ended="onAudioEnded" data-idx='0' l-src="{{content.optAudios[0].src1}}" r-src="{{content.optAudios[0].src2}}" finished='{{true}}' min-play="{{1}}" toast-text="听完一遍才可以拖动音频"></my-audio>
+    <my-audio wx:if="{{!noLimited}}" bind:ended="onAudioEnded" data-idx='0' l-src="{{content.optAudios[0].src1}}" r-src="{{content.optAudios[0].src2}}" finished='{{true}}' min-play="{{1}}" toast-text="Interdit de scroller avant d’avoir fini la première écoute."></my-audio>
+    <my-audio wx:if="{{noLimited}}" bind:ended="onAudioEnded" data-idx='0' l-src="{{content.optAudios[0].src1}}" r-src="{{content.optAudios[0].src2}}" finished='{{true}}'></my-audio>
   </view>
   <view wx:if="{{currentStep == 4}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25">
     <view>
@@ -116,25 +116,25 @@
 
   <!-- 底部按钮 -->
   <view wx:if="{{currentStep == 1}}" class="animate-in delay-2">
-    <view bindtap='next' class="btn btn--next {{firstFinished ? '' : 'disabled'}}">
+    <view bindtap='next' class="btn btn--next {{firstFinished || noLimited ? '' : 'disabled'}}">
       Prochaine étape
     </view>
   </view>
   <view wx:elif="{{currentStep == 2}}" class="animate-in delay-2">
-    <view bindtap='next' class="btn btn--next {{secondFinished ? '' : 'disabled'}}">
+    <view bindtap='next' class="btn btn--next {{secondFinished || noLimited ? '' : 'disabled'}}">
       Prochaine étape
     </view>
   </view>
   <view wx:elif="{{currentStep == 3}}" class="footer-btns animate-in delay-2">
-    <view bindtap='handleFinish' data-type="1" class="btn btn--finish {{audioCycleEnded ? '' : 'disabled'}}">
+    <view bindtap='handleFinish' data-type="1" class="btn btn--finish {{audioCycleEnded || noLimited ? '' : 'disabled'}}">
       J'ai fini
     </view>
-    <view class="btn btn--finish {{audioCycleEnded ? '' : 'disabled'}}" bindtap='toOpt'>
+    <view class="btn btn--finish {{audioCycleEnded || noLimited ? '' : 'disabled'}}" bindtap='toOpt'>
       Je passe au défi
       </view>
   </view>
   <view wx:elif="{{currentStep == 4}}" class="footer-btns animate-in delay-2">
-    <view bindtap='handleFinish' data-type="2" class="btn btn--finish {{optFinished ? '' : 'disabled'}}">
+    <view bindtap='handleFinish' data-type="2" class="btn btn--finish {{optFinished || noLimited ? '' : 'disabled'}}">
       J'ai fini
     </view>
   </view>

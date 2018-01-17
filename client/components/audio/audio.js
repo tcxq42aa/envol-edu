@@ -147,7 +147,7 @@ Component({
     },
     audioPlay: function (e) {
       if (this.data.max > 0 && this.data.cycleTimes >= this.data.max) {
-        this.showToast('本环节本音频只可听一次')
+        this.showToast('À la première étape, n’écouter qu’une fois. ')
         return
       }
       this.initAudio()
@@ -193,7 +193,7 @@ Component({
       if (offset < 0 || offset > this.barRef.width) {
         return
       }
-      this.audioCtx.seek(this.audioCtx.duration * offset / this.barRef.width)
+      this.audioCtx && this.audioCtx.seek(this.audioCtx.duration * offset / this.barRef.width)
     },
     queryMultipleNodes: function () {
       var that = this
@@ -205,7 +205,7 @@ Component({
     showToast: function(content){
       this.setData({
         showToast: true,
-        msg: content || '播放中不可拖动'
+        msg: content || 'Interdit de scroller en lisant pour la première fois. '
       })
       setTimeout(() => {
         this.setData({

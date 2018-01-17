@@ -10,7 +10,7 @@
     <image style="width: 260rpx; height: 220rpx" mode="aspectFill" src='{{bookImgSrc[type]}}'/>
     <view class="fsm mt-30">
       <view>恭喜你，</view>
-      <view>完成了ENVOL王牌听力朗读课程{{type==1 ? '必' : '选'}}修{{!isNormal?'试听':''}}！</view>
+      <view>完成了ENVOL王牌听力朗读课程{{type==1 ? '必' : '选'}}修{{isPreview?'试听':''}}！</view>
       <view>如果觉得不错，</view>
       <view>别忘了分享给朋友哦！</view>
     </view>

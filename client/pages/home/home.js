@@ -52,15 +52,22 @@ Page({
 
   initData: function (semesterId, slient, cb, forceOnline){
     console.log('initData')
-    service.getSemesterDetail.bind(this)(semesterId, slient, cb, forceOnline)
+    service.getSemesterDetail.bind(this)(semesterId, slient, (res) => {
+      cb && cb();
+      res.semesterPlans.forEach(plan => {
+        plan.isActive = (plan.beginDate <= this.data.userInfo.serverTime && plan.endDate >= this.data.userInfo.serverTime);
+      });
+    }, forceOnline)
   },
   onTapPaper: function(e) {
     if (!this.data.paper || this.data.errCode == 4041) {
       return;
     }
-    wx.navigateTo({
-      url: '/pages/audition/audition?isNormal=true&paperId=' + this.data.paper.id,
-    })
+    let url = '/pages/audition/audition?paperId=' + this.data.paper.id;
+    if (this.data.paper.type == 3) {
+      url = '/pages/dictation/dictation?paperId=' + this.data.paper.id;
+    }
+    wx.navigateTo({ url });
   },
   onEnroll: function () {
     var that = this

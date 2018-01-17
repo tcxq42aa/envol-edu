@@ -17,7 +17,7 @@
   </view>
   <!-- <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">手机号 </button> -->
 </view>
-<view class="course-card" wx:for="{{semesterPlans}}" wx:key="id" bindtap='onTapPaper' data-id="{{item.id}}">
+<view class="course-card {{item.isActive ? 'active' : ''}}" wx:for="{{semesterPlans}}" wx:key="id" bindtap='onTapPaper' data-id="{{item.id}}">
   <view class="course-card--cover">
     <image
         style="width:100%;height:100%"
@@ -33,7 +33,7 @@
     ></image>
   </view>
   <view class="f15 fb mb-10 ellipsis">{{item.name}}</view>
-  <view class="f12 ellipsis ">{{item.dateStr}}</view>
+  <view class="f12 ellipsis sub-title">{{item.dateStr}}</view>
 </view>
 
 <view wx:if="{{errCode==4041}}" class="mt-50 btn btn--next btn--pic btn-theme-2" bindtap='onEnroll'>立即报名</view>

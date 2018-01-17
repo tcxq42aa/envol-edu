@@ -27,14 +27,14 @@ Page({
     // options.type 1:必修；2:选修
     this.setData({
       type: options.type || '1',
-      isNormal: options.isNormal
+      isPreview: options.isPreview
     })
-    if(options.isNormal) {
+    if (options.isPreview) {
+      this.initCanvas()
+    } else {
       this.initData(() => {
         this.initCanvas()
       })
-    } else {
-      this.initCanvas()
     }
   },
 
@@ -106,11 +106,11 @@ Page({
           ctx.setFontSize(40)
           ctx.setFillStyle('#999999')
           ctx.setTextAlign('center')
-          let line1 = username + '邀请你参加'
-          let line2 = 'ENVOL听力朗读课的试听'
-          if(that.data.isNormal) {
-            line1 = '我在ENVOL听力朗读课'
-            line2 = '坚持完成了挑战课程'
+          let line1 = '我在ENVOL听力朗读课'
+          let line2 = '坚持完成了挑战课程'
+          if (that.data.isPreview) {
+            line1 = username + '邀请你参加'
+            line2 = 'ENVOL听力朗读课的试听'
           }
           ctx.fillText(line1, imgWidth / 2 + 16 / scale, imgHeight / 2 + 70 / scale)
           ctx.fillText(line2, imgWidth / 2 + 16 / scale, imgHeight / 2 + 70 / scale + 24 / scale)

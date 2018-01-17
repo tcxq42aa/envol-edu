@@ -15,10 +15,11 @@ Page({
     fixed: true, // 按钮悬浮
     classNames: '',
     opened: false,
-    isOptional: false,
     paper: {},
     mainEnded: false,
-    optEnded: false
+    optEnded: false,
+    noLimited: false, // 复习模式，不做限制
+    isPreview: false // 试听版
   },
 
   /**
@@ -26,7 +27,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    this.setData({ options })
+    this.setData({ 
+      options,
+      isPreview: !!options.isPreview,
+      noLimited: options.mode == 2
+    })
+    console.log(this.data.noLimited)
     getApp().ready(()=>{
       console.log('ready')
       this.initPageData((data) => {
@@ -105,6 +111,12 @@ Page({
           }
           return
         }
+        if (result.data.type == 3) {
+          wx.redirectTo({
+            url: '/pages/dictation/dictation?paperId=' + result.data.id
+          })
+          return;
+        }
         let content = JSON.parse(result.data.content);
         content.audios.forEach(audio => {
           audio.key = Math.random() * 100000
@@ -124,7 +136,7 @@ Page({
         WxParse.wxParse('thirdHandout', 'html', content.thirdHandout, that, 5);
         WxParse.wxParse('optHandout', 'html', content.optHandout, that, 5);
         if (that.data.currentStep == 1 && content.preAudio) {
-          util.showToast("播放完两个音频才可进入下一学习环节，中间不要退出小程序，否则要重新播放", 3000)
+          util.showToast("Tout écouter pour passer à l’étape suivante. ", 3000)
         }
         cb && cb()
       },
@@ -157,7 +169,7 @@ Page({
     })
     if (this.data.currentStep == 3) {
       setTimeout(() => {
-        util.showToast("跟读5遍才可完成今日学习或进入挑战模式", 2500)
+        util.showToast("Lire au moins cinq fois pour passer l’étape suivante.", 2500)
       } ,1000)
     }
     this.stopAudio()
@@ -181,7 +193,7 @@ Page({
     })
     
     if (!firstFinished) {
-      util.showToast("听完两个音频才可进入下一学习环节", 3000)
+      util.showToast("Tout écouter pour passer à l’étape suivante.", 3000)
     }
   },
   onAudioEnded: function(e) {
@@ -196,7 +208,7 @@ Page({
           })
         }
         if(hasPreAudio && !preAudioFinshed) {
-          util.showToast("听完两个音频才可进入下一学习环节", 3000)
+          util.showToast("Tout écouter pour passer à l’étape suivante.", 3000)
         }
         break
       case 2:
@@ -264,7 +276,6 @@ Page({
 
   handleFinish: function(e){
     var t = e.target.dataset.type
-    console.log(this.data.content)
     if (this.data.content.preAudio) {
       this.goResultPage(t)
       return
@@ -277,7 +288,7 @@ Page({
     if (t == 2) {
       key = 'optPaper_' + this.data.paper.id
     }
-    if(!wx.getStorageSync(key) && this.data.isNormal) {
+    if (!wx.getStorageSync(key) && !this.data.isPreview) {
       this.goJdk()
     } else {
       this.goResultPage(t)
@@ -296,8 +307,9 @@ Page({
     var that = this
     const { serverTime, openId } = getApp().globalData.userInfo
     const readToday = util.getCurrentDate(this.data.paper.readToday)
+    
     var options = {
-      url: config.service.finishUrl.replace('{paperId}', that.data.options.paperId),
+      url: config.service.finishUrl.replace('{paperId}', that.data.paper.id),
       method: 'POST',
       data: { openId, readToday, wordsTotal: this.data.paper.wordsTotal },
       header: {
@@ -311,7 +323,16 @@ Page({
         console.log('request fail', error);
       }
     }
-    qcloud.request(options)
+    if (this.data.noLimited) { // 复习模式
+      options.url = config.service.reviewUrl.replace('{paperId}', that.data.paper.id);
+    }
+    wx.getStorage({
+      key: 'currentSemester',
+      success: (res) => {
+        options.data.semesterId = res.data.id;
+        qcloud.request(options)
+      }
+    })
   },
   stopAudio: function() {
     if (wx.getBackgroundAudioManager) {

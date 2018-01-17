@@ -27,7 +27,7 @@
         <view class="f16 fb" style='letter-spacing: 2.9px;margin-bottom: 6rpx'>{{item.name}}</view>
         <view class="f10">{{item.beginDateStr}}</view>
       </view>
-      <view class="tag-new" wx:if="{{index==0}}">nouveau</view>
+      <view class="tag tag-blue tag-new" wx:if="{{index==0}}">nouveau</view>
       <view class="progress">
         <view class="f10 flex flex-bottom-v">
           <text class="flex-1">Déroulement</text>

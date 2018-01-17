@@ -38,12 +38,14 @@ view {
   background: rgba(0,0,0,.1);
   background: linear-gradient(to right, rgb(51,51,150), rgb(201, 102, 201));
   border-radius: 5rpx;
+  transition: left .3s linear;
 }
 .progress--point {
   position: absolute;
   left: 0;
   top: 2rpx;
   margin-left: -20rpx;
+  transition: left .3s linear;
 }
 .progress--ctrl {
   margin-left: 30rpx;

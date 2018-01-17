@@ -20,7 +20,21 @@
   border-radius: 4px;
   padding: 118rpx 20rpx 40rpx 242rpx;
   box-sizing: border-box;
+  pointer-events: none;
+  background:#fff;
+  box-shadow: 0 10px 20px rgba(155,155,155,.3);
+}
+.course-card .sub-title {
+  color: rgb(153, 153, 153);
+}
+.course-card.active {
   color: #fff;
+  pointer-events: initial;
+  background:transparent;
+}
+.course-card.active .sub-title {
+  color: #fff;
+  opacity: .5;
 }
 .course-card--bg {
   position: absolute;

@@ -7,9 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    mode: 1,
     userInfo: {},
     semesterPlans: [],
     statisticalMap: {},
+    reviewStatisticalMap: {},
     weekIdxs: [0, 1, 2, 3, 4, 5, 6],
     weekDays: util.simpleWeekDays,
     emptyDays: 0,
@@ -23,6 +25,7 @@ Page({
     this.firstLoad = true
     getApp().ready((data) => {
       const today = util.getCurrentTime();
+      const monthStr = util.monthArr[util.getCurrentTime().month()].upperFirst();
       const emptyDays = util.getCurrentTime().date(1).day();
       let daysInMonth = util.getCurrentTime().daysInMonth();
 
@@ -38,6 +41,7 @@ Page({
       this.setData({
         logged: data.logged,
         userInfo: data.userInfo,
+        monthStr: monthStr,
         emptyDays: emptyDays,
         daysInMonth: daysInMonth
       })
@@ -76,15 +80,36 @@ Page({
     })
   },
 
+  initReviewData: function (semesterId) {
+    service.getReviewData.bind(this)(semesterId, true, (data) => {
+      let tmpMap = {};
+      data.forEach(item => {
+        tmpMap[util.getCurrentDate(item.readToday)] = true
+      })
+      this.setData({
+        reviewStatisticalMap: tmpMap
+      })
+      console.log(this.data.reviewStatisticalMap)
+    })
+  },
+
   goCourseDetail: function(e) {
     const { active, date } = e.currentTarget.dataset;
     if (!active) {
       return;
     }
     wx.navigateTo({
-      url: '/pages/audition/audition?date=' + date + '&semesterId=' + this.data.semesterId
+      url: '/pages/audition/audition?date=' + date + '&semesterId=' + this.data.semesterId + '&mode=' + this.data.mode
     })
-    console.log(date)
+  },
+
+  switchMode(e) {
+    if(this.data.semesterId) {
+      this.initReviewData(this.data.semesterId);
+    }
+    this.setData({
+      mode: e.currentTarget.dataset.mode
+    });
   },
 
   /**

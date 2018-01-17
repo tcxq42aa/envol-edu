@@ -88,6 +88,10 @@ var getCurrentDate = function (date) {
   return moment(serverTime).utc().utcOffset(8).format('YYYY-MM-DD')
 };
 
+String.prototype.upperFirst = function() {
+  return this[0].toUpperCase() + this.substr(1);
+}
+
 module.exports = { 
   weekDays, simpleWeekDays, monthArr, simlpleMonthArr,
   formatTime, showBusy, showSuccess, showModel, 

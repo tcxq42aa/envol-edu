@@ -37,6 +37,10 @@ var config = {
 
         finishUrl: `${host}/api/user/course/{paperId}/save`,
 
+        reviewUrl: `${host}/api/user/review/{paperId}/save`,
+
+        reviewStatisticalUrl: `${host}/api/user/review/statistical`,
+
         reminderUrl: `${host}/api/user/setting`,
 
         articleUrl: `${host}/api/article`,

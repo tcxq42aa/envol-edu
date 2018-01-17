@@ -3,7 +3,7 @@ page {
   color: rgb(51,51,51);
   font-size: 14px;
   line-height:1.5;
-  font-family: DIN;
+  font-family: DIN, -apple-system, BlinkMacSystemFont, "PingFang SC","Helvetica Neue",STHeiti,"Microsoft Yahei",Tahoma,Simsun,sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 .container {
@@ -104,6 +104,9 @@ page {
 .ml-10 {
   margin-left: 20rpx;
 }
+.ml-20 {
+  margin-left: 40rpx;
+}
 .mt-20 {
   margin-top: 40rpx;
 }
@@ -145,6 +148,25 @@ page {
   left: 0;
   right: 0;
 }
+.tag {
+  color: #fff;
+  font-size: 12px;
+  height: 36rpx;
+  line-height: 36rpx;
+  border-top-left-radius: 18rpx;
+  border-bottom-left-radius: 18rpx;
+  padding: 0 7rpx 0 16rpx;
+}
+.tag-blue {
+  background: linear-gradient(to right, rgb(51,51,150), rgb(201, 102, 201));
+}
+.tag-yellow {
+  background: linear-gradient(to right, rgb(255, 209, 2), rgb(255, 192, 38));
+}
+.tag-yellow-reverse {
+  background: #fff;
+  color: rgb(252, 147, 61);
+}
 .btn {
   color: #fff;
   height: 90rpx;
@@ -160,7 +182,7 @@ button.btn::after {
 }
 .btn.disabled {
   opacity: .5; 
-  pointer-events: none;
+   pointer-events: none; 
 }
 .btn-theme-2 {
   background: linear-gradient(to right, rgb(51, 51, 150), rgb(201, 102, 201));
