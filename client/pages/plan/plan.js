@@ -89,7 +89,6 @@ Page({
       this.setData({
         reviewStatisticalMap: tmpMap
       })
-      console.log(this.data.reviewStatisticalMap)
     })
   },
 
@@ -104,12 +103,14 @@ Page({
   },
 
   switchMode(e) {
+    if (this.data.mode == 1) {
+      this.setData({ mode: 2 });
+    } else {
+      this.setData({ mode: 1 });
+    }
     if(this.data.semesterId) {
       this.initReviewData(this.data.semesterId);
     }
-    this.setData({
-      mode: e.currentTarget.dataset.mode
-    });
   },
 
   /**

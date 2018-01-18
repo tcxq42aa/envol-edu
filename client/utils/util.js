@@ -79,8 +79,8 @@ var formatDate2 = (date) => {
   }) + ' ' + date.date();
 }
 
-var getCurrentTime = function() {
-  var serverTime = getApp().globalData.userInfo.serverTime;
+var getCurrentTime = function (date) {
+  var serverTime = date || getApp().globalData.userInfo.serverTime;
   return moment(serverTime).utc().utcOffset(8)
  };
 var getCurrentDate = function (date) {

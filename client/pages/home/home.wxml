@@ -10,7 +10,7 @@
       ></image>
     </view>
     <view class="text-center">
-      <view class="f13">Message(s)</view>
+      <view class="f13">Message<text class="f12">(s)</text></view>
       <view class="f50 mb-5" style="letter-spacing: 3.8rpx">{{statistical ? statistical.length : 0}}</view>
       <view class="f13">jour(s) de persévérance</view>
     </view>
@@ -20,10 +20,11 @@
 <view class="course-card {{item.isActive ? 'active' : ''}}" wx:for="{{semesterPlans}}" wx:key="id" bindtap='onTapPaper' data-id="{{item.id}}">
   <view class="course-card--cover">
     <image
-        style="width:100%;height:100%"
-        src="{{item.coverUrl}}"
-        background-size="cover"
-        mode='aspectFill'
+      class="course-cover"
+      style="width:100%;height:100%"
+      src="{{item.coverUrl}}"
+      background-size="cover"
+      mode='aspectFill'
     ></image>
   </view>
   <view class="course-card--bg">

@@ -126,9 +126,20 @@ page {
 .pr-82 {
   padding-right: 164rpx;
 }
-
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
 .text-gray {
   color: rgb(153,153,153);
+}
+.text-yellow {
+  color: rgb(240,149,28);
 }
 .text-center {
   text-align:center;

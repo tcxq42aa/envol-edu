@@ -30,7 +30,7 @@ page {
   border-top-left-radius: 4rpx;
   border-bottom-left-radius: 4rpx;
   margin-left: 70rpx;
-  padding: 70rpx 44rpx;
+  padding: 70rpx 24rpx 70rpx 44rpx;
   text-align: left;
   box-sizing: border-box;
   box-shadow: 0 5px 20px rgba(155,155,155, 0.3);

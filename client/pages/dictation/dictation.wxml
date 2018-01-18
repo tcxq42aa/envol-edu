@@ -1,0 +1,47 @@
+<!--pages/dictation/dictation.wxml-->
+<view class="bannel">
+  <image class="bannel--bg" style="width: 100%; height: 304rpx" mode="aspectFill" src='../../assets/common/bannel-yellow.png'></image>
+  <view class="flex">
+    <view>
+      <image style="width: 230rpx;height: 290rpx" src="{{content.cover || '../../assets/common/headphone@3x.png'}}"></image>
+    </view>
+    <view style="padding-top: 30rpx;margin-left: 30rpx">
+      <view>{{dateStr}}</view>
+      <view class="f18">Dictée</view>
+      <view style='margin-top: 48rpx'>
+        <image style="width: 30rpx;height:30rpx" src='../../assets/common/hp-sm@3x.png'></image>
+        <image class="ml-5" style="width: 30rpx;height:30rpx" src='../../assets/common/book-sm@3x.png'></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="page-content" wx:if="{{content}}">
+  <block wx:key="{{item.key}}" wx:for="{{content.audios}}">
+    <view class="offset-l-2 animate-in delay-1 mb-30">
+      <view class="offset-r-1">
+        <view class="f15">Astuce</view>
+        <view class="text-gray mb-15">{{item.desc}}</view>
+      </view>
+      <my-audio bind:ready="onAudioReady" bind:play="onAudioPlay" bind:ended="onAudioEnded" data-idx='{{index}}' l-src="{{item.src1}}"></my-audio>
+    </view>
+    <view class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25 pr-82">
+      <view class="btn--collapse {{!opened[index] ? '' : 'up'}}" bindtap='toggle' data-target='{{index}}'></view>
+      <view class="f14 block--title">九点以后解锁答案</view>
+      <view class="{{!opened[index] ? 'mask' : ''}}">
+        <view class="mt-45">
+          <import src="/vendor/wxParse/wxParse.wxml"/>  
+          <template is="wxParse" data="{{wxParseData:dictationAnswerHtmls[index].nodes}}"/>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <view class="footer-btns animate-in delay-2">
+    <view bindtap='handleFinish' data-type="2" class="btn btn--finish {{allFinished ? '' : 'disabled'}}">
+      J'ai fini
+    </view>
+  </view>
+</view>
+<import src="../../components/toast/toast.wxml"/>
+<template is="wetoast" data="{{toastData: toastData}}"/>

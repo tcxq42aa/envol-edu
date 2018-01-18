@@ -29,10 +29,10 @@ Page({
     var that = this
     this.setData({ 
       options,
-      isPreview: !!options.isPreview,
-      noLimited: options.mode == 2
+      isPreview: !!options.isPreview, //试听
+      noLimited: options.mode == 2 // 复习模式
     })
-    console.log(this.data.noLimited)
+    
     getApp().ready(()=>{
       console.log('ready')
       this.initPageData((data) => {
@@ -137,6 +137,17 @@ Page({
         WxParse.wxParse('optHandout', 'html', content.optHandout, that, 5);
         if (that.data.currentStep == 1 && content.preAudio) {
           util.showToast("Tout écouter pour passer à l’étape suivante. ", 3000)
+        }
+        if (that.data.noLimited) {
+          const semester = wx.getStorageSync('currentSemester');
+          let today = util.getCurrentTime(that.data.paper.readToday);
+          const nextDate = today.add(1, 'd').format('YYYY-MM-DD');
+          const prevDate = today.add(-2, 'd').format('YYYY-MM-DD');
+          that.setData({
+            nextDate, prevDate,
+            hasPrev: prevDate >= util.getCurrentTime(semester.beginDate).format('YYYY-MM-DD'),
+            hasNext: nextDate <= util.getCurrentTime(semester.endDate).format('YYYY-MM-DD'),
+          })
         }
         cb && cb()
       },
@@ -247,6 +258,10 @@ Page({
   },
 
   toOpt: function(){
+    if (this.data.noLimited) {
+      this.goNext();
+      return;
+    }
     // this.data.content.audios = this.data.content.optAudios
     this.setData({
       currentStep: 4,
@@ -275,6 +290,11 @@ Page({
   },
 
   handleFinish: function(e){
+    if(this.data.noLimited) {
+      this.goPrev();
+      return;
+    }
+
     var t = e.target.dataset.type
     if (this.data.content.preAudio) {
       this.goResultPage(t)
@@ -298,6 +318,27 @@ Page({
       data: 'finished',
     })
   },
+
+  goNext() { 
+    const semester = wx.getStorageSync('currentSemester');
+    const { prevDate } = this.data;
+    if (this.data.noLimited) {
+      wx.navigateTo({
+        url: '/pages/audition/audition?mode=2&date=' + prevDate + '&semesterId=' + semester.id,
+      })
+      return;
+    }
+  },
+  goPrev() {
+    const semester = wx.getStorageSync('currentSemester');
+    const { nextDate } = this.data;
+    if (this.data.noLimited) {
+      wx.navigateTo({
+        url: '/pages/audition/audition?mode=2&date=' + nextDate + '&semesterId=' + semester.id,
+      })
+      return;
+    }
+   },
   goResultPage: function(t){
     wx.navigateTo({
       url: '/pages/audition/result?type=' + (t || 1)

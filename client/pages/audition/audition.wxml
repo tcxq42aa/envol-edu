@@ -126,11 +126,11 @@
     </view>
   </view>
   <view wx:elif="{{currentStep == 3}}" class="footer-btns animate-in delay-2">
-    <view bindtap='handleFinish' data-type="1" class="btn btn--finish {{audioCycleEnded || noLimited ? '' : 'disabled'}}">
-      J'ai fini
+    <view bindtap='handleFinish' data-type="1" class="btn btn--finish {{audioCycleEnded || noLimited ? '' : 'disabled'}} {{noLimited && !hasPrev ? 'disabled' :''}}">
+      {{noLimited ? '上一天' : "J'ai fini"}}
     </view>
-    <view class="btn btn--finish {{audioCycleEnded || noLimited ? '' : 'disabled'}}" bindtap='toOpt'>
-      Je passe au défi
+    <view class="btn btn--finish {{audioCycleEnded || noLimited ? '' : 'disabled'}}  {{noLimited && !hasNext ? 'disabled' : ''}}" bindtap="toOpt" >
+      {{noLimited ? '下一天' : "Je passe au défi"}}
       </view>
   </view>
   <view wx:elif="{{currentStep == 4}}" class="footer-btns animate-in delay-2">

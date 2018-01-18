@@ -1,12 +1,23 @@
 <!--pages/plan/plan.wxml-->
-<view class="plan-container {{mode==2?'reverse':''}}">
-  <view class="bg-yellow" wx:if="{{mode==2}}">
-    <image src="../../assets/common/bg.png" mode="aspectFill" style="width: 100%;height:100%"></image>
-  </view>
+<view class="plan-container">
+  
   <view class="plan-title">
       <text>{{monthStr}}</text>
-      <text wx:if="{{mode==1}}" class="tag tag-yellow tag-mode" bindtap="switchMode" data-mode="2">Normal</text>
-      <text wx:if="{{mode==2}}" class="tag tag-yellow-reverse tag-mode" bindtap="switchMode" data-mode="1">Révision</text>
+
+      <view class="tag-mode f12 flex">
+        <view class="tag tag-yellow switch" bindtap="switchMode">
+          <view class="switch-point {{mode == 1 ? 'right': 'left'}}"></view>
+        </view>
+        <view class="flex-1 text-left text-yellow">
+          {{mode == 1 ? 'Normal': ''}}
+          {{mode == 2 ? 'Révision': ''}}
+        </view>
+      </view>
+
+       <!-- <text wx:if="{{mode==1}}" class="tag tag-yellow tag-mode" bindtap="switchMode" data-mode="2">Normal</text>  -->
+      <!-- <text wx:if="{{mode==2}}" class="tag tag-yellow-reverse tag-mode" bindtap="switchMode" data-mode="1">Révision</text> -->
+
+
   </view>
   <view class="week-wrap">
     <view wx:for="{{weekIdxs}}" wx:key="index" class="week-day">{{weekDays[item]}}</view>
@@ -22,7 +33,7 @@
     <!-- 复习模式  -->
     <view wx:if="{{mode==2}}" wx:for="{{daysInMonth}}" wx:key="index"
       bindtap="goCourseDetail" data-active="{{beginDate<=item.dateStr&&endDate>=item.dateStr}}" data-date="{{item.dateStr}}"
-      class="month-day {{beginDate<=item.dateStr&&endDate>=item.dateStr?'active':''}} {{reviewStatisticalMap[item.dateStr] ? 'reviewed' : ''}}">
+      class="month-day {{beginDate<=item.dateStr&&endDate>=item.dateStr?'active':''}} {{reviewStatisticalMap[item.dateStr] ? 'finished' : ''}}">
       <view class="point">{{index + 1}}</view>
     </view>
   </view>
@@ -34,8 +45,8 @@
     <view class="item">未完成 <text class="icon-circle icon-unfinish"></text></view>
   </view>
   <!-- 复习模式  -->
-  <view class="statistic" style="justify-content: start" wx:if="{{mode==2}}">
-    <view class="item ml-20">已复习 <text class="icon-circle icon-fuxi"></text></view>
+  <view class="statistic" style="justify-content: middle" wx:if="{{mode==2}}">
+    <view class="item ml-20">已复习 <text class="icon-circle icon-finish"></text></view>
   </view>
 </view>
 <view class="plans">

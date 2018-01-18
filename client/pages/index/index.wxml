@@ -22,8 +22,7 @@
         <image style="width: 115rpx; height: 115rpx;margin-right: 26rpx" mode="aspectFill" src='../../assets/common/headphone.png'></image>
       </view>
       <view class="flex-1">
-        <view class="f16 fb" style='letter-spacing: 3.6px'>et lecture</view>
-        <view class="f10" style='letter-spacing: 2.2px'>Compréhension orale</view>
+        <view class="f16 fb" style='line-height: 1.2;margin-bottom: 6rpx'>Compréhension orale et lecture</view>
         <view class="f16 fb" style='letter-spacing: 2.9px;margin-bottom: 6rpx'>{{item.name}}</view>
         <view class="f10">{{item.beginDateStr}}</view>
       </view>

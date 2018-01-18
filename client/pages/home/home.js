@@ -54,8 +54,13 @@ Page({
     console.log('initData')
     service.getSemesterDetail.bind(this)(semesterId, slient, (res) => {
       cb && cb();
+      let fmt = 'YYYY-MM-DD';
       res.semesterPlans.forEach(plan => {
-        plan.isActive = (plan.beginDate <= this.data.userInfo.serverTime && plan.endDate >= this.data.userInfo.serverTime);
+        plan.isActive = (
+          util.getCurrentTime(plan.beginDate).format(fmt) <= util.getCurrentTime(this.data.userInfo.serverTime).format(fmt)
+          && 
+          util.getCurrentTime(plan.endDate).format(fmt) >= util.getCurrentTime(this.data.userInfo.serverTime).format(fmt)
+          );
       });
     }, forceOnline)
   },

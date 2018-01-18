@@ -1,0 +1,3 @@
+/* pages/dictation/dictation.wxss */
+@import "/vendor/wxParse/wxParse.wxss";
+@import "/pages/audition/audition.wxss";
