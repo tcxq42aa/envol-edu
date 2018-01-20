@@ -103,12 +103,9 @@ Page({
   },
 
   switchMode(e) {
-    if (this.data.mode == 1) {
-      this.setData({ mode: 2 });
-    } else {
-      this.setData({ mode: 1 });
-    }
-    if(this.data.semesterId) {
+    const mode = e.currentTarget.dataset.mode;
+    this.setData({ mode });
+    if (mode == 2 && this.data.semesterId) {
       this.initReviewData(this.data.semesterId);
     }
   },

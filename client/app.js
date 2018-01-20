@@ -29,14 +29,30 @@ App({
     },
     // 用户登录示例
     login: function (cb) {
+      console.log('login')
       util.showBusy('正在登录')
       this.createPms(cb)
     },
 
     createPms: function(cb) {
       var that = this
+      
       this._ready = new Promise(function (resolve, reject) {
+        function handle(data) {
+          that.globalData.userInfo = data
+          that.globalData.logged = true
+          wx.setStorage({
+            key: 'userInfo',
+            data: data
+          })
+          resolve(that.globalData)
+          cb && cb(that.globalData)
+        }
         // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
+        let cached = wx.getStorageSync('userInfo');
+        if (cached) {
+          handle(cached)
+        }
         qcloud.request({
           url: config.service.requestUrl,
           login: true,
@@ -44,9 +60,14 @@ App({
             // util.showSuccess('登录成功')
             that.globalData.userInfo = result.data.data
             that.globalData.logged = true
-
-            resolve(that.globalData)
-            cb && cb(that.globalData)
+            wx.setStorage({
+              key: 'userInfo',
+              data: result.data.data
+            })
+            if(!cached) {
+              resolve(that.globalData)
+              cb && cb(that.globalData)
+            }
           },
 
           fail(error) {

@@ -33,7 +33,7 @@ page {
   padding: 70rpx 24rpx 70rpx 44rpx;
   text-align: left;
   box-sizing: border-box;
-  box-shadow: 0 5px 20px rgba(155,155,155, 0.3);
+  box-shadow: 0 10rpx 40rpx rgba(155,155,155, 0.3);
 }
 .tag-new {
   position: absolute;

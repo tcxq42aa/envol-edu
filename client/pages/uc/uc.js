@@ -143,26 +143,72 @@ Page({
   },
 
   openSetting: function () {
-    let that = this;
-    wx.openSetting({
-      success: function (res) {
-        if (res.authSetting['scope.userInfo']) {
-          getApp().ready(() => {
-            wx.getStorage({
-              key: 'currentSemester',
-              success: (res) => {
-                that.initData(res.data.id)
-                that.setData({
-                  semesterId: res.data.id
-                })
-              },
+    if (this.interval) {
+      this.hint = this.hint || 0;
+      this.hint++;
+      clearTimeout(this.interval)
+    }
+    if (this.hint >= 5) {
+      this.hint = 0;
+      this.getUserInfo((user) => {
+        var admin = wx.getStorageSync('admin');
+        wx.showActionSheet({
+          itemList: admin ? ['学员模式'] : ['管理员模式'],
+          success: function (res) {
+            console.log(res.tapIndex)
+            wx.setStorage({
+              key: 'admin',
+              data: !admin
             })
-          })
-          
-        }
+          },
+          fail: function (res) {
+            console.log(res.errMsg)
+          }
+        })
+      });
+      return;
+    }
+    this.interval = setTimeout( () => {
+      this.hint = 0;
+      let that = this;
+      wx.openSetting({
+        success: function (res) {
+          if (res.authSetting['scope.userInfo']) {
+            getApp().ready(() => {
+              wx.getStorage({
+                key: 'currentSemester',
+                success: (res) => {
+                  that.initData(res.data.id)
+                  that.setData({
+                    semesterId: res.data.id
+                  })
+                },
+              })
+            })
+
+          }
+        },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+    }, 300);
+  },
+
+  getUserInfo(cb) {
+    const { openId } = getApp().globalData.userInfo
+    var that = this
+    var options = {
+      url: `${config.service.userInfoUrl}?openId=${openId}`,
+      success(result) {
+        console.log('request success', result)
+        cb && cb(result.data);
       },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
+      fail(error) {
+        console.log('request fail', error);
+      },
+      complete: function () {
+      }
+    }
+    qcloud.request(options)
   }
 })

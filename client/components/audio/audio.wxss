@@ -11,7 +11,7 @@ view {
   display: flex;
   padding: 0 32rpx;
   height: 160rpx;
-  box-shadow: 0 5px 20px rgba(155,155,155,.3);
+  box-shadow: 0 10rpx 40rpx rgba(155,155,155,.3);
   align-items: center;
 }
 .audio--btn {
@@ -55,7 +55,7 @@ view {
   text-align: center;
   color: rgb(255, 192, 38);
   border-radius: 4rpx;
-  font-size: 12px;
+  font-size: 24rpx;
   border-style: solid;
   border-width: 1rpx;
   border-color: rgb(255, 192, 38);
@@ -67,7 +67,7 @@ view {
   background: linear-gradient(to right, rgb(255, 209, 2), rgb(255, 192, 38));
 }
 .progress--ctrl .sm {
-  font-size: 10px;
+  font-size: 20rpx;
 }
 .toast {
   position: absolute;

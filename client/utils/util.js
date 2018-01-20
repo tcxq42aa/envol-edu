@@ -79,6 +79,13 @@ var formatDate2 = (date) => {
   }) + ' ' + date.date();
 }
 
+// Jour 30
+var formatDate3 = (date) => {
+  return simlpleMonthArr[date.month()].replace(/^./, function (a) {
+    return a.toUpperCase()
+  }) + ' ' + date.date();
+}
+
 var getCurrentTime = function (date) {
   var serverTime = date || getApp().globalData.userInfo.serverTime;
   return moment(serverTime).utc().utcOffset(8)
@@ -95,5 +102,6 @@ String.prototype.upperFirst = function() {
 module.exports = { 
   weekDays, simpleWeekDays, monthArr, simlpleMonthArr,
   formatTime, showBusy, showSuccess, showModel, 
-  showToast, formatDate, formatDate2, getCurrentTime, getCurrentDate
+  showToast, formatDate, formatDate2, formatDate3, 
+  getCurrentTime, getCurrentDate
 }

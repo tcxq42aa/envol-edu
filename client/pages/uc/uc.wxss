@@ -17,7 +17,7 @@
 .uc-bd {
   margin-left: 32rpx;
   padding-left: 32rpx;
-  border-left: 1px solid #999;
+  border-left: 1rpx solid #999;
 }
 
 .uc-card-wrap {
@@ -31,7 +31,7 @@
   align-items:center;
   background: #fff;
   height: 151.5rpx;
-  border-bottom: 1px solid rgba(0,0,0,.1)
+  border-bottom: 1rpx solid rgba(0,0,0,.1)
 }
 .uc-card-wrap > .uc-card:last-child {
   border-bottom-width: 0;

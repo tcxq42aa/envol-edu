@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "Calendrier",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "navigationBarBackgroundColor": "#FFD102",
+  "backgroundColor": "#FFD102",
+  "navigationBarTextStyle": "white"
 }

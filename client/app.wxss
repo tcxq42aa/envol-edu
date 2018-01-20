@@ -1,10 +1,13 @@
 /**app.wxss**/
 page {
   color: rgb(51,51,51);
-  font-size: 14px;
+  font-size: 28rpx;
   line-height:1.5;
   font-family: DIN, -apple-system, BlinkMacSystemFont, "PingFang SC","Helvetica Neue",STHeiti,"Microsoft Yahei",Tahoma,Simsun,sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+view {
+  word-break:normal!important;
 }
 .container {
   display: flex; 
@@ -14,7 +17,7 @@ page {
 }
 .block {
   position: relative;
-  box-shadow: 0 5px 20px rgba(155,155,155,.3);
+  box-shadow: 0 10rpx 40rpx rgba(155,155,155,.3);
   border-radius: 4rpx;
 }
 .block--title {
@@ -170,7 +173,7 @@ page {
 }
 .tag {
   color: #fff;
-  font-size: 12px;
+  font-size: 24rpx;
   height: 36rpx;
   line-height: 36rpx;
   border-top-left-radius: 18rpx;
@@ -194,7 +197,7 @@ page {
   padding: 0 40rpx;
   border-radius: 4rpx!important;
   background: linear-gradient(to right, rgb(255, 192, 38), rgb(255, 209, 2));
-  box-shadow: 0 5px 10px rgba(252, 147, 61, 0.3);
+  box-shadow: 0 10rpx 20rpx rgba(252, 147, 61, 0.3);
   text-align: center;
 }
 button.btn::after {
@@ -206,7 +209,7 @@ button.btn::after {
 }
 .btn-theme-2 {
   background: linear-gradient(to right, rgb(51, 51, 150), rgb(201, 102, 201));
-  box-shadow: 0 5px 10px rgba(201, 102, 201, 0.3);
+  box-shadow: 0 10rpx 20rpx rgba(201, 102, 201, 0.3);
 }
 .btn--next {
   position: relative;
@@ -307,7 +310,7 @@ button.btn::after {
   padding: 30rpx;
   display: inline-block;
   max-width: 70%;
-  border-radius: 5px;
+  border-radius: 10rpx;
 }
 
 

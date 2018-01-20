@@ -1,23 +1,11 @@
 <!--pages/plan/plan.wxml-->
+<view class="plan-tabs flex flex-center-v">
+  <view bindtap="switchMode" data-mode="1" class="flex-1 text-center {{mode == 1 ? 'plan-tab-active': ''}}">Normal</view>
+  <view bindtap="switchMode" data-mode="2" class="flex-1 text-center {{mode == 2 ? 'plan-tab-active': ''}}">Révision</view>
+</view>
 <view class="plan-container">
-  
   <view class="plan-title">
       <text>{{monthStr}}</text>
-
-      <view class="tag-mode f12 flex">
-        <view class="tag tag-yellow switch" bindtap="switchMode">
-          <view class="switch-point {{mode == 1 ? 'right': 'left'}}"></view>
-        </view>
-        <view class="flex-1 text-left text-yellow">
-          {{mode == 1 ? 'Normal': ''}}
-          {{mode == 2 ? 'Révision': ''}}
-        </view>
-      </view>
-
-       <!-- <text wx:if="{{mode==1}}" class="tag tag-yellow tag-mode" bindtap="switchMode" data-mode="2">Normal</text>  -->
-      <!-- <text wx:if="{{mode==2}}" class="tag tag-yellow-reverse tag-mode" bindtap="switchMode" data-mode="1">Révision</text> -->
-
-
   </view>
   <view class="week-wrap">
     <view wx:for="{{weekIdxs}}" wx:key="index" class="week-day">{{weekDays[item]}}</view>
@@ -48,10 +36,12 @@
   <view class="statistic" style="justify-content: middle" wx:if="{{mode==2}}">
     <view class="item ml-20">已复习 <text class="icon-circle icon-finish"></text></view>
   </view>
-</view>
-<view class="plans">
-  <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
-    <image src="{{item.coverUrl}}"></image>
+
+  <view class="plans">
+    <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
+      <image src="{{item.coverUrl}}"></image>
+    </view>
   </view>
 </view>
+
 

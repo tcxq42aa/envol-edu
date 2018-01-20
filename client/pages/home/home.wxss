@@ -17,12 +17,12 @@
   position: relative;
   margin: 30rpx 45rpx;
   height: 320rpx;
-  border-radius: 4px;
+  border-radius:8rpx;
   padding: 118rpx 20rpx 40rpx 242rpx;
   box-sizing: border-box;
   pointer-events: none;
   background:#fff;
-  box-shadow: 0 10px 20px rgba(155,155,155,.3);
+  box-shadow: 0 20rpx 40rpx rgba(155,155,155,.3);
   overflow:hidden;
 }
 .course-card .sub-title {
@@ -52,10 +52,10 @@
   bottom: 0;
   left: 37rpx;
   background: #ccc;
-  border-radius: 4px;
+  border-radius: 8rpx;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  box-shadow: 0 10px 20px rgba(155, 155, 155, 0.3);
+  box-shadow: 0 20rpx 40rpx rgba(155, 155, 155, 0.3);
 }
 .course-card--cover > view {
   white-space: nowrap;

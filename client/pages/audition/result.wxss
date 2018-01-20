@@ -22,7 +22,7 @@
   position: relative;
   text-align: center;
   box-sizing: border-box;
-  box-shadow: 0 10px 15px rgba(155,155,155, 0.2)
+  box-shadow: 0 20rpx 30rpx rgba(155,155,155, 0.2)
 }
 .result-btn-group {
   position: absolute;
@@ -31,7 +31,7 @@
   width: 100%;
 }
 .btn--share,.btn--pic {
-  font-size: 14px;
+  font-size: 28rpx;
   margin-right: 100rpx;
   margin-left: -20rpx;
 }

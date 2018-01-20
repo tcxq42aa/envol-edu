@@ -45,7 +45,9 @@ var config = {
 
         articleUrl: `${host}/api/article`,
 
-        decodePhoneNumberUrl: `${host}/weapp/phoneNumber`
+        decodePhoneNumberUrl: `${host}/weapp/phoneNumber`,
+
+        userInfoUrl: `${host}/api/user/info`
     }
 };
 

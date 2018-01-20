@@ -111,9 +111,17 @@ Page({
           }
           return
         }
+        // 跳转到听写
         if (result.data.type == 3) {
           wx.redirectTo({
             url: '/pages/dictation/dictation?paperId=' + result.data.id
+          })
+          return;
+        }
+        // 跳转到测试
+        if (result.data.type == 2) {
+          wx.redirectTo({
+            url: '/pages/test/test?paperId=' + result.data.id
           })
           return;
         }
