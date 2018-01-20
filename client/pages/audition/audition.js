@@ -321,20 +321,20 @@ Page({
 
   goNext() { 
     const semester = wx.getStorageSync('currentSemester');
-    const { prevDate } = this.data;
+    const { nextDate } = this.data;
     if (this.data.noLimited) {
       wx.navigateTo({
-        url: '/pages/audition/audition?mode=2&date=' + prevDate + '&semesterId=' + semester.id,
+        url: '/pages/audition/audition?mode=2&date=' + nextDate + '&semesterId=' + semester.id,
       })
       return;
     }
   },
   goPrev() {
     const semester = wx.getStorageSync('currentSemester');
-    const { nextDate } = this.data;
+    const { prevDate } = this.data;
     if (this.data.noLimited) {
       wx.navigateTo({
-        url: '/pages/audition/audition?mode=2&date=' + nextDate + '&semesterId=' + semester.id,
+        url: '/pages/audition/audition?mode=2&date=' + prevDate + '&semesterId=' + semester.id,
       })
       return;
     }

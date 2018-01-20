@@ -4,7 +4,7 @@
   <image class="bannel--bg" style="width: 100%; height: 304rpx" mode="aspectFill" src='../../assets/common/bannel-yellow.png'></image>
   <view class="flex">
     <view>
-      <image style="width: 230rpx;height: 290rpx" src="{{content.cover || '../../assets/common/headphone@3x.png'}}"></image>
+      <image style="width: 180rpx;height: 242rpx" src="{{content.cover || 'http://oss.edu.envol.vip/20180119/Hli0K9H9gfCvP3LIXZUxYKZYOz4TJycX.png'}}"></image>
     </view>
     <view style="padding-top: 30rpx;margin-left: 30rpx">
       <view wx:if="{{currentStep==1}}">

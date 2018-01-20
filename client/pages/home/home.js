@@ -71,6 +71,8 @@ Page({
     let url = '/pages/audition/audition?paperId=' + this.data.paper.id;
     if (this.data.paper.type == 3) {
       url = '/pages/dictation/dictation?paperId=' + this.data.paper.id;
+    } else if (this.data.paper.type == 2) {
+      url = '/pages/test/test?paperId=' + this.data.paper.id;
     }
     wx.navigateTo({ url });
   },

@@ -25,15 +25,3 @@
 .offset-r-1 {
   margin-right: 86rpx;
 }
-.footer-btns {
-  display: flex;
-  margin-left: 60rpx;
-  margin-right: 60rpx;
-}
-.footer-btns .btn {
-  flex-grow: 1;
-  flex-basis: 0;
-}
-.footer-btns .btn + .btn {
-  margin-left: 30rpx;
-}
