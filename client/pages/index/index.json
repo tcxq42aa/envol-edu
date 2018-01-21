@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "Mes cours"
+  "navigationBarTitleText": "Mes cours",
+  "enablePullDownRefresh": true
 }

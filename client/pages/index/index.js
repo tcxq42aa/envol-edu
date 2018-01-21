@@ -21,7 +21,7 @@ Page({
       this.doRequest()
     })
   },
-  doRequest: function () {
+  doRequest: function (cb) {
     wx.showLoading({
       title: '加载中',
     })
@@ -39,6 +39,9 @@ Page({
         that.setData({
           semesterList: result.data
         })
+        setTimeout(()=>{
+          cb && cb();
+        }, 100);
       },
       fail (error) {
         console.log('request fail', error);
@@ -68,5 +71,11 @@ Page({
       fail: function(res) {},
       complete: function(res) {},
     })
-  }
+  },
+
+  onPullDownRefresh: function (e) {
+    this.doRequest((d) => {
+      wx.stopPullDownRefresh()
+    }, true)
+  },
 })

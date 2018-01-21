@@ -151,20 +151,22 @@ Page({
     if (this.hint >= 5) {
       this.hint = 0;
       this.getUserInfo((user) => {
-        var admin = wx.getStorageSync('admin');
-        wx.showActionSheet({
-          itemList: admin ? ['学员模式'] : ['管理员模式'],
-          success: function (res) {
-            console.log(res.tapIndex)
-            wx.setStorage({
-              key: 'admin',
-              data: !admin
-            })
-          },
-          fail: function (res) {
-            console.log(res.errMsg)
-          }
-        })
+        if (user.admin) {
+          var admin = wx.getStorageSync('admin');
+          wx.showActionSheet({
+            itemList: admin ? ['学员模式'] : ['管理员模式'],
+            success: function (res) {
+              console.log(res.tapIndex)
+              wx.setStorage({
+                key: 'admin',
+                data: !admin
+              })
+            },
+            fail: function (res) {
+              console.log(res.errMsg)
+            }
+          })
+        }
       });
       return;
     }

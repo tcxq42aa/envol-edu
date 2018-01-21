@@ -45,6 +45,7 @@ Page({
         emptyDays: emptyDays,
         daysInMonth: daysInMonth
       })
+
       wx.getStorage({
         key: 'currentSemester',
         success: (res) => {
@@ -64,6 +65,12 @@ Page({
     if (!this.firstLoad) {
       this.initData(this.data.semesterId, true)
     }
+    wx.getStorage({
+      key: 'admin',
+      success: (res) => {
+        this.setData({ admin: res.data })
+      },
+    })
   },
 
   initData: function (semesterId, slient, cb) {
@@ -95,7 +102,7 @@ Page({
 
   goCourseDetail: function(e) {
     const { active, date } = e.currentTarget.dataset;
-    if (!active) {
+    if (!active && !this.data.admin) {
       return;
     }
     wx.navigateTo({

@@ -1,12 +1,17 @@
 /**index.wxss**/
 page {
     background: #FFF;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    min-height: 100vh;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: flex-start; */
+}
+.index-page {
+  position: relative;
 }
 .userinfo {
-  margin: 70rpx 54rpx 96rpx 70rpx;
+  padding: 35px 27px 48px 35px;
+  min-height:135rpx;
   color: #fff;
 }
 .userinfo-avatar {

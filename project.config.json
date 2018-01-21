@@ -46,7 +46,7 @@
 					"id": 2,
 					"name": "audition",
 					"pathName": "pages/audition/audition",
-					"query": "main=done&paperId=5&mode=2",
+					"query": "main=done&semesterId=4&paperId=10",
 					"scene": "1020",
 					"referrerInfo": {}
 				},

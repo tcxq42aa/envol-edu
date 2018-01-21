@@ -74,9 +74,7 @@ var formatDate = (date = new Date()) => {
 }
 
 var formatDate2 = (date) => {
-  return weekDays[date.day()] + ' ' + simlpleMonthArr[date.month()].replace(/^./, function (a) {
-    return a.toUpperCase()
-  }) + ' ' + date.date();
+  return weekDays[date.day()] + ' ' + date.date() + ' ' + simlpleMonthArr[date.month()];
 }
 
 // Jour 30
