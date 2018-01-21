@@ -5,7 +5,7 @@
 }
 .bannel {
   position: relative;
-  padding: 82rpx 30rpx 48rpx;
+  padding: 82rpx 53rpx 48rpx;
   color: #fff;
 }
 .bannel--bg {

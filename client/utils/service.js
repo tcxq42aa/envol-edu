@@ -44,6 +44,9 @@ export default {
         console.log('request success', result)
         if (result.data.code == 4041) {
           that.setData({ errCode: 4041 })
+          wx.redirectTo({
+            url: '/pages/error/permision',
+          })
           return
         }
         handlerResponse(result.data.data)

@@ -3,7 +3,7 @@ page {
   background: #FFD102;
 }
 .plan-container {
-  padding: 20rpx 62rpx;
+  padding: 20rpx 62rpx 100rpx;
   position: relative;
   border-top-left-radius: 20rpx;
   border-top-right-radius: 20rpx;

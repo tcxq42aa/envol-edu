@@ -4,7 +4,7 @@
     <view class="">
       <image
           class="userinfo-avatar"
-          src="{{userInfo.avatarUrl || '../../assets/user-unlogin.png'}}"
+          src="{{userInfo.avatarUrl}}"
           background-size="cover"
           bindtap="openSetting"
       ></image>
@@ -37,4 +37,4 @@
   <view class="f12 ellipsis sub-title">{{item.dateStr}}</view>
 </view>
 
-<view wx:if="{{errCode==4041}}" class="mt-50 btn btn--next btn--pic btn-theme-2" bindtap='onEnroll'>立即报名</view>
+<!-- <view wx:if="{{errCode==4041}}" class="mt-50 btn btn--next btn--pic btn-theme-2" bindtap='onEnroll'>立即报名</view> -->

@@ -66,7 +66,7 @@ Page({
     }
   },
 
-  initData: function (semesterId, slient) {
+  initData: function (semesterId, slient, cb) {
     service.getSemesterDetail.bind(this)(semesterId, slient, (data) => {
       let tmpMap = {};
       data.statistical.forEach( item => {
@@ -77,6 +77,7 @@ Page({
         endDate: util.getCurrentDate(Math.min(data.semester.endDate, util.getCurrentTime())),
         statisticalMap: tmpMap
       })
+      cb && cb();
     })
   },
 
@@ -150,7 +151,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
   
-  }
+  // }
 })

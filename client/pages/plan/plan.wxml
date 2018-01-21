@@ -1,8 +1,8 @@
 <!--pages/plan/plan.wxml-->
-<view class="plan-tabs flex flex-center-v">
-  <view bindtap="switchMode" data-mode="1" class="flex-1 text-center {{mode == 1 ? 'plan-tab-active': ''}}">Normal</view>
-  <view bindtap="switchMode" data-mode="2" class="flex-1 text-center {{mode == 2 ? 'plan-tab-active': ''}}">Révision</view>
-</view>
+<!-- <view class="plan-tabs flex flex-center-v"> -->
+  <!-- <view bindtap="switchMode" data-mode="1" class="flex-1 text-center {{mode == 1 ? 'plan-tab-active': ''}}">Normal</view> -->
+  <!-- <view bindtap="switchMode" data-mode="2" class="flex-1 text-center {{mode == 2 ? 'plan-tab-active': ''}}">Révision</view> -->
+<!-- </view> -->
 <view class="plan-container">
   <view class="plan-title">
       <text>{{monthStr}}</text>

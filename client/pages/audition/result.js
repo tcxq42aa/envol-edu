@@ -85,7 +85,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '邀请你参加ENVOL听力朗读课的试听',
-      path:	'pages/audition/cover'
+      path:	'pages/index/index'
     }
   },
 

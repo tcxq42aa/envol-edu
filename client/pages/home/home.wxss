@@ -52,9 +52,10 @@
   bottom: 0;
   left: 37rpx;
   background: #ccc;
-  border-radius: 8rpx;
+  border-radius: 4rpx;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  overflow: hidden;
   box-shadow: 0 20rpx 40rpx rgba(155, 155, 155, 0.3);
 }
 .course-card--cover > view {

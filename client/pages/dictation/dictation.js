@@ -131,8 +131,37 @@ Page({
   },
 
   handleFinish: function(){
-    wx.navigateBack({
-      delta: 1
+    var that = this
+    const { serverTime, openId } = getApp().globalData.userInfo
+    const readToday = util.getCurrentDate(this.data.paper.readToday)
+
+    var options = {
+      url: config.service.finishUrl.replace('{paperId}', that.data.paper.id),
+      method: 'POST',
+      data: { openId, readToday, wordsTotal: this.data.paper.wordsTotal },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      login: true,
+      success(result) {
+        console.log('request success', result)
+      },
+      fail(error) {
+        console.log('request fail', error);
+      }
+    }
+    if (this.data.noLimited) { // 复习模式
+      options.url = config.service.reviewUrl.replace('{paperId}', that.data.paper.id);
+    }
+    wx.getStorage({
+      key: 'currentSemester',
+      success: (res) => {
+        options.data.semesterId = res.data.id;
+        qcloud.request(options)
+        wx.navigateBack({
+          delta: 1
+        })
+      }
     })
   },
 
@@ -185,7 +214,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
   
-  }
+  // }
 })
