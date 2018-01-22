@@ -39,10 +39,10 @@ Page({
         let { mainEnded, optEnded } = this.data
         if (options.main == 'done' && mainEnded) {
           let step = 3, optFinished = false
-          if (optEnded) {
-            step = 4
-            optFinished = true
-          }
+          // if (optEnded) {
+          //   step = 4
+          //   optFinished = true
+          // }
           this.setData({
             currentStep: step,
             audioCycleEnded: true,
@@ -303,6 +303,8 @@ Page({
       return;
     }
 
+    this.sendFinish();
+
     var t = e.target.dataset.type
     if (this.data.content.preAudio) {
       this.goResultPage(t)
@@ -352,15 +354,21 @@ Page({
       url: '/pages/audition/result?type=' + (t || 1)
     })
     this.stopAudio()
+  },
 
+  sendFinish: function() {
     var that = this
     const { serverTime, openId } = getApp().globalData.userInfo
     const readToday = util.getCurrentDate(this.data.paper.readToday)
-    
+
     var options = {
       url: config.service.finishUrl.replace('{paperId}', that.data.paper.id),
       method: 'POST',
-      data: { openId, readToday, wordsTotal: this.data.paper.wordsTotal },
+      data: {
+        openId, readToday,
+        wordsTotal: that.data.paper.wordsTotal,
+        semesterId: that.data.paper.semesterId
+      },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -375,13 +383,7 @@ Page({
     if (this.data.noLimited) { // 复习模式
       options.url = config.service.reviewUrl.replace('{paperId}', that.data.paper.id);
     }
-    wx.getStorage({
-      key: 'currentSemester',
-      success: (res) => {
-        options.data.semesterId = res.data.id;
-        qcloud.request(options)
-      }
-    })
+    qcloud.request(options)
   },
   stopAudio: function() {
     if (wx.getBackgroundAudioManager) {
