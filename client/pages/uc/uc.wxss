@@ -53,3 +53,13 @@ button.uc-card::after {
   background: #fff;
   margin: 0 29rpx 0 46rpx;
 }
+.uc-card--right {
+  width: 14rpx;
+  height: 24rpx;
+  background: #fff;
+  margin: 0 60rpx 0 32rpx;
+}
+.uc-card--hint {
+  font-size: 20rpx;
+  color: rgba(0,0,0,.4);
+}

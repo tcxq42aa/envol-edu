@@ -82,13 +82,16 @@ page {
   display: flex;
   overflow: auto;
   -webkit-overflow-scrolling : touch; 
+  margin:-20rpx;
+  padding:20rpx;
 }
 .plans .item {
   width: 180rpx;
   border-radius:4rpx;
-  overflow:hidden;
   font-size:0;
   flex-shrink: 0;
+}
+.plans .item image {
   box-shadow: 0 20rpx 40rpx rgba(155,155,155, .3); 
 }
 .plans .item + .item {

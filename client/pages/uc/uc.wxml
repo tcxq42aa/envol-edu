@@ -4,7 +4,7 @@
     <view>
       <image
           class="userinfo-avatar"
-          src="{{userInfo.avatarUrl}}"
+          src="{{userInfo.avatarUrl || '../../assets/user-unlogin.png'}}"
           background-size="cover"
           bindtap="openSetting"
       ></image>
@@ -23,25 +23,30 @@
 
   <view class="uc-card-wrap">
     <picker mode="time" value="{{time}}" bindchange="bindTimeChange">
-      <view class="uc-card flex-1">
+      <view class="uc-card">
         <image class="uc-card--icon" mode='aspectFit' src='../../assets/alarme@3x.png'/>
-        Alarme
+        <view class="flex-1">Alarme</view>
+        <view class="uc-card--hint">{{time}}</view>
+        <image class="uc-card--right" mode='aspectFit' src='../../assets/arrow-right.png'/>
       </view>
     </picker>
     <view class="uc-card" bindtap='toWebPage' data-id="1">
       <image class="uc-card--icon" mode='aspectFit' src='../../assets/faq@3x.png'/>
-      FAQ
+      <view class="flex-1">FAQ</view>
+      <image class="uc-card--right" mode='aspectFit' src='../../assets/arrow-right.png'/>
     </view>
     <button class="uc-card" open-type='contact' session-from="uc">
       <image class="uc-card--icon" mode='aspectFit' src='../../assets/trice@3x.png'/>
-      <view>
+      <view class="flex-1">
         <view>Je cherche un,une</view>
         <view>montieur, trice</view>
       </view>
+      <image class="uc-card--right" mode='aspectFit' src='../../assets/arrow-right.png'/>
     </button>
     <view class="uc-card" bindtap='toWebPage' data-id="2">
       <image class="uc-card--icon" mode='aspectFit' src='../../assets/envol@3x.png'/>
-      Maison ENVOL
+      <view class="flex-1">Maison ENVOL</view>
+      <image class="uc-card--right" mode='aspectFit' src='../../assets/arrow-right.png'/>
     </view>
   </view>
 </view>

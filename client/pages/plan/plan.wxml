@@ -40,6 +40,7 @@
   <view class="plans">
     <view class="item" wx:for="{{semesterPlans}}" wx:key="{{item.id}}">
       <image src="{{item.coverUrl}}"></image>
+      <view class="f12 mt-10">{{item.coverDesc}}</view>
     </view>
   </view>
 </view>

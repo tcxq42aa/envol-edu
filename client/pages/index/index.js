@@ -13,44 +13,44 @@ Page({
     formatTime: util.formatTime
   },
   onLoad: function(){
+    this.doRequest();
+  },
+  doRequest: function (cb) {
     getApp().ready((data) => {
       this.setData({
         logged: data.logged,
         userInfo: data.userInfo,
       })
-      this.doRequest()
-    })
-  },
-  doRequest: function (cb) {
-    wx.showLoading({
-      title: '加载中',
-    })
-    var that = this
-    var options = {
-      url: config.service.semesterListUrl,
-      login: true,
-      success (result) {
-        console.log('request success', result)
-        result.data.forEach(item => {
-          item.beginDateStr = util.formatTime(item.beginDate)
-          item.durationDay = moment(item.endDate).diff(moment(item.beginDate), 'days') + 1
-          item.currentDay = moment(that.data.userInfo.serverTime).diff(moment(item.beginDate), 'days') + 1
-        })
-        that.setData({
-          semesterList: result.data
-        })
-        setTimeout(()=>{
-          cb && cb();
-        }, 100);
-      },
-      fail (error) {
-        console.log('request fail', error);
-      },
-      complete: function(){
-        wx.hideLoading()
+      wx.showLoading({
+        title: '加载中',
+      })
+      var that = this
+      var options = {
+        url: config.service.semesterListUrl,
+        login: true,
+        success(result) {
+          console.log('request success', result)
+          result.data.forEach(item => {
+            item.beginDateStr = util.formatTime(item.beginDate)
+            item.durationDay = moment(item.endDate).diff(moment(item.beginDate), 'days') + 1
+            item.currentDay = moment(that.data.userInfo.serverTime).diff(moment(item.beginDate), 'days') + 1
+          })
+          that.setData({
+            semesterList: result.data
+          })
+          setTimeout(() => {
+            cb && cb();
+          }, 100);
+        },
+        fail(error) {
+          console.log('request fail', error);
+        },
+        complete: function () {
+          wx.hideLoading()
+        }
       }
-    }
-    qcloud.request(options)
+      qcloud.request(options)
+    })
   },
 
   goSemesterHome: function(e){

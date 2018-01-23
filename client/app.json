@@ -13,7 +13,8 @@
     "pages/web/web",
     "pages/dictation/dictation",
     "pages/test/test",
-    "pages/error/permision"
+    "pages/error/permision",
+    "pages/review/review"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -25,6 +25,17 @@ App({
         success: function (res) {
           fundebug.systemInfo = res;
         }
+      });
+      wx.getStorage({
+        key: 'currentSemester',
+        success: function(res) {
+          console.log(res)
+        },
+        fail: function(err){
+          wx.redirectTo({
+            url: 'pages/index/index',
+          })
+        }
       })
     },
     // 用户登录示例
