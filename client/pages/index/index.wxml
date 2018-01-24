@@ -7,11 +7,17 @@
       <view class="f16">{{todayStr}}</view>
     </view>
     <view>
-      <image
+      <image wx:if="{{userInfo.avatarUrl}}"
           class="userinfo-avatar"
-          src="{{userInfo.avatarUrl || '../../assets/user-unlogin.png'}}"
+          src="{{userInfo.avatarUrl}}"
           background-size="cover"
           bindtap='openSetting'
+      ></image>
+      <image wx:if="{{!userInfo.avatarUrl}}"
+          class="userinfo-avatar"
+          src="../../assets/user-unlogin.png"
+          background-size="cover"
+          bindtap="openSetting"
       ></image>
     </view>
   </view>

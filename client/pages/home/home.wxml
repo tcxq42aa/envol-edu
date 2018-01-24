@@ -2,9 +2,15 @@
 <view class="home-page">
   <view class="userinfo">
     <view class="">
-      <image
+      <image wx:if="{{userInfo.avatarUrl}}"
           class="userinfo-avatar"
           src="{{userInfo.avatarUrl}}"
+          background-size="cover"
+          bindtap="openSetting"
+      ></image>
+      <image wx:if="{{!userInfo.avatarUrl}}"
+          class="userinfo-avatar"
+          src="../../assets/user-unlogin.png"
           background-size="cover"
           bindtap="openSetting"
       ></image>
@@ -22,6 +28,7 @@
     <image
       class="course-cover"
       style="width:100%;height:100%"
+      wx:if="{{item.coverUrl}}"
       src="{{item.coverUrl}}"
       background-size="cover"
       mode='aspectFill'

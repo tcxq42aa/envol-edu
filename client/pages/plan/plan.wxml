@@ -1,8 +1,8 @@
 <!--pages/plan/plan.wxml-->
-<!-- <view class="plan-tabs flex flex-center-v"> -->
-  <!-- <view bindtap="switchMode" data-mode="1" class="flex-1 text-center {{mode == 1 ? 'plan-tab-active': ''}}">Normal</view> -->
-  <!-- <view bindtap="switchMode" data-mode="2" class="flex-1 text-center {{mode == 2 ? 'plan-tab-active': ''}}">Révision</view> -->
-<!-- </view> -->
+ <view animation="{{animationData}}" style="height: {{height || 0}};" class="plan-tabs flex flex-center-v" wx:if="{{enableReview}}">
+   <view bindtap="switchMode" data-mode="1" class="flex-1 text-center {{mode == 1 ? 'plan-tab-active': ''}}">Normal</view> 
+   <view bindtap="switchMode" data-mode="2" class="flex-1 text-center {{mode == 2 ? 'plan-tab-active': ''}}">Révision</view> 
+</view>  
 <view class="plan-container">
   <view class="plan-title">
       <text>{{monthStr}}</text>
@@ -44,5 +44,5 @@
     </view>
   </view>
 </view>
-
-
+<import src="../../components/toast/toast.wxml"/>
+<template is="wetoast" data="{{toastData: toastData}}"/>

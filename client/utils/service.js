@@ -96,5 +96,42 @@ export default {
       }
     }
     qcloud.request(options)
+  },
+
+  /**
+   * 完成当日学习
+   * @semesterId 学期id
+   * @paperId    试卷id
+   * @readToday  试卷日期
+   * @wordsTotal 试卷字数
+   * @isReview   复习模式
+   */
+  sendFinish (semesterId, paperId, readToday, wordsTotal, isReview) {
+    const that = this
+    const promise = new Promise((resolve)=>{
+      const { serverTime, openId } = getApp().globalData.userInfo
+
+      var options = {
+        url: (!isReview ? config.service.finishUrl : config.service.reviewUrl).replace('{paperId}', paperId),
+        method: 'POST',
+        data: {
+          openId, readToday, wordsTotal, semesterId
+        },
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        login: true,
+        success(result) {
+          console.log('request success', result)
+          resolve(result);
+        },
+        fail(error) {
+          console.log('request fail', error);
+          resolve(error);
+        }
+      }
+      qcloud.request(options)
+    });
+    return promise;
   }
 }

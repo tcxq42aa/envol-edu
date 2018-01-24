@@ -23,7 +23,7 @@ Page({
     getApp().ready((data) => {
       this.setData({
         logged: data.logged,
-        userInfo: data.userInfo,
+        userInfo: data.userInfo
       })
       wx.getStorage({
         key: 'currentSemester',
@@ -41,6 +41,16 @@ Page({
     if (!this.firstLoad) {
       this.initData(this.data.semesterId, true)
     }
+    wx.getStorage({
+      key: 'userInfo',
+      success: (res) => {
+        console.log(this.data.userInfo.avatarUrl);
+        console.log(res.data.avatarUrl);
+        this.setData({
+          userInfo: res.data
+        });
+      }
+    })
   },
 
   /**

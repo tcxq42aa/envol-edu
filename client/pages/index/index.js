@@ -15,11 +15,21 @@ Page({
   onLoad: function(){
     this.doRequest();
   },
+  onShow: function(){
+    wx.getStorage({
+      key: 'userInfo',
+      success: (res) => {
+        this.setData({
+          userInfo: res.data
+        });
+      }
+    })
+  },
   doRequest: function (cb) {
     getApp().ready((data) => {
       this.setData({
         logged: data.logged,
-        userInfo: data.userInfo,
+        userInfo: data.userInfo
       })
       wx.showLoading({
         title: '加载中',

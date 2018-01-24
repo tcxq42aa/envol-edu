@@ -20,10 +20,16 @@ Page({
    */
   onLoad: function (options) {
     this.firstLoad = true
+    wx.getStorage({
+      key: 'reminder',
+      success: (res) => {
+        this.setData({ time: res.data })
+      },
+    })
     getApp().ready((data) => {
       this.setData({
         logged: data.logged,
-        userInfo: data.userInfo,
+        userInfo: data.userInfo
       })
       wx.getStorage({
         key: 'currentSemester',
@@ -32,12 +38,6 @@ Page({
           this.setData({
             semesterId: res.data.id
           })
-        },
-      })
-      wx.getStorage({
-        key: 'reminder',
-        success: (res) => {
-          this.setData({ time: res.data })
         },
       })
     })
@@ -124,6 +124,7 @@ Page({
           key: 'reminder',
           data: e.detail.value,
         })
+        that.setData({ time: e.detail.value })
       },
       fail(error) {
         console.log('request fail', error);
@@ -142,6 +143,21 @@ Page({
     })
   },
 
+  handleKefu: function() {
+    wx.showModal({
+      title: '',
+      content: '不急请直接微信留言给Vovo，耐心等待回复。急的话可以直接电话Vovo哦。',
+      confirmText: '直接联系',
+      success: function (res) {
+        if (res.confirm) {
+          wx.makePhoneCall({
+            phoneNumber: '15601720679'
+          })
+        }
+      }
+    })
+  },
+
   openSetting: function () {
     if (this.interval) {
       this.hint = this.hint || 0;
@@ -154,13 +170,35 @@ Page({
         if (user.admin) {
           var admin = wx.getStorageSync('admin');
           wx.showActionSheet({
-            itemList: admin ? ['学员模式'] : ['管理员模式'],
+            itemList: admin ? ['学员模式', '设置复习日'] : ['管理员模式', '设置复习日'],
             success: function (res) {
-              console.log(res.tapIndex)
-              wx.setStorage({
-                key: 'admin',
-                data: !admin
-              })
+              if(res.tapIndex == 0) {
+                wx.setStorage({
+                  key: 'admin',
+                  data: !admin
+                });
+                if (admin) {
+                  wx.removeStorage({
+                    key: 'reviewWeekDay'
+                  })
+                }
+                wx.reLaunch({
+                  url: '/pages/index/index',
+                });
+              } else {
+                wx.showActionSheet({
+                  itemList: ['星期一', '星期二', '星期三', '星期四', '星期五'],
+                  success: function (res) {
+                    wx.setStorage({
+                      key: 'reviewWeekDay',
+                      data: res.tapIndex + 1
+                    });
+                    wx.reLaunch({
+                      url: '/pages/index/index',
+                    });
+                  }
+                })
+              }
             },
             fail: function (res) {
               console.log(res.errMsg)

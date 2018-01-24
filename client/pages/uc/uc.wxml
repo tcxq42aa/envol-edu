@@ -2,9 +2,15 @@
 <view class="uc-page">
   <view class="userinfo">
     <view>
-      <image
+      <image wx:if="{{userInfo.avatarUrl}}"
           class="userinfo-avatar"
-          src="{{userInfo.avatarUrl || '../../assets/user-unlogin.png'}}"
+          src="{{userInfo.avatarUrl}}"
+          background-size="cover"
+          bindtap="openSetting"
+      ></image>
+      <image wx:if="{{!userInfo.avatarUrl}}"
+          class="userinfo-avatar"
+          src="../../assets/user-unlogin.png"
           background-size="cover"
           bindtap="openSetting"
       ></image>
@@ -35,14 +41,22 @@
       <view class="flex-1">FAQ</view>
       <image class="uc-card--right" mode='aspectFit' src='../../assets/arrow-right.png'/>
     </view>
-    <button class="uc-card" open-type='contact' session-from="uc">
+    <!-- <button class="uc-card" open-type='contact' session-from="uc">
       <image class="uc-card--icon" mode='aspectFit' src='../../assets/trice@3x.png'/>
       <view class="flex-1">
         <view>Je cherche un,une</view>
         <view>montieur, trice</view>
       </view>
       <image class="uc-card--right" mode='aspectFit' src='../../assets/arrow-right.png'/>
-    </button>
+    </button> -->
+    <view class="uc-card" bindtap='handleKefu'>
+      <image class="uc-card--icon" mode='aspectFit' src='../../assets/trice@3x.png'/>
+      <view class="flex-1">
+        <view>Je cherche un,une</view>
+        <view>montieur, trice</view>
+      </view>
+      <image class="uc-card--right" mode='aspectFit' src='../../assets/arrow-right.png'/>
+    </view>
     <view class="uc-card" bindtap='toWebPage' data-id="2">
       <image class="uc-card--icon" mode='aspectFit' src='../../assets/envol@3x.png'/>
       <view class="flex-1">Maison ENVOL</view>

@@ -13,6 +13,7 @@ Page({
     statisticalMap: {},
     reviewStatisticalMap: {},
     weekIdxs: [0, 1, 2, 3, 4, 5, 6],
+    reviewWeekDay: 5, // 复习日
     weekDays: util.simpleWeekDays,
     emptyDays: 0,
     daysInMonth: 0
@@ -22,6 +23,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('plan onLoad')
+    const reviewWeekDay = wx.getStorageSync('reviewWeekDay');
+    if (reviewWeekDay) {
+      this.setData({ reviewWeekDay: reviewWeekDay });
+    }
+    
     this.firstLoad = true
     getApp().ready((data) => {
       const today = util.getCurrentTime();
@@ -38,6 +45,8 @@ Page({
         }
       })
 
+      const now = util.getCurrentTime();
+      
       this.setData({
         logged: data.logged,
         userInfo: data.userInfo,
@@ -45,6 +54,8 @@ Page({
         emptyDays: emptyDays,
         daysInMonth: daysInMonth
       })
+
+      this.performAnimation();
 
       wx.getStorage({
         key: 'currentSemester',
@@ -61,7 +72,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function (options) {
     if (!this.firstLoad) {
       this.initData(this.data.semesterId, true)
     }
@@ -71,6 +82,9 @@ Page({
         this.setData({ admin: res.data })
       },
     })
+    if(this.mode == 2) {
+      this.initReviewData(this.data.semesterId);
+    }
   },
 
   initData: function (semesterId, slient, cb) {
@@ -105,8 +119,25 @@ Page({
     if (!active && !this.data.admin) {
       return;
     }
+    
+    // 周五是复习日，不能进入课程主页
+    if (util.getCurrentTime(date).day() == this.data.reviewWeekDay) {
+      util.showToast('C’est le jour de révision. Vas-y!', 4000);
+      return;
+    }
+    // 没完成的学习不能复习
+    if (this.data.mode == 2 && !this.data.statisticalMap[date]) {
+      util.showToast('Tu n’as pas fini la tâche de ce jour.', 4000);
+      return;
+    }
+
+    let url = '/pages/audition/audition?date=' + date + '&semesterId=' + this.data.semesterId;
+    if (this.data.mode == 2) {
+      url = '/pages/review/review?date=' + date + '&semesterId=' + this.data.semesterId;
+    }
+
     wx.navigateTo({
-      url: '/pages/audition/audition?date=' + date + '&semesterId=' + this.data.semesterId + '&mode=' + this.data.mode
+      url: url
     })
   },
 
@@ -161,4 +192,36 @@ Page({
   // onShareAppMessage: function () {
   
   // }
+
+  // 周五显示模式切换逻辑 
+  performAnimation: function () {
+    const today = util.getCurrentTime();
+    const key = 'review_animation_' + today.format('YYYY-MM-DD');
+    const that = this;
+    this.setData({
+      enableReview: today.day() == this.data.reviewWeekDay
+    })
+    wx.getStorage({
+      key: key,
+      success: function(res) {
+        that.setData({ height: '72rpx' });
+      },
+      fail: function() {
+        var animation = wx.createAnimation({
+          transformOrigin: "50% 0%",
+          duration: 300,
+          timingFunction: "ease-out",
+          delay: 300
+        });
+        animation.height('72rpx').step();
+        that.setData({
+          animationData: animation.export()
+        });
+        wx.setStorage({
+          key: key,
+          data: true,
+        })
+      }
+    })
+  }
 })

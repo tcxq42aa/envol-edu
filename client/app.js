@@ -8,10 +8,10 @@ fundebug.apikey = 'f24ac51aec6a37d209d9dc8d85e9ec1ab21ec9d8dc872ef292850b072b6e8
 
 App({
     onShow: function() {
-      this.processRef()
+      //this.processRef()
     },
     onLaunch: function () {
-      this.processRef()
+      //this.processRef()
       qcloud.setLoginUrl(config.service.loginUrl)
       var that = this
       this.login(function (result){
@@ -41,7 +41,6 @@ App({
     // 用户登录示例
     login: function (cb) {
       console.log('login')
-      util.showBusy('正在登录')
       this.createPms(cb)
     },
 
@@ -52,10 +51,6 @@ App({
         function handle(data) {
           that.globalData.userInfo = data
           that.globalData.logged = true
-          wx.setStorage({
-            key: 'userInfo',
-            data: data
-          })
           resolve(that.globalData)
           cb && cb(that.globalData)
         }
@@ -63,6 +58,8 @@ App({
         let cached = wx.getStorageSync('userInfo');
         if (cached) {
           handle(cached)
+        } else {
+          util.showBusy('正在登录')
         }
         qcloud.request({
           url: config.service.requestUrl,

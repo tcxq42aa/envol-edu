@@ -4,6 +4,7 @@ var config = require('../../config.js')
 var util = require('../../utils/util.js')
 var moment = require('../../vendor/moment.min')
 var WxParse = require('../../vendor/wxParse/wxParse.js');
+import service from '../../utils/service';
 Page({
 
   /**
@@ -14,12 +15,23 @@ Page({
     disabled: true, // 按钮禁用
     fixed: true, // 按钮悬浮
     classNames: '',
+    disabledClassName: 'disabled',
     opened: false,
     paper: {},
     mainEnded: false,
     optEnded: false,
-    noLimited: false, // 复习模式，不做限制
     isPreview: false // 试听版
+  },
+
+  onShow: function(){
+    wx.getStorage({
+      key: 'admin',
+      success: (res) => {
+        if(res.data) {
+          this.setData({disabledClassName: ''});
+        }
+      },
+    })
   },
 
   /**
@@ -30,7 +42,6 @@ Page({
     this.setData({ 
       options,
       isPreview: !!options.isPreview, //试听
-      noLimited: options.mode == 2 // 复习模式
     })
     
     getApp().ready(()=>{
@@ -146,17 +157,6 @@ Page({
         if (that.data.currentStep == 1 && content.preAudio) {
           util.showToast("Tout écouter pour passer à l’étape suivante. ", 3000)
         }
-        if (that.data.noLimited) {
-          const semester = wx.getStorageSync('currentSemester');
-          let today = util.getCurrentTime(that.data.paper.readToday);
-          const nextDate = today.add(1, 'd').format('YYYY-MM-DD');
-          const prevDate = today.add(-2, 'd').format('YYYY-MM-DD');
-          that.setData({
-            nextDate, prevDate,
-            hasPrev: prevDate >= util.getCurrentTime(semester.beginDate).format('YYYY-MM-DD'),
-            hasNext: nextDate <= util.getCurrentTime(semester.endDate).format('YYYY-MM-DD'),
-          })
-        }
         cb && cb()
       },
 
@@ -266,10 +266,6 @@ Page({
   },
 
   toOpt: function(){
-    if (this.data.noLimited) {
-      this.goNext();
-      return;
-    }
     // this.data.content.audios = this.data.content.optAudios
     this.setData({
       currentStep: 4,
@@ -298,12 +294,7 @@ Page({
   },
 
   handleFinish: function(e){
-    if(this.data.noLimited) {
-      this.goPrev();
-      return;
-    }
-
-    this.sendFinish();
+    this.doFinish();
 
     var t = e.target.dataset.type
     if (this.data.content.preAudio) {
@@ -314,41 +305,23 @@ Page({
     var key = ''
     if(t == 1) {
       key = 'paper_' + this.data.paper.id
+      if (!wx.getStorageSync(key) && !this.data.isPreview) {
+        this.goJdk()
+      } else {
+        this.goResultPage(t)
+      }
     }
     if (t == 2) {
       key = 'optPaper_' + this.data.paper.id
-    }
-    if (!wx.getStorageSync(key) && !this.data.isPreview) {
-      this.goJdk()
-    } else {
       this.goResultPage(t)
     }
+    
     wx.setStorage({
       key: key,
       data: 'finished',
     })
   },
 
-  goNext() { 
-    const semester = wx.getStorageSync('currentSemester');
-    const { nextDate } = this.data;
-    if (this.data.noLimited) {
-      wx.navigateTo({
-        url: '/pages/audition/audition?mode=2&date=' + nextDate + '&semesterId=' + semester.id,
-      })
-      return;
-    }
-  },
-  goPrev() {
-    const semester = wx.getStorageSync('currentSemester');
-    const { prevDate } = this.data;
-    if (this.data.noLimited) {
-      wx.navigateTo({
-        url: '/pages/audition/audition?mode=2&date=' + prevDate + '&semesterId=' + semester.id,
-      })
-      return;
-    }
-   },
   goResultPage: function(t){
     wx.navigateTo({
       url: '/pages/audition/result?type=' + (t || 1)
@@ -356,34 +329,18 @@ Page({
     this.stopAudio()
   },
 
-  sendFinish: function() {
+  doFinish: function() {
     var that = this
     const { serverTime, openId } = getApp().globalData.userInfo
     const readToday = util.getCurrentDate(this.data.paper.readToday)
 
-    var options = {
-      url: config.service.finishUrl.replace('{paperId}', that.data.paper.id),
-      method: 'POST',
-      data: {
-        openId, readToday,
-        wordsTotal: that.data.paper.wordsTotal,
-        semesterId: that.data.paper.semesterId
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      login: true,
-      success(result) {
-        console.log('request success', result)
-      },
-      fail(error) {
-        console.log('request fail', error);
-      }
-    }
-    if (this.data.noLimited) { // 复习模式
-      options.url = config.service.reviewUrl.replace('{paperId}', that.data.paper.id);
-    }
-    qcloud.request(options)
+    service.sendFinish.bind(this)(
+      this.data.paper.semesterId,
+      this.data.paper.id,
+      util.getCurrentDate(this.data.paper.readToday),
+      that.data.paper.wordsTotal,
+      this.data.noLimited
+    )
   },
   stopAudio: function() {
     if (wx.getBackgroundAudioManager) {

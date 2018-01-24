@@ -4,7 +4,7 @@
 	"miniprogramRoot": "./client",
 	"qcloudRoot": "./server",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -26,7 +26,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 10,
 			"list": [
 				{
 					"id": 0,
@@ -101,10 +101,10 @@
 					"referrerInfo": {}
 				},
 				{
-					"id": -1,
+					"id": 10,
 					"name": "audition",
 					"pathName": "pages/audition/audition",
-					"query": "type=1",
+					"query": "paperId=12",
 					"scene": "1020",
 					"referrerInfo": {}
 				},
