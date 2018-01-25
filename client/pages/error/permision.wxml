@@ -1,0 +1,2 @@
+<!--pages/error/permision.wxml-->
+<view style='text-align: center;margin-top: 50rpx;'>您尚未报名，请先联系老师报名</view>

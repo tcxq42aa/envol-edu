@@ -1,0 +1,73 @@
+<!--pages/review/review.wxml-->
+<view class="bannel" wx:if="{{content}}">
+  <image class="bannel--bg" style="width: 100%; height: 304rpx" mode="aspectFill" src='../../assets/common/bannel-yellow.png'></image>
+  <view class="flex">
+    <view>
+      <image style="width: 180rpx;height: 242rpx" src="{{content.cover || 'http://oss.edu.envol.vip/20180119/Hli0K9H9gfCvP3LIXZUxYKZYOz4TJycX.png'}}"></image>
+    </view>
+    <view style="padding-top: 30rpx;margin-left: 30rpx">
+      <view>
+        <view>Première étape</view>
+        <view class="f18">Écouter sans texte</view>
+      </view>
+      <view style='margin-top: 48rpx'>
+        <image style="width: 30rpx;height:30rpx" src='../../assets/common/hp-sm@3x.png'></image>
+        <image class="ml-5" style="width: 30rpx;height:30rpx" src='../../assets/common/book-sm@3x.png'></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="page-content" wx:if="{{content}}">
+  <view class="offset-l-2 animate-in delay-1 mb-30">
+    <view class="offset-r-1">
+      <view class="f15">「懒癌原声」</view>
+      <view class="text-gray mb-15">复习建议直接跟读5遍以上，才可以看一遍原文。</view>
+    </view>
+    <my-audio finished='{{true}}' bind:ready="onAudioReady" bind:play="onAudioPlay" data-idx='0' l-src="{{content.audios[0].src1}}"></my-audio>
+  </view>
+  
+  <view class="block animate-in delay-1 offset-l-1 mt-20 mb-60 pa-25 pr-82">
+    <view class="btn--collapse {{!opened ? '' : 'up'}}" bindtap='toggle' data-target='opened'></view>
+    <!-- <view class="f14 block--title">Écouter une fois avant de cliquer</view> -->
+    <view class="{{!opened ? 'mask' : ''}}">
+      <view>
+        <import src="/vendor/wxParse/wxParse.wxml"/>  
+        <template is="wxParse" data="{{wxParseData:handout.nodes}}"/>
+      </view>
+    </view>
+  </view>
+
+  <view class="offset-l-2 animate-in delay-1 mb-60">
+    <view class="offset-r-1">
+      <view class="f15">「懒癌解析」</view>
+      <view class="text-gray mb-15">基础较好同学跳过这一步。基础较弱的同学听一遍懒癌解析加深印象。此处不放文本，逼自己听了理解或查看笔记。</view>
+    </view>
+    <my-audio finished='{{true}}' bind:ready="onAudioReady" bind:play="onAudioPlay" data-idx='1' l-src="{{content.audios[1].src1}}"></my-audio>
+  </view>
+
+  <view class="offset-l-2 animate-in delay-1 mb-30">
+    <view class="offset-r-1">
+      <view class="f15">「Défi」</view>
+      <view class="text-gray mb-15">之前有当dictée练习的，可以点开文本框对照一遍，再隐藏并反复听没听出来的部分5遍以上。若想轻松一点，只需再听一遍即可。</view>
+    </view>
+    <my-audio finished='{{true}}' bind:ready="onAudioReady" bind:play="onAudioPlay" data-idx='2' l-src="{{content.audios[2].src1}}"></my-audio>
+  </view>
+  
+  <view class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25 pr-82">
+    <view class="btn--collapse {{!reviewOpened ? '' : 'up'}}" bindtap='toggle' data-target='reviewOpened'></view>
+    <!-- <view class="f14 block--title">Écouter une fois avant de cliquer</view> -->
+    <view class="{{!reviewOpened ? 'mask' : ''}}">
+      <view>
+        <import src="/vendor/wxParse/wxParse.wxml"/>  
+        <template is="wxParse" data="{{wxParseData:reviewContent.nodes}}"/>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer-btns animate-in delay-2">
+    <view bindtap='handleFinish' class="btn btn--finish">
+      J'ai fini
+    </view>
+  </view>
+</view>

@@ -1,0 +1,72 @@
+<!--pages/test/test.wxml-->
+<view class="test-page">
+  <image class="bg" wx:if="{{!showResult}}" src='../../assets/common/test-bg.png'></image>
+  <image class="normal-bg" wx:if="{{showResult}}" src='../../assets/common/bg.png'></image>
+  
+  <block wx:if="{{!showResult}}">
+    <view class="test-title" wx:if="{{paper}}">
+      <text class="f18">{{paper.name}}</text>
+      <text class="f14">{{dateStr}}</text>
+    </view>
+
+    <view class="card test-card" wx:key="{{index}}" wx:for="{{exerciseList}}" wx:if="{{current==index}}">
+      <view class="test-idx">
+        <text class="sm">{{index + 1}}</text><text class="f12">/</text><text>{{exerciseList.length}}</text>
+      </view>
+      <view>
+        <view class="exercise-title">
+          <import src="/vendor/wxParse/wxParse.wxml"/>
+          <template is="wxParse" data="{{wxParseData:exerciseList[index].html.nodes}}"/>
+        </view>
+        <view wx:key="{{idx}}" wx:for="{{item.options}}" wx:for-item="option" wx:for-index="idx" class="exercise-option {{item.testIdx == idx ? 'selected' : ''}}" data-exercise="{{item}}" data-index="{{index}}"  data-subindex="{{idx}}"
+          bindtap="select"
+        >{{option.content}}</view>
+      </view>
+
+      <view class="footer-btns">
+        <view class="btn btn-next" bindtap='prev'>Retour</view>
+        <view class="btn btn-next" bindtap='next'>Valider</view>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{showResult}}">
+    <view class="flex test-result">
+      <view class="test-result-cover flex-1">
+        <image style="width: 180rpx;height: 242rpx" src="{{content.cover || 'http://oss.edu.envol.vip/20180119/Hli0K9H9gfCvP3LIXZUxYKZYOz4TJycX.png'}}"></image>
+      </view>
+      <view class="test-result-right">
+        <view class="f18 mb-15">{{paper.name}}</view>
+        <view class="f14">{{dateStr}}</view>
+      </view>
+      <view class="test-result-right">
+        <view class="f14">正确率</view>
+        <view class="f40">{{correctPercent}}<text class="f18">%</text></view>
+      </view>
+    </view>
+    <view class="card test-card test-result-card">
+      <view class="result-item flex" wx:for="{{exerciseList}}">
+        <view class="result-item-cnt">{{ index >= 9 ? (index + 1) :( '0'+(index+1))}}</view>
+        <view class="flex-1 result-item-body">
+          <view class="result-item-icon">
+            <image wx:if="{{item.answer==item.testIdx}}" src='../../assets/check.png'></image>
+            <image wx:if="{{item.answer!=item.testIdx}}" src='../../assets/close.png'></image>
+          </view>
+          <view class="result-item-title">
+            <import src="/vendor/wxParse/wxParse.wxml"/>
+            <template is="wxParse" data="{{wxParseData:item.html.nodes}}"/>
+          </view>
+          <view class="mt-10">
+            <text class="fb">Ta réponse: </text>{{item.options[item.testIdx] ? item.options[item.testIdx].content: ''}}</view>
+          <view class="mt-10">
+            <text class="text-gray">La bonne réponse:</text> {{item.options[item.answer] ? item.options[item.answer].content: ''}}</view>
+          <!-- <view class="text-gray mt-10">
+            <view>Explication:</view>
+            <view><text>{{item.desc}}</text></view>
+          </view> -->
+        </view>
+      </view>
+    </view>
+    <view class="btn btn--next f16" bindtap='handleFinish'>我要打卡</view>
+  </block>
+</view>
