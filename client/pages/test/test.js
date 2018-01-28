@@ -131,9 +131,17 @@ Page({
     this.setData({
       correctPercent: Math.round(correct.length / this.data.exerciseList.length * 100)
     })
+    this.doFinish();
   },
 
   handleFinish() {
+    this.doFinish();
+    wx.navigateBack({
+      delta: -1
+    });
+  },
+
+  doFinish() {
     var that = this
     const { serverTime, openId } = getApp().globalData.userInfo
     const readToday = util.getCurrentDate(this.data.paper.readToday)
@@ -161,19 +169,6 @@ Page({
       success: (res) => {
         options.data.semesterId = res.data.id;
         qcloud.request(options)
-        wx.navigateToMiniProgram({
-          appId: res.data.appId,
-          path: res.data.appPath,
-          envVersion: 'release',
-          success(res) {
-            // 打开成功
-            console.log(res)
-          },
-          fail(res) {
-            // 打开成功
-            console.log(res)
-          }
-        })
       }
     })
   }

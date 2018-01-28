@@ -37,11 +37,13 @@ Page({
       let daysInMonth = util.getCurrentTime().daysInMonth();
 
       daysInMonth = new Array(daysInMonth).fill(0).map((day, i) => {
+        const t = today.date(i + 1);
         return {
           finished: false,
           finished2: false,
           unfinished: false,
-          dateStr: today.date(i + 1).format('YYYY-MM-DD')
+          dateStr: t.format('YYYY-MM-DD'),
+          dayofWeek: t.day()
         }
       })
 
@@ -121,8 +123,13 @@ Page({
     }
     
     // 周五是复习日，不能进入课程主页
-    if (util.getCurrentTime(date).day() == this.data.reviewWeekDay) {
+    const d = util.getCurrentTime(date).day();
+
+    if (d == this.data.reviewWeekDay) {
       util.showToast('C’est le jour de révision. Vas-y!', 4000);
+      return;
+    }
+    if (this.data.mode == 2 && (d == 6 || d == 0)) {
       return;
     }
     // 没完成的学习不能复习

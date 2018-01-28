@@ -43,5 +43,6 @@
   <view class="f15 fb mb-10 ellipsis">{{item.name}}</view>
   <view class="f12 ellipsis sub-title">{{item.dateStr}}</view>
 </view>
-
+<import src="../../components/toast/toast.wxml"/>
+<template is="wetoast" data="{{toastData: toastData}}"/>
 <!-- <view wx:if="{{errCode==4041}}" class="mt-50 btn btn--next btn--pic btn-theme-2" bindtap='onEnroll'>立即报名</view> -->

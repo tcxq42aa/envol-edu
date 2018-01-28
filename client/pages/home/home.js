@@ -76,6 +76,9 @@ Page({
   },
   onTapPaper: function(e) {
     if (!this.data.paper || this.data.errCode == 4041) {
+      if(util.getCurrentTime().day() == 5) {
+        util.showToast("Il n'y pas de cours aujourd'hui. Clique le calendrier au-dessous pour passer au mode de RÉVISION.", 3000);
+      }
       return;
     }
     let url = '/pages/audition/audition?paperId=' + this.data.paper.id;

@@ -5,7 +5,7 @@
   
   <block wx:if="{{!showResult}}">
     <view class="test-title" wx:if="{{paper}}">
-      <text class="f18">{{paper.name}}</text>
+      <text class="f18">Test de la semaine</text>
       <text class="f14">{{dateStr}}</text>
     </view>
 
@@ -35,7 +35,7 @@
       <view class="test-result-cover flex-1">
         <image style="width: 180rpx;height: 242rpx" src="{{content.cover || 'http://oss.edu.envol.vip/20180119/Hli0K9H9gfCvP3LIXZUxYKZYOz4TJycX.png'}}"></image>
       </view>
-      <view class="test-result-right">
+      <view class="test-result-right" style="min-width: 100rpx">
         <view class="f18 mb-15">{{paper.name}}</view>
         <view class="f14">{{dateStr}}</view>
       </view>
@@ -67,6 +67,6 @@
         </view>
       </view>
     </view>
-    <view class="btn btn--next f16" bindtap='handleFinish'>我要打卡</view>
+    <view class="btn btn--next f16" bindtap='handleFinish'>J'ai fini</view>
   </block>
 </view>

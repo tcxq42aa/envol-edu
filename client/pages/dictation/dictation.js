@@ -103,14 +103,15 @@ Page({
   },
 
   onAudioEnded: function (e) {
-    console.log(e)
-    const audios = this.data.content.audios;
-    audios[e.currentTarget.dataset.idx].finished = true;
-    if (audios.filter(audio => audio.finished).length == audios.length) {
-      this.setData({
-        allFinished: true
-      })
-    }
+    // console.log(e)
+    // const audios = this.data.content.audios;
+    // audios[e.currentTarget.dataset.idx].finished = true;
+    // if (audios.filter(audio => audio.finished).length == audios.length) {
+    this.setData({
+      allFinished: true
+    });
+    this.doFinish();
+    // }
   },
 
   toggle: function (e) {
@@ -131,6 +132,13 @@ Page({
   },
 
   handleFinish: function(){
+    this.doFinish();
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+
+  doFinish() {
     var that = this
     const { serverTime, openId } = getApp().globalData.userInfo
     const readToday = util.getCurrentDate(this.data.paper.readToday)
@@ -158,9 +166,6 @@ Page({
       success: (res) => {
         options.data.semesterId = res.data.id;
         qcloud.request(options)
-        wx.navigateBack({
-          delta: 1
-        })
       }
     })
   },

@@ -249,7 +249,8 @@ Page({
   onAudioCycleEnded: function(e) {
     this.setData({
       audioCycleEnded: true
-    })
+    });
+    this.doFinish();
   },
 
   onPreAudioReady: function (e) {

@@ -1,5 +1,5 @@
 <!--pages/plan/plan.wxml-->
- <view animation="{{animationData}}" style="height: {{height || 0}};" class="plan-tabs flex flex-center-v" wx:if="{{enableReview}}">
+ <view class="plan-tabs flex flex-center-v">
    <view bindtap="switchMode" data-mode="1" class="flex-1 text-center {{mode == 1 ? 'plan-tab-active': ''}}">Normal</view> 
    <view bindtap="switchMode" data-mode="2" class="flex-1 text-center {{mode == 2 ? 'plan-tab-active': ''}}">Révision</view> 
 </view>  
@@ -15,7 +15,7 @@
     <!-- 正常模式  -->
     <view wx:if="{{mode==1}}" wx:for="{{daysInMonth}}" wx:key="index"
       bindtap="goCourseDetail" data-active="{{beginDate<=item.dateStr&&endDate>=item.dateStr}}" data-date="{{item.dateStr}}"
-      class="month-day {{beginDate<=item.dateStr&&endDate>=item.dateStr?'active':''}} {{!statisticalMap[item.dateStr] ? 'unfinished' : (statisticalMap[item.dateStr]!=item.dateStr?'finished2':'finished')}}">
+      class="month-day {{beginDate<=item.dateStr&&endDate>=item.dateStr?'active':''}} {{!statisticalMap[item.dateStr] ? 'unfinished' : (statisticalMap[item.dateStr]!=item.dateStr?'finished2':'finished')}} {{reviewWeekDay==item.dayofWeek ? 'initial' : ''}}">
       <view class="point">{{index + 1}}</view>
     </view>
     <!-- 复习模式  -->

@@ -25,7 +25,7 @@
 }
 .test-title {
   display: flex;
-  width: 360rpx;
+  width: 500rpx;
   margin: 0 auto 53rpx;
   text-align:center;
   color: #fff;
@@ -137,11 +137,13 @@
   padding-left: 0;
 }
 .test-result-right {
-  padding: 0 40rpx 20rpx;
+  min-width:100rpx;
+  padding: 0 30rpx 20rpx 0;
   line-height: 1;
 }
 .test-result-right + .test-result-right {
   border-left: 1rpx solid #fff;
+  padding-left: 30rpx;
 }
 .test-result-card {
   margin-top: -32rpx;

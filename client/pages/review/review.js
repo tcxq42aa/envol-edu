@@ -73,19 +73,19 @@ Page({
           return
         }
         // 跳转到听写
-        if (result.data.type == 3) {
-          wx.showToast({
-            title: '听写不能复习',
-          })
-          return;
-        }
+        // if (result.data.type == 3) {
+        //   wx.showToast({
+        //     title: '听写不能复习',
+        //   })
+        //   return;
+        // }
         // 跳转到测试
-        if (result.data.type == 2) {
-          wx.showToast({
-            title: '测试不能复习',
-          })
-          return;
-        }
+        // if (result.data.type == 2) {
+        //   wx.showToast({
+        //     title: '测试不能复习',
+        //   })
+        //   return;
+        // }
         let content = JSON.parse(result.data.content);
         content.audios.forEach(audio => {
           audio.key = Math.random() * 100000

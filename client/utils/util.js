@@ -79,9 +79,7 @@ var formatDate2 = (date) => {
 
 // Jour 30
 var formatDate3 = (date) => {
-  return simlpleMonthArr[date.month()].replace(/^./, function (a) {
-    return a.toUpperCase()
-  }) + ' ' + date.date();
+  return date.date() + ' ' +simlpleMonthArr[date.month()];
 }
 
 var getCurrentTime = function (date) {
