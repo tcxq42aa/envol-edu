@@ -151,6 +151,7 @@ Page({
           mainEnded: mainEnded, 
           optEnded: optEnded
         })
+        WxParse.wxParse('original', 'html', content.original, that, 5);
         WxParse.wxParse('handout', 'html', content.handout, that, 5);
         WxParse.wxParse('thirdHandout', 'html', content.thirdHandout, that, 5);
         WxParse.wxParse('optHandout', 'html', content.optHandout, that, 5);

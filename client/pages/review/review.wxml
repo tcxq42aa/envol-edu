@@ -33,7 +33,7 @@
     <view class="{{!opened ? 'mask' : ''}}">
       <view>
         <import src="/vendor/wxParse/wxParse.wxml"/>  
-        <template is="wxParse" data="{{wxParseData:handout.nodes}}"/>
+        <template is="wxParse" data="{{wxParseData:original.nodes}}"/>
       </view>
     </view>
   </view>

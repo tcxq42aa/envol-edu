@@ -97,7 +97,7 @@ Page({
           paper: result.data,
           content: content
         })
-        WxParse.wxParse('handout', 'html', content.handout, that, 5);
+        WxParse.wxParse('original', 'html', content.original || content.handout, that, 5);
         WxParse.wxParse('reviewContent', 'html', content.reviewContent, that, 5);
       },
 

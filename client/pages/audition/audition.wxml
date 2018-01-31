@@ -64,6 +64,8 @@
     <view class="{{!opened ? 'mask' : ''}}">
       <view class="mt-45">
         <import src="/vendor/wxParse/wxParse.wxml"/>  
+        <template is="wxParse" data="{{wxParseData:original.nodes}}"/>
+        <view class="wxParse-hr"></view>
         <template is="wxParse" data="{{wxParseData:handout.nodes}}"/>
       </view>
     </view>

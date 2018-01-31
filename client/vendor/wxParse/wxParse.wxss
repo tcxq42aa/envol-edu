@@ -22,7 +22,8 @@
   min-height: 1rpx;
 }
 .wxParse-hr{
-  height: 1rpx;
+  margin: 2em 0;
+  height: 2rpx;
   background: rgb(216,216,216);
 }
 view{
