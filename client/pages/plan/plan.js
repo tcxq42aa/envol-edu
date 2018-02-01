@@ -16,7 +16,8 @@ Page({
     reviewWeekDay: 5, // 复习日
     weekDays: util.simpleWeekDays,
     emptyDays: 0,
-    daysInMonth: 0
+    daysInMonth: 0,
+    monthOffset: 0
   },
 
   /**
@@ -31,32 +32,11 @@ Page({
     
     this.firstLoad = true
     getApp().ready((data) => {
-      const today = util.getCurrentTime();
-      const monthStr = util.monthArr[util.getCurrentTime().month()].upperFirst();
-      const emptyDays = util.getCurrentTime().date(1).day();
-      let daysInMonth = util.getCurrentTime().daysInMonth();
-
-      daysInMonth = new Array(daysInMonth).fill(0).map((day, i) => {
-        const t = today.date(i + 1);
-        return {
-          finished: false,
-          finished2: false,
-          unfinished: false,
-          dateStr: t.format('YYYY-MM-DD'),
-          dayofWeek: t.day()
-        }
-      })
-
-      const now = util.getCurrentTime();
-      
+      this.renderCalander(0);
       this.setData({
         logged: data.logged,
-        userInfo: data.userInfo,
-        monthStr: monthStr,
-        emptyDays: emptyDays,
-        daysInMonth: daysInMonth
+        userInfo: data.userInfo
       })
-
       this.performAnimation();
 
       wx.getStorage({
@@ -68,6 +48,31 @@ Page({
           })
         },
       })
+    })
+  },
+
+  renderCalander(offset) {
+
+    const today = util.getCurrentTime().add(offset, 'M');
+    const monthStr = util.monthArr[util.getCurrentTime().add(offset, 'M').month()].upperFirst();
+    const emptyDays = util.getCurrentTime().add(offset, 'M').date(1).day();
+    let daysInMonth = util.getCurrentTime().add(offset, 'M').daysInMonth();
+
+    daysInMonth = new Array(daysInMonth).fill(0).map((day, i) => {
+      const t = today.date(i + 1);
+      return {
+        finished: false,
+        finished2: false,
+        unfinished: false,
+        dateStr: t.format('YYYY-MM-DD'),
+        dayofWeek: t.day()
+      }
+    })
+
+    this.setData({
+      monthStr: monthStr,
+      emptyDays: emptyDays,
+      daysInMonth: daysInMonth
     })
   },
   
@@ -154,6 +159,23 @@ Page({
     if (mode == 2 && this.data.semesterId) {
       this.initReviewData(this.data.semesterId);
     }
+  },
+
+  handlePrevtMonth() {
+    this.setData({
+      monthOffset: this.data.monthOffset - 1
+    });
+    this.renderCalander(this.data.monthOffset);
+  },
+
+  handleNextMonth() {
+    if (this.data.monthOffset >= 0) {
+      return;
+    }
+    this.setData({
+      monthOffset: this.data.monthOffset + 1
+    });
+    this.renderCalander(this.data.monthOffset);
   },
 
   /**

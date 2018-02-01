@@ -36,6 +36,15 @@ page {
   min-height: 60rpx;
   margin: 0 -62rpx 45rpx;
 }
+.plan-title .icon {
+  padding: 8rpx 24rpx;
+  width: 96rpx;
+  height: 64rpx;
+}
+.plan-title .icon image {
+  height: 48rpx;
+  width: 48rpx;
+}
 .week-wrap,.month-wrap {
   display: flex;
   margin-bottom: 36rpx;

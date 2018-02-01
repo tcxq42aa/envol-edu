@@ -4,8 +4,10 @@
    <view bindtap="switchMode" data-mode="2" class="flex-1 text-center {{mode == 2 ? 'plan-tab-active': ''}}">Révision</view> 
 </view>  
 <view class="plan-container">
-  <view class="plan-title">
-      <text>{{monthStr}}</text>
+  <view class="plan-title flex">
+      <view class="icon" bindtap="handlePrevtMonth"><image src="../../assets/chevron-left.png"></image></view>
+      <text class="flex-1">{{monthStr}}</text>
+      <view class="icon" bindtap="handleNextMonth"><image wx:if="{{monthOffset<0}}" src="../../assets/chevron-right.png"></image></view>
   </view>
   <view class="week-wrap">
     <view wx:for="{{weekIdxs}}" wx:key="index" class="week-day">{{weekDays[item]}}</view>
