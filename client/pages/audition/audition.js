@@ -46,7 +46,7 @@ Page({
     
     getApp().ready(()=>{
       console.log('ready')
-      this.initPageData((data) => {
+      this.initPageData(_ => {
         let { mainEnded, optEnded } = this.data
         if (options.main == 'done' && mainEnded) {
           let step = 3, optFinished = false
@@ -60,6 +60,14 @@ Page({
             optFinished: optFinished
           })
         }
+        wx.getStorage({
+          key: 'semester_detail_' + this.data.paper.semesterId,
+          success: (res) => {
+            if (res.data.statistical.find((item) => item.paperId == this.data.paper.id)) {
+              this.setData({ disabledClassName: '' });
+            }
+          },
+        })
       })
     })
     
