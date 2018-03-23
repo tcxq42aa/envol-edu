@@ -14,6 +14,8 @@ Page({
     reviewStatisticalMap: {},
     weekIdxs: [0, 1, 2, 3, 4, 5, 6],
     reviewWeekDay: 5, // 复习日
+    testWeekDay: 6, // 测试日
+    dicWeekDay: 0, // 听写日
     weekDays: util.simpleWeekDays,
     emptyDays: 0,
     daysInMonth: 0,
@@ -134,7 +136,7 @@ Page({
       util.showToast('C’est le jour de révision. Vas-y!', 4000);
       return;
     }
-    if (this.data.mode == 2 && (d == 6 || d == 0)) {
+    if (this.data.mode == 2 && (d == this.data.testWeekDay || d == this.data.dicWeekDay)) {
       return;
     }
     // 没完成的学习不能复习
@@ -143,7 +145,10 @@ Page({
       return;
     }
 
-    let url = '/pages/audition/audition?date=' + date + '&semesterId=' + this.data.semesterId;
+    let url = '/pages/audition/select?date=' + date + '&semesterId=' + this.data.semesterId;
+    if (d == this.data.testWeekDay || d == this.data.dicWeekDay) {
+      url = '/pages/audition/audition?date=' + date + '&semesterId=' + this.data.semesterId;
+    }
     if (this.data.mode == 2) {
       url = '/pages/review/review?date=' + date + '&semesterId=' + this.data.semesterId;
     }

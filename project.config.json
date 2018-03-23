@@ -131,6 +131,14 @@
 					"query": "paperId=51",
 					"scene": "1020",
 					"referrerInfo": {}
+				},
+				{
+					"id": 14,
+					"name": "select",
+					"pathName": "pages/audition/select",
+					"query": "paperId=20",
+					"scene": "1020",
+					"referrerInfo": {}
 				}
 			]
 		}

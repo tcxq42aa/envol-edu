@@ -43,6 +43,9 @@ Page({
       options,
       isPreview: !!options.isPreview, //试听
     })
+    if (options.mode == 'opt') { //选修
+      this.setData({ currentStep: 4 });
+    }
     
     getApp().ready(()=>{
       console.log('ready')
