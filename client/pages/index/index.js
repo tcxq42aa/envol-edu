@@ -37,6 +37,9 @@ Page({
       var that = this
       var options = {
         url: config.service.semesterListUrl,
+        data: {
+          openId: data.userInfo.openId
+        },
         login: true,
         success(result) {
           console.log('request success', result)

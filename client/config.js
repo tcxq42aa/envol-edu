@@ -29,7 +29,7 @@ var config = {
 
         payUrl: `${host}/api/userSemester/{semesterId}/enroll`,
 
-        semesterListUrl: `${host}/api/semester/list`,
+        semesterListUrl: `${host}/api/semester/paidList`,
 
         todayUrl: `${host}/api/user/today`,
 
