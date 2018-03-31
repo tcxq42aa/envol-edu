@@ -56,12 +56,14 @@ App({
         }
         // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
         let cached = wx.getStorageSync('userInfo');
-        if (cached) {
+        const useCache = cached && cached.expireTime > Date.now();
+        console.log('useCache = ', cached);
+        if (useCache) {
           handle(cached)
         } else {
           util.showBusy('正在登录')
         }
-        qcloud.request({
+        !useCache && qcloud.request({
           url: config.service.requestUrl,
           login: true,
           success(result) {
@@ -70,9 +72,9 @@ App({
             that.globalData.logged = true
             wx.setStorage({
               key: 'userInfo',
-              data: result.data.data
+              data: { ...result.data.data, expireTime: Date.now() + config.expireTime }
             })
-            if(!cached) {
+            if (!useCache) {
               resolve(that.globalData)
               cb && cb(that.globalData)
             }

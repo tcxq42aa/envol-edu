@@ -48,7 +48,8 @@ var config = {
         decodePhoneNumberUrl: `${host}/weapp/phoneNumber`,
 
         userInfoUrl: `${host}/api/user/info`
-    }
+    },
+    expireTime: 30 * 60 * 1000
 };
 
 module.exports = config;
