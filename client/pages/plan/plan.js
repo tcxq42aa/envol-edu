@@ -91,7 +91,7 @@ Page({
         this.setData({ admin: res.data })
       },
     })
-    if(this.mode == 2) {
+    if (this.data.mode == 2 && this.data.semesterId) {
       this.initReviewData(this.data.semesterId);
     }
   },

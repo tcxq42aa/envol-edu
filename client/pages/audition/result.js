@@ -103,7 +103,7 @@ Page({
           that.setData({canvasReady: true})
           var ctx = wx.createCanvasContext('firstCanvas')
           ctx.drawImage(res.path, 0, 0, imgWidth, imgHeight)
-          ctx.setFontSize(40)
+          ctx.setFontSize(36)
           ctx.setFillStyle('#999999')
           ctx.setTextAlign('center')
           let line1 = '我在ENVOL听力朗读课'
@@ -112,8 +112,31 @@ Page({
             line1 = username + '邀请你参加'
             line2 = 'ENVOL听力朗读课的试听'
           }
-          ctx.fillText(line1, imgWidth / 2 + 16 / scale, imgHeight / 2 + 70 / scale)
-          ctx.fillText(line2, imgWidth / 2 + 16 / scale, imgHeight / 2 + 70 / scale + 24 / scale)
+          const centerX = imgWidth / 2 + 16 / scale;
+          const offsetY = imgHeight / 2 + 45 / scale;
+          ctx.fillText(line1, centerX, offsetY)
+          ctx.fillText(line2, centerX, offsetY + 18 / scale)
+          
+          const offsetX2 = imgWidth / 3 + 8 / scale;
+          const offsetX3 = imgWidth / 3 * 2 + 16 / scale;
+          const offsetY2 = imgHeight / 2 + 70 / scale;
+          ctx.setFillStyle('#333333')
+          ctx.fillText("J'ai écouté", offsetX2, offsetY2 + 24 / scale)
+          ctx.fillText("J'ai fini", offsetX3, offsetY2 + 24 / scale)
+
+          ctx.setFontSize(48)
+          ctx.fillText(that.data.mots, offsetX2, offsetY2 + 48 / scale)
+          ctx.fillText(that.data.fois, offsetX3, offsetY2 + 48 / scale)
+
+          ctx.setFontSize(28)
+          ctx.fillText('mots', offsetX2 + 38 /scale, offsetY2 + 48 / scale)
+          ctx.fillText('fois', offsetX3 + 38 / scale, offsetY2 + 48 / scale)
+
+          ctx.moveTo(centerX, offsetY2 + 12 / scale)
+          ctx.lineTo(centerX, offsetY2 + 52 / scale)
+          ctx.setStrokeStyle('#4a4a4a')
+          ctx.stroke()
+
           ctx.draw()
         },
         fail: function (err) {
@@ -129,6 +152,7 @@ Page({
     })
   },
   generateShareImg: function(e, trace = 1){
+    console.log(this.data.mots, this.data.fois);
     if (!this.data.canvasReady && trace < 5) {
       trace++
       wx.showLoading()
