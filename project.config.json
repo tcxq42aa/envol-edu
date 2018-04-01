@@ -26,7 +26,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 12,
 			"list": [
 				{
 					"id": 0,
@@ -62,7 +62,7 @@
 					"id": 4,
 					"name": "cover",
 					"pathName": "pages/audition/cover",
-					"query": "paperId=4",
+					"query": "paperId=5",
 					"scene": "1020",
 					"referrerInfo": {}
 				},

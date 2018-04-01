@@ -120,7 +120,7 @@ Page({
     const now = util.getCurrentTime();
   
     if (now.isBefore(publishTime)) {
-      util.showToast('九点以后解锁答案', 2000);
+      util.showToast('21:00以后解锁答案', 2000);
       return;
     }
 

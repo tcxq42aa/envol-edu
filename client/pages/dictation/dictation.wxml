@@ -27,7 +27,7 @@
     </view>
     <view class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25 pr-82">
       <view class="btn--collapse {{!opened[index] ? '' : 'up'}}" bindtap='toggle' data-target='{{index}}'></view>
-      <view class="f14 block--title">九点以后解锁答案</view>
+      <view class="f14 block--title">21:00以后解锁答案</view>
       <view class="{{!opened[index] ? 'mask' : ''}}">
         <view class="mt-45">
           <import src="/vendor/wxParse/wxParse.wxml"/>  
