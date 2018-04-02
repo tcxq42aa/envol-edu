@@ -1,5 +1,5 @@
 //app.js
-var moment = require('./vendor/moment.min')
+var Promise = require('./vendor/es6-promise').Promise;
 var qcloud = require('./vendor/wafer2-client-sdk/index')
 var config = require('./config')
 var util = require('./utils/util.js')
@@ -59,7 +59,8 @@ App({
         const useCache = cached && cached.expireTime > Date.now();
         console.log('useCache = ', cached);
         if (useCache) {
-          handle(cached)
+          wx.hideToast();
+          handle(cached);
         } else {
           util.showBusy('正在登录')
         }
