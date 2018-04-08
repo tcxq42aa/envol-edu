@@ -20,6 +20,8 @@ Page({
     paper: {},
     mainEnded: false,
     optEnded: false,
+    isAdmin: false,
+    preFinished: false, //预习过
     isPreview: false // 试听版
   },
 
@@ -28,7 +30,7 @@ Page({
       key: 'admin',
       success: (res) => {
         if(res.data) {
-          this.setData({disabledClassName: ''});
+          this.setData({ isAdmin: true, disabledClassName: '' });
         }
       },
     })
@@ -68,6 +70,14 @@ Page({
           success: (res) => {
             if (res.data.statistical.find((item) => item.paperId == this.data.paper.id)) {
               this.setData({ disabledClassName: '' });
+            }
+          },
+        })
+        wx.getStorage({
+          key: 'paper_' + this.data.paper.id,
+          success: (res) => {
+            if(res.data == 'finished') {
+              this.setData({ preFinished: true })
             }
           },
         })
@@ -194,8 +204,9 @@ Page({
    * 下一步
    */ 
   next: function() {
+    const step = this.data.currentStep + 1;
     this.setData({
-      currentStep: this.data.currentStep + 1,
+      currentStep: step,
       fixed: true
     })
     if (this.data.currentStep == 3) {

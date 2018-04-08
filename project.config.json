@@ -58,7 +58,7 @@
 					"id": 3,
 					"name": "paper",
 					"pathName": "pages/audition/audition",
-					"query": "main=done&paperId=10",
+					"query": "paperId=895",
 					"scene": "1020",
 					"referrerInfo": {}
 				},

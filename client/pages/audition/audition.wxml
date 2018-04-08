@@ -113,21 +113,24 @@
 
   <!-- 底部按钮 -->
   <view wx:if="{{currentStep == 1}}" class="animate-in delay-2">
-    <view bindtap='next' class="btn btn--next {{firstFinished ? '' : disabledClassName}}">
+    <view bindtap='next' class="btn btn--next {{firstFinished ? '' : (preFinished?'':disabledClassName)}}">
       Prochaine étape
     </view>
   </view>
   <view wx:elif="{{currentStep == 2}}" class="animate-in delay-2">
-    <view bindtap='next' class="btn btn--next {{secondFinished ? '' : disabledClassName}}">
+    <view bindtap='next' class="btn btn--next {{secondFinished ? '' : (preFinished?'':disabledClassName)}}">
       Prochaine étape
     </view>
   </view>
   <view wx:elif="{{currentStep == 3}}" class="footer-btns animate-in delay-2">
-    <view bindtap='handleFinish' data-type="1" class="btn btn--finish {{audioCycleEnded ? '' : disabledClassName}}">J'ai fini</view>
-    <view class="btn btn--finish {{audioCycleEnded ? '' : disabledClassName}}" bindtap="toOpt" >Je passe au défi</view>
+    <view bindtap='handleFinish' 
+      data-type="1" 
+      class="btn btn--finish {{audioCycleEnded ? '' : disabledClassName}}">J'ai fini</view>
+    <view bindtap="toOpt" 
+      class="btn btn--finish {{audioCycleEnded ? '' : disabledClassName}}">Je passe au défi</view>
   </view>
   <view wx:elif="{{currentStep == 4}}" class="footer-btns animate-in delay-2">
-    <view bindtap='handleFinish' data-type="2" class="btn btn--finish {{optFinished ? '' : disabledClassName}}">
+    <view bindtap='handleFinish' data-type="2" class="btn btn--finish {{optFinished ? '' : (preFinished?'':disabledClassName)}}">
       J'ai fini
     </view>
   </view>
