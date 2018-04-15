@@ -3,7 +3,7 @@ var Promise = require('./vendor/es6-promise').Promise;
 var qcloud = require('./vendor/wafer2-client-sdk/index')
 var config = require('./config')
 var util = require('./utils/util.js')
-var fundebug = require('./vendor/fundebug.0.0.3.min.js')
+var fundebug = require('./vendor/fundebug.0.1.2.min')
 fundebug.apikey = 'f24ac51aec6a37d209d9dc8d85e9ec1ab21ec9d8dc872ef292850b072b6e881e';
 
 App({
