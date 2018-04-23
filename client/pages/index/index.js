@@ -47,6 +47,7 @@ Page({
             item.beginDateStr = util.formatTime(item.beginDate)
             item.durationDay = moment(item.endDate).diff(moment(item.beginDate), 'days') + 1
             item.currentDay = moment(that.data.userInfo.serverTime).diff(moment(item.beginDate), 'days') + 1
+            item.currentDay = Math.min(item.currentDay, item.durationDay)
           })
           that.setData({
             semesterList: result.data
