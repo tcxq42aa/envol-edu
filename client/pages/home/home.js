@@ -71,6 +71,9 @@ Page({
           && 
           util.getCurrentTime(plan.endDate).format(fmt) >= util.getCurrentTime(this.data.userInfo.serverTime).format(fmt)
           );
+        if (util.getCurrentTime(plan.beginDate).format(fmt) > util.getCurrentTime(this.data.userInfo.serverTime).format(fmt)) {
+          plan.coverUrl = '../../assets/default-cover.png';
+        }
       });
     }, forceOnline)
   },
