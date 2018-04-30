@@ -105,6 +105,7 @@ Component({
               }, 100)
             } else {
               that.triggerEvent('cycleended', {}, {})
+              that.data.cycleTimes = 0;
             }
           }
         })
