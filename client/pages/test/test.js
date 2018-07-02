@@ -46,20 +46,24 @@ Page({
       login: true,
       success(result) {
         if (result.statusCode != 200) {
+          let msg = '系统异常，请联系管理员';
           if (result.data.code == 4042) {
-            wx.showModal({
-              title: '提示',
-              content: '该课程已删除',
-              showCancel: false,
-              success: function (res) {
-                if (res.confirm) {
-                  wx.navigateBack({
-                    delta: 1
-                  })
-                }
-              }
-            })
+            msg = '该课程已删除';
+          } else if (result.data.code == 4043) {
+            msg = '本学期已结束';
           }
+          wx.showModal({
+            title: '提示',
+            content: msg,
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
+            }
+          })
           return
         }
         let paperContent = {}, exerciseList = [];

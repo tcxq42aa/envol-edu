@@ -1,4 +1,5 @@
 <!--pages/home/home.wxml-->
+<fast-nav></fast-nav>
 <view class="home-page">
   <view class="userinfo">
     <view class="">

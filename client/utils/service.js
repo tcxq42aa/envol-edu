@@ -13,10 +13,14 @@ export default {
     const handlerResponse = (data) => {
       cb && cb(data);
       let { semester, semesterPlans, paper, statistical } = data;
+      let fmt = 'YYYY-MM-DD';
       semesterPlans.forEach(item => {
         let begin = moment(item.beginDate).utc().utcOffset(8)
         let end = moment(item.endDate).utc().utcOffset(8)
         item.dateStr = util.formatDate2(begin) + ' - ' + util.formatDate2(end)
+        if (util.getCurrentTime(item.beginDate).format(fmt) > util.getCurrentTime(serverTime).format(fmt)) {
+          item.coverUrl = '../../assets/default-cover.png';
+        }
       })
       that.setData({
         statistical, semester, semesterPlans, paper, errCode: 0
