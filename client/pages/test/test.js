@@ -34,6 +34,7 @@ Page({
   onReady: function () {
   
   },
+
   initPageData: function (cb) {
     var that = this, url = '';
     wx.showLoading({
@@ -140,9 +141,16 @@ Page({
 
   handleFinish() {
     this.doFinish();
-    wx.navigateBack({
-      delta: -1
-    });
+    const currentPages = getCurrentPages();
+    if (currentPages.length <= 1) {
+      wx.redirectTo({
+        url: '/pages/index/index'
+      })
+    } else {
+      wx.navigateBack({
+        delta: -1
+      });
+    }
   },
 
   doFinish() {
