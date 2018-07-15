@@ -141,7 +141,7 @@ Page({
       true
     ).then( () => {
       wx.navigateBack({
-        delta: -1
+        delta: 1
       });
     })
   }

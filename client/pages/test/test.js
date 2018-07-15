@@ -148,7 +148,7 @@ Page({
       })
     } else {
       wx.navigateBack({
-        delta: -1
+        delta: 1
       });
     }
   },
