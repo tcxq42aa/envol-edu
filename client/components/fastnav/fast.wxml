@@ -1,0 +1,6 @@
+<!--components/fastnav/fast.wxml-->
+<view class="fastnav" bindtap="backToIndex">
+  <image style="width: 40rpx; height: 40rpx" 
+    mode="aspectFit" src="../../assets/category.png"></image>
+  <text class="ml3" style="font-size: 12px">课程列表</text>
+</view>

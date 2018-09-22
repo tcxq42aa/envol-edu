@@ -1,0 +1,12 @@
+/* components/fastnav/fast.wxss */
+.fastnav {
+  position: fixed;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  top: 40rpx;
+  left: 40rpx;
+}
+.ml3 {
+  margin-left: 3rpx;
+}
