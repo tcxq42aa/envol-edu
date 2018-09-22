@@ -63,7 +63,7 @@
     <view class="f14 block--title">Écouter une fois avant de cliquer</view>
     <view class="{{!opened ? 'mask' : ''}}">
       <view class="mt-45">
-        <import src="/vendor/wxParse/wxParse.wxml"/>  
+        <import src="/vendor/wxParse/wxParse.wxml"/>
         <template is="wxParse" data="{{wxParseData:original.nodes}}"/>
         <view class="wxParse-hr"></view>
         <template is="wxParse" data="{{wxParseData:handout.nodes}}"/>
@@ -72,8 +72,8 @@
   </view>
   <!-- <view wx:if="{{isOptional}}" class="block animate-in offset-l-1 mt-20 pa-25">
     <view>
-        <import src="/vendor/wxParse/wxParse.wxml"/>  
-        <template is="wxParse" data="{{wxParseData:optHandout.nodes}}"/> 
+        <import src="/vendor/wxParse/wxParse.wxml"/>
+        <template is="wxParse" data="{{wxParseData:optHandout.nodes}}"/>
     </view>
   </view> -->
 
@@ -90,7 +90,7 @@
     <view class="f14 block--title">Écouter une fois avant de cliquer</view>
     <view class="{{!opened2 ? 'mask' : ''}}">
       <view class="mt-45">
-        <import src="/vendor/wxParse/wxParse.wxml"/>  
+        <import src="/vendor/wxParse/wxParse.wxml"/>
         <template is="wxParse" data="{{wxParseData:thirdHandout.nodes}}"/>
       </view>
     </view>
@@ -100,16 +100,16 @@
   <view wx:if="{{currentStep == 4}}" class="offset-l-2 animate-in delay-1 mb-30">
     <view class="offset-r-1">
       <view class="f15">Astuce</view>
-      <view class="text-gray mb-15">{{content.optAudios[0].desc}}</view>
+      <view class="text-gray mb-15">{{content.optAudios[0].desc}}{{optRecordFinished}}</view>
     </view>
-    <my-audio bind:ended="onAudioEnded" data-idx='0' l-src="{{content.optAudios[0].src1}}" r-src="{{content.optAudios[0].src2}}" finished='{{true}}' min-play="{{1}}" toast-text="Interdit de scroller avant d’avoir fini la première écoute."></my-audio>
+    <my-audio bind:ended="onAudioEnded" data-idx='0' l-src="{{content.optAudios[0].src1}}" r-src="{{content.optAudios[0].src2}}" finished='{{optRecordFinished}}' min-play="{{ optRecordFinished ? 0 : 1 }}" toast-text="Interdit de scroller avant d’avoir fini la première écoute."></my-audio>
   </view>
   <view wx:if="{{currentStep == 4}}" class="block animate-in delay-1 offset-l-1 mt-20 mb-30 pa-25">
     <view>
-      <import src="/vendor/wxParse/wxParse.wxml"/>  
-      <template is="wxParse" data="{{wxParseData:optHandout.nodes}}"/> 
+      <import src="/vendor/wxParse/wxParse.wxml"/>
+      <template is="wxParse" data="{{wxParseData:optHandout.nodes}}"/>
     </view>
-  </view> 
+  </view>
 
   <!-- 底部按钮 -->
   <view wx:if="{{currentStep == 1}}" class="animate-in delay-2">
@@ -123,10 +123,10 @@
     </view>
   </view>
   <view wx:elif="{{currentStep == 3}}" class="footer-btns animate-in delay-2">
-    <view bindtap='handleFinish' 
-      data-type="1" 
+    <view bindtap='handleFinish'
+      data-type="1"
       class="btn btn--finish {{audioCycleEnded ? '' : disabledClassName}}">J'ai fini</view>
-    <view bindtap="toOpt" 
+    <view bindtap="toOpt"
       class="btn btn--finish {{audioCycleEnded ? '' : disabledClassName}}">Je passe au défi</view>
   </view>
   <view wx:elif="{{currentStep == 4}}" class="footer-btns animate-in delay-2">

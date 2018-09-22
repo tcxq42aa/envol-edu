@@ -22,7 +22,9 @@ Page({
     optEnded: false,
     isAdmin: false,
     preFinished: false, //预习过
-    isPreview: false // 试听版
+    isPreview: false, // 试听版
+    optFinished: false, //选修课是否完成
+    optRecordFinished: false, //选修课录音是否听过
   },
 
   onShow: function(){
@@ -41,14 +43,14 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    this.setData({ 
+    this.setData({
       options,
       isPreview: !!options.isPreview, //试听
     })
     if (options.mode == 'opt') { //选修
       this.setData({ currentStep: 4 });
     }
-    
+
     getApp().ready(()=>{
       console.log('ready')
       this.initPageData(_ => {
@@ -81,9 +83,18 @@ Page({
             }
           },
         })
+        wx.getStorage({
+          key: 'optRecord_' + this.data.paper.id,
+          success: (res) => {
+            if(res.data) {
+              this.setData({ optRecordFinished: true })
+            }
+          },
+        })
+        this.setData({ currentStep: 4 });
       })
     })
-    
+
     wx.getSetting({
       success: function (res) {
         if (!res.authSetting['scope.userInfo']) {
@@ -173,7 +184,7 @@ Page({
         that.setData({
           paper: result.data,
           content: content,
-          mainEnded: mainEnded, 
+          mainEnded: mainEnded,
           optEnded: optEnded
         })
         WxParse.wxParse('original', 'html', content.original, that, 5);
@@ -201,12 +212,12 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
    * 下一步
-   */ 
+   */
   next: function() {
     const step = this.data.currentStep + 1;
     this.setData({
@@ -237,7 +248,7 @@ Page({
       preAudioFinshed: true,
       firstFinished: firstFinished
     })
-    
+
     if (!firstFinished) {
       util.showToast("Tout écouter pour passer à l’étape suivante.", 3000)
     }
@@ -263,6 +274,10 @@ Page({
         })
         break
       case 4:
+        wx.setStorage({
+          key: 'optRecord_' + this.data.paper.id,
+          data: true,
+        })
         this.setData({
           optFinished: true
         })
@@ -329,7 +344,7 @@ Page({
       this.goResultPage(t)
       return
     }
-    
+
     var key = ''
     if(t == 1) {
       key = 'paper_' + this.data.paper.id
@@ -343,7 +358,7 @@ Page({
       key = 'optPaper_' + this.data.paper.id
       this.goResultPage(t)
     }
-    
+
     wx.setStorage({
       key: key,
       data: 'finished',
@@ -395,6 +410,6 @@ Page({
         })
       },
     })
-    
+
   }
 })
