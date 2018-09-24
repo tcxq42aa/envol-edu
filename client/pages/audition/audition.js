@@ -278,6 +278,7 @@ Page({
           data: true,
         })
         this.setData({
+          optRecordFinished: true,
           optFinished: true
         })
         break
