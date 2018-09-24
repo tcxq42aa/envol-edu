@@ -91,7 +91,6 @@ Page({
             }
           },
         })
-        this.setData({ currentStep: 4 });
       })
     })
 
