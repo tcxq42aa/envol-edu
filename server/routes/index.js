@@ -55,4 +55,18 @@ router.get('/webview', function(ctx, next) {
     `
 })
 
+router.get('/test/**', function(ctx, next) {
+    const src = ctx.path.replace('/weapp/test', 'https://oss.edu.envol.vip');
+    ctx.body = `
+      <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        </head>
+        <body style="margin:0;padding:0;overflow:hidden">
+            <audio controls src="${src}"></audio>
+        </body>
+    </html>`;
+});
+
 module.exports = router

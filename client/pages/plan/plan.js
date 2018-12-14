@@ -1,6 +1,7 @@
 // pages/plan/plan.js
 import service from '../../utils/service'
 import util from '../../utils/util'
+var moment = require('../../vendor/moment.min')
 Page({
 
   /**
@@ -144,7 +145,6 @@ Page({
       util.showToast('Tu n’as pas fini la tâche de ce jour.', 4000);
       return;
     }
-
     let url = '/pages/audition/select?date=' + date + '&semesterId=' + this.data.semesterId;
     if (d == this.data.testWeekDay || d == this.data.dicWeekDay) {
       url = '/pages/audition/audition?date=' + date + '&semesterId=' + this.data.semesterId;
@@ -152,7 +152,7 @@ Page({
     if (this.data.mode == 2) {
       url = '/pages/review/review?date=' + date + '&semesterId=' + this.data.semesterId;
     }
-
+    
     wx.navigateTo({
       url: url
     })

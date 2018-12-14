@@ -83,12 +83,20 @@ var formatDate3 = (date) => {
 }
 
 var getCurrentTime = function (date) {
-  var serverTime = date || getApp().globalData.userInfo.serverTime;
+  var serverTime;
+  if(!date) {
+    serverTime = getApp().globalData.userInfo.serverTime;
+  } else {
+    if (typeof date === 'string') {
+      serverTime = date + 'T08:00:00.000+08:00';
+    } else if (typeof date === 'number') {
+      serverTime = date;
+    }
+  }
   return moment(serverTime).utc().utcOffset(8)
  };
 var getCurrentDate = function (date) {
-  var serverTime = date || getApp().globalData.userInfo.serverTime;
-  return moment(serverTime).utc().utcOffset(8).format('YYYY-MM-DD')
+  return getCurrentTime(date).format('YYYY-MM-DD');
 };
 
 String.prototype.upperFirst = function() {

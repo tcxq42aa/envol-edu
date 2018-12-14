@@ -49,5 +49,8 @@
         "selectedIconPath": "assets/personal3@3x.png"
       }
     ]
-  }
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wxbff9a0fc838c56e7"
+  ]
 }
