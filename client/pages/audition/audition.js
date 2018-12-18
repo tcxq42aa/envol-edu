@@ -27,7 +27,8 @@ Page({
     optRecordFinished: false, //选修课录音是否听过
   },
 
-  onShow: function(){
+  onShow: function(options){
+    this.doRequest(this.data.options);
     wx.getStorage({
       key: 'admin',
       success: (res) => {
@@ -50,8 +51,12 @@ Page({
     if (options.mode == 'opt') { //选修
       this.setData({ currentStep: 4 });
     }
+  },
 
-    getApp().ready(()=>{
+  doRequest: function(options) {
+    var that = this
+
+    getApp().ready(() => {
       console.log('ready')
       this.initPageData(_ => {
         let { mainEnded, optEnded } = this.data
@@ -78,7 +83,7 @@ Page({
         wx.getStorage({
           key: 'paper_' + this.data.paper.id,
           success: (res) => {
-            if(res.data == 'finished') {
+            if (res.data == 'finished') {
               this.setData({ preFinished: true })
             }
           },
@@ -86,7 +91,7 @@ Page({
         wx.getStorage({
           key: 'optRecord_' + this.data.paper.id,
           success: (res) => {
-            if(res.data) {
+            if (res.data) {
               this.setData({ optRecordFinished: true })
             }
           },

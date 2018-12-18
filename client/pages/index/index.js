@@ -13,9 +13,10 @@ Page({
     formatTime: util.formatTime
   },
   onLoad: function(){
-    this.doRequest();
+    // this.doRequest();
   },
   onShow: function(){
+    this.doRequest();
     wx.getStorage({
       key: 'userInfo',
       success: (res) => {

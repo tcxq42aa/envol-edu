@@ -39,6 +39,18 @@ var getWxLoginResult = function getLoginCode(callback) {
                     var error = new LoginError(constants.ERR_WX_GET_USER_INFO, '获取微信用户信息失败，请检查网络状态');
                     error.detail = userError;
                     callback(error, null);
+                      wx.showModal({
+                        title: '警告',
+                        content: '尚未进行授权，请点击确定跳转到授权页面进行授权。',
+                        success: function (res) {
+                          if (res.confirm) {
+                            console.log('用户点击确定')
+                            wx.navigateTo({
+                              url: '../tologin/tologin',
+                            })
+                          }
+                        }
+                      })
                 },
             });
         },
@@ -82,7 +94,7 @@ var login = function login(options) {
             options.fail(wxLoginError);
             return;
         }
-        
+
         var userInfo = wxLoginResult.userInfo;
 
         // 构造请求头，包含 code、encryptedData 和 iv
