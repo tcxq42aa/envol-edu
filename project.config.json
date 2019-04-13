@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 15,
+			"current": 2,
 			"list": [
 				{
 					"id": 0,
@@ -50,7 +50,7 @@
 					"id": 2,
 					"name": "audition",
 					"pathName": "pages/audition/audition",
-					"query": "main=done&semesterId=4&paperId=10",
+					"query": "date=2018-08-21&semesterId=17&mode=obl",
 					"scene": "1020",
 					"referrerInfo": {}
 				},
@@ -149,6 +149,14 @@
 					"name": "选修",
 					"pathName": "pages/audition/audition",
 					"query": "date=2018-09-11&semesterId=22&mode=opt",
+					"scene": "1020",
+					"referrerInfo": {}
+				},
+				{
+					"id": -1,
+					"name": "dashboard",
+					"pathName": "pages/dashboard/dashboard",
+					"query": "",
 					"scene": "1020",
 					"referrerInfo": {}
 				}
