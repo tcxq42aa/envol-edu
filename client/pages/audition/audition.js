@@ -23,8 +23,13 @@ Page({
     isAdmin: false,
     preFinished: false, //预习过
     isPreview: false, // 试听版
+    finished: false, // 正课是否完成
     optFinished: false, //选修课是否完成
     optRecordFinished: false, //选修课录音是否听过
+    localAudioState: {
+      audios: {},
+      optAudios: {},
+    }
   },
 
   onShow: function(options){
@@ -36,7 +41,45 @@ Page({
           this.setData({ isAdmin: true, disabledClassName: '' });
         }
       },
-    })
+    });
+    wx.getStorage({
+      key: 'record_' + this.data.paper.id,
+      success: (res) => {
+        if(res.data) {
+          this.setData({ localAudioState: res.data });
+          for(var idx in res.data.audios) {
+            switch(idx) {
+              case 1:
+                this.setData({
+                  firstFinished: true
+                });
+                break;
+              case 2:
+                this.setData({
+                  secondFinished: true
+                });
+                break;
+              case 3:
+                this.setData({
+                  audioCycleEnded: true
+                });
+                break;
+            }
+          }
+          for(var idx in res.data.optAudios) {
+            this.setData({
+              optRecordFinished: true,
+              optFinished: true
+            });
+          }
+          for(var idx in res.data.preAudios) {
+            this.setData({
+              preAudioFinshed: true
+            });
+          }
+        }
+      }
+    });
   },
 
   /**
@@ -75,8 +118,9 @@ Page({
         wx.getStorage({
           key: 'semester_detail_' + this.data.paper.semesterId,
           success: (res) => {
-            if (res.data.statistical.find((item) => item.paperId == this.data.paper.id)) {
-              this.setData({ disabledClassName: '' });
+            let current;
+            if (current = res.data.statistical.find((item) => item.paperId == this.data.paper.id)) {
+              this.setData({ disabledClassName: '', finished: true });
             }
           },
         })
@@ -243,11 +287,39 @@ Page({
     })
   },
 
+  // 本地保存音频状态
+  saveLocalState: function(idx, audioKey) {
+    audioKey = audioKey || 'audios';
+    var key = 'record_' + this.data.paper.id;
+    wx.getStorage({
+      key: key,
+      success: function(res) {
+        res.data[audioKey] = res.data[audioKey] || {};
+        res.data[audioKey][idx] = true;
+        wx.setStorage({
+          key: key,
+          data: res.data
+        })
+      },
+      fail: function() {
+        wx.setStorage({
+          key: key,
+          data: {
+            [audioKey]: {
+              [idx]: true
+            }
+          }
+        });
+      }
+    });
+  },
+
   /**
    * 音频播放结束
    */
   onPreAudioEnded: function() {
     var firstFinished = !!this.data.content.audios[0].finished
+    this.saveLocalState(0, 'preAudios');
     this.setData({
       preAudioFinshed: true,
       firstFinished: firstFinished
@@ -257,9 +329,11 @@ Page({
       util.showToast("Tout écouter pour passer à l’étape suivante.", 3000)
     }
   },
+
   onAudioEnded: function(e) {
     switch (this.data.currentStep) {
       case 1:
+        this.saveLocalState(0);
         var hasPreAudio = this.data.content.preAudio
         this.data.content.audios[0].finished = true;
         var preAudioFinshed = this.data.preAudioFinshed
@@ -273,11 +347,13 @@ Page({
         }
         break
       case 2:
+        this.saveLocalState(1);
         this.setData({
           secondFinished: true
         })
         break
       case 4:
+        this.saveLocalState(0, 'optAudios');
         wx.setStorage({
           key: 'optRecord_' + this.data.paper.id,
           data: true,
@@ -289,6 +365,7 @@ Page({
         break
     }
     if(this.data.currentStep == 3) {
+      this.saveLocalState(2);
       return
     }
   },
